@@ -1,0 +1,2 @@
+INFO  2020-09-01T14:28:13.369 161   channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-09-01T14:28:13.565 161   main:566: starting main loop
