@@ -2,19 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using TMPro;
+using System.Linq;
 
-public class InputName : MonoBehaviour {
+public class Username : MonoBehaviour {
     public string userName;
-    public InputField inputField;
+    public TMP_InputField inputField;
+    public TMP_Text usernameText;
 
-    public void setUsername(string input){
-        userName = input;
-    }
+    public string[] bannedUsernames = {"fuck","shit"};
 
-    public void Awake(){
-        userName = PlayerPrefs.GetString("playerName", "Player");
-        inputField.text = userName;
+    public void getUsername(){
+        userName = inputField.text;
+        if (bannedUsernames.Contains(userName)){
+            inputField.text = "Banned Name!!!";
+            userName = "";
+        }
+
+        usernameText.text = "Username: " + userName;
+
     }
 
 }
