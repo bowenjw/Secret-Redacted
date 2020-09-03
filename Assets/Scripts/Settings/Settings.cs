@@ -12,7 +12,7 @@ public class Settings : MonoBehaviour {
     public TMP_Dropdown resolutionDropdown;
 
     void Start() {
-        resolutions = Screen.resolutions;
+        resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate == 60).ToArray();
 
         resolutionDropdown.ClearOptions();
 
