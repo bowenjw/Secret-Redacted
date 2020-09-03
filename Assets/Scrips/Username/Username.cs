@@ -19,7 +19,7 @@ public class Username : MonoBehaviour {
             userName = "";
         }
 
-        usernameText.text = "Username: " + userName;
+        usernameText.text = "USERNAME: " + userName;
 
     }
 
