@@ -16,4 +16,8 @@ public class MainMenu : MonoBehaviour {
     public void loadMainMenue(){
         SceneManager.LoadScene(0);
     }
+
+    public void startCustomGame(){
+        SceneManager.LoadScene(3);
+    }
 }
