@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 
@@ -10,6 +11,8 @@ public class Settings : MonoBehaviour {
     Resolution[] resolutions;
 
     public TMP_Dropdown resolutionDropdown;
+    public TMP_Dropdown qualityDropdown;
+    public Toggle fullscreenToggle;
 
     void Start() {
         resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate == 60).ToArray();
@@ -38,6 +41,18 @@ public class Settings : MonoBehaviour {
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+
+        if (PlayerPrefs.GetInt("Fullscreen", 1) == 0) {
+            fullscreenToggle.isOn = false;
+        }
+        else{
+            fullscreenToggle.isOn = true;
+        }
+
+        int qualityIndex = PlayerPrefs.GetInt("Quality", 0);
+        qualityDropdown.value = qualityIndex;
+        qualityDropdown.RefreshShownValue();
+
     }
 
     public void setResolution (int resolutionIndex) {
@@ -48,10 +63,12 @@ public class Settings : MonoBehaviour {
 
     public void setQuality( int qualityIndex ) {
         QualitySettings.SetQualityLevel(qualityIndex);
+        PlayerPrefs.SetInt("Quality",qualityIndex);
     }
 
     public void setFullscreen ( bool isFullscreen ) {
         Screen.fullScreen = isFullscreen;
+        PlayerPrefs.SetInt("Fullscreen", isFullscreen ? 1 : 0 );
     }
 
 }
