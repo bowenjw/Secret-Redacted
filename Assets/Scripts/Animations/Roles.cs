@@ -12,6 +12,7 @@ public class Roles : MonoBehaviour {
     private Sprite[] liberalSprites;
     private Sprite[] facistSprites;
     private Sprite hitlerSprite;
+    private Sprite defaultBack;
     private GameObject[] children;
 
     void Start()
@@ -19,6 +20,7 @@ public class Roles : MonoBehaviour {
         liberalSprites = Resources.LoadAll<Sprite>("Roles/Liberal");
         facistSprites = Resources.LoadAll<Sprite>("Roles/Fascist");
         hitlerSprite = Resources.Load<Sprite>("Roles/Hitler/Hitler");
+        defaultBack = Resources.Load<Sprite>("defaultBack");
 
         //TODO: get # of players
         playerRoles = new string[players];
@@ -49,7 +51,7 @@ public class Roles : MonoBehaviour {
 
     }
 
-    public void assignRoles() {
+    public void showRoles() {
 
         int facistCnt = 0;
 
@@ -74,22 +76,19 @@ public class Roles : MonoBehaviour {
         
     }
 
-    public void showRoles() {
-
-        for (int i = 0; i < players; i++) {
-           //sprite.sortingOrder++;
-
-        }
-    }
-        
     public void hideRoles() {
 
         for (int i = 0; i < players; i++) {
-           //sprite.sortingOrder--;
-
+            SpriteRenderer x = children[i].GetComponent<SpriteRenderer>();
+            x.sprite = defaultBack; 
+            children[i].SetActive(false);
+            }
+        for (int i = 0; i < players; i++) {
+            children[i].SetActive(true);
         }
 
     }
+        
 
 
 }
