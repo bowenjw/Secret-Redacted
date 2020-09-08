@@ -5,3 +5,8 @@ INFO  2020-09-03T14:06:16.831 136   on_process_exit:393: exited: pid=138 status=
 INFO  2020-09-03T14:06:16.836 136   os_exit:593: Nvim exit: 0
 INFO  2020-09-03T14:24:14.217 117   channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
 INFO  2020-09-03T14:24:14.276 117   main:566: starting main loop
+INFO  2020-09-07T17:51:38.714 117   channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-09-07T17:51:38.933 117   main:566: starting main loop
+INFO  2020-09-07T18:38:27.237 117   os_proc_tree_kill:96: sending SIGTERM to PID -119
+INFO  2020-09-07T18:38:27.247 117   on_process_exit:393: exited: pid=119 status=143 stoptime=2830488796100
+INFO  2020-09-07T18:38:27.252 117   os_exit:593: Nvim exit: 0
