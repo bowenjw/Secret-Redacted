@@ -9,14 +9,14 @@ TODO: Implement logic for gameplay changes
 
 */
 
-public class FascistPathFiveSixLogic : MonoBehaviour
+public class FascistPathNineTenLogic : MonoBehaviour
 {
     /*
     overflowPrevention keeps track of the current board state as follows
     0: Empty board
-    1: One fascist card
-    2: Two fascist card
-    3: Three fascist card, president peeks the deck, red zone begins
+    1: One fascist card, president peeks at a role
+    2: Two fascist card, president peeks at a role
+    3: Three fascist card, president picks the next candidate, red zone begins
     4: Four fascist card, President executes
     5: Five fascist card, President executes and veto power begins
     6: Six fascist card, facists win
@@ -62,14 +62,25 @@ public class FascistPathFiveSixLogic : MonoBehaviour
             DecrementFascistPath();
     }
 
-    //Checks overflowPrevention only after increments to see current gamestate
+    //Checks overflowPrevention after increment to see current gamestate
     private void CheckGameState()
     {
         switch (overflowPreventation)
         {
+
+            case 1:
+            //Apply president peeks at someone's role
+            Debug.Log("President views someone's role!");
+            break;
+
+            case 2:
+            //Apply president peeks at someone's role
+            Debug.Log("President views someone's role!");
+            break;
+            
             case 3:
-            //Apply president peek at next 3 cards and red zone beggining here
-            Debug.Log("President peeks at the next 3 cards. Red zone also begins!");
+            //Apply president picks next candidate and red zone beggining here
+            Debug.Log("President picks next candidate! Red zone also begins! ");
             break;
 
             case 4:
