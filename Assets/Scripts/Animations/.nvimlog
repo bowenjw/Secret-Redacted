@@ -1,0 +1,3 @@
+INFO  2020-09-08T17:23:57.452 224   os_proc_tree_kill:96: sending SIGTERM to PID -226
+INFO  2020-09-08T17:23:57.462 224   on_process_exit:393: exited: pid=226 status=143 stoptime=12018577650900
+INFO  2020-09-08T17:23:57.465 224   os_exit:593: Nvim exit: 0
