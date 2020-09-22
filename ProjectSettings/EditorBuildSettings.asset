@@ -17,4 +17,25 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menue/Custom Game.unity
     guid: ae8f4f640b019b34989177c4a3c010f0
+  - enabled: 1
+    path: Assets/Scenes/Menue/overview/overview.unity
+    guid: 336d2337ad96c574c896686d3fd09c6a
+  - enabled: 1
+    path: Assets/Scenes/Menue/overview/liberalRole.unity
+    guid: 221e1169eb3a50946a99ca26bce85f33
+  - enabled: 1
+    path: Assets/Scenes/Menue/overview/fashRole.unity
+    guid: a8ee6aee1a2449b43a527f8284e7b62e
+  - enabled: 1
+    path: Assets/Scenes/Menue/overview/hitlerRole.unity
+    guid: 7ebbadafb3ddf234583eeb138108623e
+  - enabled: 1
+    path: Assets/Scenes/Menue/overview/executiveAction.unity
+    guid: 76e7d02c87366af4cbff10dfbd606d96
+  - enabled: 1
+    path: Assets/Scenes/Menue/overview/election.unity
+    guid: 5ea6d2338a658454ea976dd5f1d7c3aa
+  - enabled: 1
+    path: Assets/Scenes/Menue/overview/legistlativeSession.unity
+    guid: 990d9574a3268784bb29dbc347a63f86
   m_configObjects: {}
