@@ -54,8 +54,8 @@ public class PresidentRoles : MonoBehaviour {
     presidentText.text = "President: " + children[president].GetComponent<TMP_Text>().text;
     chancellorText.text = "Chancellor: " + children[chancellor].GetComponent<TMP_Text>().text;
 
-    presidentObj.transform.position = children[president].transform.position + new Vector3(0,-130,0);
-    chancellorObj.transform.position = children[chancellor].transform.position + new Vector3(0,-130,0);
+    presidentObj.transform.position = children[president].transform.position + new Vector3(0,-150,0);
+    chancellorObj.transform.position = children[chancellor].transform.position + new Vector3(0,-150,0);
 
     return;
   }
