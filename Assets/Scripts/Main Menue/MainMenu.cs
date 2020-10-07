@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour {
 
     private string overviewScene = "overview";
+    private string lobbyScene = "Lobby";
 
     public void Start(){
         int qualityIndex = PlayerPrefs.GetInt("Quality",0);
@@ -35,6 +36,10 @@ public class MainMenu : MonoBehaviour {
 
     public void loadOverview() {
         SceneManager.LoadScene(overviewScene);
+    }
+
+    public void loadLobby() {
+        SceneManager.LoadScene(lobbyScene);
     }
 
     public void startCustomGame(){

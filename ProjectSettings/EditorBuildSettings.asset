@@ -38,4 +38,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menue/overview/legistlativeSession.unity
     guid: 990d9574a3268784bb29dbc347a63f86
+  - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: 24a7c95610933e440baa846623da2229
   m_configObjects: {}
