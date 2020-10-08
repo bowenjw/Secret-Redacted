@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 using Mirror;
+using System.Linq;
 
 namespace customLobby {
     public class Lobby : MonoBehaviour {
@@ -70,11 +71,13 @@ namespace customLobby {
         public void OnEnable() {
             NetworkManagerLobby.OnClientConnected += HandleClientConnected;
             NetworkManagerLobby.OnClientDisconnected += HandleClientDisconnected;
+            NetworkManagerLobby.OnRoomClientConnected += HandleRoomClientConnected;
         }
 
         public void OnDisable() {
             NetworkManagerLobby.OnClientConnected -= HandleClientConnected;
             NetworkManagerLobby.OnClientDisconnected -= HandleClientDisconnected;
+            NetworkManagerLobby.OnRoomClientConnected -= HandleRoomClientConnected;
         }
 
         public void JoinLobby() {
@@ -110,6 +113,10 @@ namespace customLobby {
             numPlayersText.gameObject.SetActive(false);
         }
 
+        private void HandleRoomClientConnected() {
+          updateNumPlayers();
+        }
+
         public void setJoinedText() {
             joinedText.gameObject.SetActive(true);
             joinedText.text = "Joined: " + networkManager.networkAddress;
@@ -122,8 +129,9 @@ namespace customLobby {
             updateNumPlayers();
         }
 
-        private void updateNumPlayers() {
-            numPlayersText.SetText("Number of Players: " + networkManager.numPlayers);
+        public void updateNumPlayers() {
+            //Debug.Log(GameObject.Find("NetworkManager").GetComponent<NetworkManagerLobby>().roomSlots + " " + GameObject.Find("NetworkManager").GetComponent<NetworkManagerLobby>().roomSlots.Count());
+            numPlayersText.text = "Number of Players: " + GameObject.Find("NetworkManager").GetComponent<NetworkManagerLobby>().roomSlots.Count();
         }
 
     }

@@ -16,6 +16,8 @@ namespace customLobby {
         public static event Action OnClientConnected;
         public static event Action OnClientDisconnected;
 
+        public static event Action OnRoomClientConnected;
+
         //public override void OnStartServer() => spawnPrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs").ToList();
 
         /*
@@ -80,6 +82,7 @@ namespace customLobby {
         }
 
         public override void OnRoomClientEnter() {
+            OnRoomClientConnected?.Invoke();
             /*int cnt = 1;
             foreach ( NetworkRoomPlayerLobby player in roomSlots) {
                 GameObject.Find("Player"+cnt).GetComponentInChildren<TMP_Text>().text = player.username;
