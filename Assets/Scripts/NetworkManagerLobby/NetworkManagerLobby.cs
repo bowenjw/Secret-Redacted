@@ -80,13 +80,13 @@ namespace customLobby {
         }
 
         public override void OnRoomClientEnter() {
-            int cnt = 1;
+            /*int cnt = 1;
             foreach ( NetworkRoomPlayerLobby player in roomSlots) {
                 GameObject.Find("Player"+cnt).GetComponentInChildren<TMP_Text>().text = player.username;
                 cnt++;
-            }
+            }*/
         }
-        
+
 
 
         /*
@@ -100,4 +100,3 @@ namespace customLobby {
         */
     }
 }
-
