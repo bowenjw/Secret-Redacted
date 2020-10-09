@@ -27,6 +27,9 @@ public class NewFascistPathFiveSixLogic : MonoBehaviour
     private int numCards = 6;
     private int pathwayTracker = 0;
 
+    //Other scripts in project
+    Veto Veto;
+
     //Grabs cards and hides them all.
     void Start()
     {
@@ -37,6 +40,9 @@ public class NewFascistPathFiveSixLogic : MonoBehaviour
             cards[i] = GameObject.Find("Policy Card Fascist #" + (i+1));
             cards[i].GetComponent<Renderer>().enabled = false;
         }
+
+        //Allows access to Functions/Methods from these Scripts
+        Veto = GameObject.Find("VetoHolder").GetComponent<Veto>();
     }
 
     //Keeps current game state, includes where to implement gamestate
@@ -93,8 +99,10 @@ public class NewFascistPathFiveSixLogic : MonoBehaviour
             break;
 
             case 5:
-            //Apply president executes and veto begins
+            //Apply president executes and veto begins TODO: GET RID OF VETO START HERE, REFER TO VETO SCRIPT
             Debug.Log("President executes someone! Vetoing is now live!");
+            Veto.SetVetoLive();
+            Veto.StartVeto();
             break;
 
             case 6:

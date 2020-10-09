@@ -22,7 +22,7 @@ public class Execution : MonoBehaviour
 
         for(int i = 0; i < playerCount; i++)
         {
-            buttons[i] = (GameObject.Find("Button " + (i+1)).GetComponent<Button>());
+            buttons[i] = (GameObject.Find("Execution Button " + (i+1)).GetComponent<Button>());
         }
 
         //Turns off Buttons
