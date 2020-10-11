@@ -27,9 +27,9 @@ public class Player : MonoBehaviour
     public bool IsChancellor { get{return isChancellor;} }
     public bool WasChancellor { get{return wasChancellor;} }
     public bool IsFascist { get{return isFascist;} }
-    public bool IsHitlar { get{return isHitlar;} }
+    public bool IsHitler { get{return isHitlar;} }
     public bool HasVoted { get{return hasVoted;} }
-    public bool VotedYes { get{return votedYes;}}
+    public bool VotedYes { get{return votedYes;} }
     public void setHitlar() {
         isFascist = true;
         isHitlar = true;
