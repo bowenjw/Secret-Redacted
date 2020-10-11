@@ -3,3 +3,13 @@ INFO  2020-10-04T22:36:09.157 98    main:566: starting main loop
 INFO  2020-10-04T22:59:43.781 98    os_proc_tree_kill:96: sending SIGTERM to PID -100
 INFO  2020-10-04T22:59:43.790 98    on_process_exit:393: exited: pid=100 status=143 stoptime=1438122426500
 INFO  2020-10-04T22:59:43.793 98    os_exit:593: Nvim exit: 0
+INFO  2020-10-10T22:42:15.069 82    channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-10-10T22:42:15.250 82    main:566: starting main loop
+INFO  2020-10-10T23:13:25.575 82    os_proc_tree_kill:96: sending SIGTERM to PID -84
+INFO  2020-10-10T23:13:25.585 82    on_process_exit:393: exited: pid=84 status=143 stoptime=1883941539800
+INFO  2020-10-10T23:13:25.588 82    os_exit:593: Nvim exit: 0
+INFO  2020-10-11T18:44:18.445 86    channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-10-11T18:44:18.537 86    main:566: starting main loop
+INFO  2020-10-11T18:58:20.988 86    os_proc_tree_kill:96: sending SIGTERM to PID -88
+INFO  2020-10-11T18:58:20.998 86    on_process_exit:393: exited: pid=88 status=143 stoptime=857606444100
+INFO  2020-10-11T18:58:21.002 86    os_exit:593: Nvim exit: 0

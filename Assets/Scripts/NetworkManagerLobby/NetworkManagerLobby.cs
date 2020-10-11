@@ -18,24 +18,12 @@ namespace customLobby {
 
         public static event Action OnRoomClientConnected;
 
-        //public override void OnStartServer() => spawnPrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs").ToList();
-
-        /*
-        public override void OnStartClient(){
-
-            var spawnPrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs");
-
-            Debug.Log(spawnPrefabs);
-
-            foreach (var prefab in spawnPrefabs) {
-                Debug.Log("Registering prefab:" + prefab);
-                ClientScene.RegisterPrefab(prefab);
-            }
-        }
-        */
-
         public override void OnClientConnect(NetworkConnection conn) {
-            base.OnClientConnect(conn);
+            if (!clientLoadedScene) {
+                if (!ClientScene.ready) ClientScene.Ready(conn);
+                ClientScene.AddPlayer(conn);
+            }
+
             Debug.Log("Connected" + conn);
             OnClientConnected?.Invoke();
         }
@@ -77,29 +65,26 @@ namespace customLobby {
             Debug.Log("Disconnected:" + conn);
         }
 
+
         public override void OnStopClient() {
             Debug.Log("Stopping client, num players: " + numPlayers);
         }
 
         public override void OnRoomClientEnter() {
             OnRoomClientConnected?.Invoke();
-            /*int cnt = 1;
-            foreach ( NetworkRoomPlayerLobby player in roomSlots) {
-                GameObject.Find("Player"+cnt).GetComponentInChildren<TMP_Text>().text = player.username;
-                cnt++;
-            }*/
         }
 
+        public override void OnRoomServerPlayersReady() {
+            ServerChangeScene(GameplayScene);
+        }
 
+        public override void OnClientSceneChanged(NetworkConnection conn) {
+            if (!ClientScene.ready) ClientScene.Ready(conn);
 
-        /*
-        public override void OnServerAddPlayer(NetworkConnection conn) {
-            if ("Assets/Scenes/" + SceneManager.GetActiveScene().name + ".unity" == menuScene) {
-                NetworkRoomPlayerLobby roomPlayerInstance = Instantiate(playerPrefab);
-
-                NetworkServer.AddPlayerForConnection(conn, roomPlayerInstance.gameObject);
+            if (ClientScene.localPlayer == null) {
+                ClientScene.AddPlayer(conn);
             }
         }
-        */
+
     }
 }

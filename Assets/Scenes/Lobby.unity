@@ -289,8 +289,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 876, y: -293}
-  m_SizeDelta: {x: 261.73105, y: 277.15475}
+  m_AnchoredPosition: {x: 876, y: -749.0018}
+  m_SizeDelta: {x: 192, y: 277.15475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &96537811
 SpriteRenderer:
@@ -859,8 +859,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 109, y: -293}
-  m_SizeDelta: {x: 261.73105, y: 277.15475}
+  m_AnchoredPosition: {x: 109, y: -749.0018}
+  m_SizeDelta: {x: 192, y: 277.15475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &419780024
 SpriteRenderer:
@@ -1479,8 +1479,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 699, y: -293}
-  m_SizeDelta: {x: 261.73105, y: 277.15475}
+  m_AnchoredPosition: {x: 699, y: -749.0018}
+  m_SizeDelta: {x: 192, y: 277.15475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &572911085
 SpriteRenderer:
@@ -1567,8 +1567,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 307, y: -293}
-  m_SizeDelta: {x: 261.73105, y: 277.15475}
+  m_AnchoredPosition: {x: 307, y: -749.0018}
+  m_SizeDelta: {x: 192, y: 277.15475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &690239499
 SpriteRenderer:
@@ -2586,8 +2586,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 505, y: -293}
-  m_SizeDelta: {x: 261.73105, y: 277.15475}
+  m_AnchoredPosition: {x: 505, y: -749.0018}
+  m_SizeDelta: {x: 192, y: 277.15475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1166232570
 SpriteRenderer:
@@ -3443,7 +3443,7 @@ MonoBehaviour:
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 3233974726073481358, guid: 3ae355322b094254da43b0a2f82e76ca,
     type: 3}
-  autoCreatePlayer: 1
+  autoCreatePlayer: 0
   playerSpawnMethod: 0
   spawnPrefabs: []
   showRoomGUI: 0
@@ -3637,8 +3637,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -288, y: -293}
-  m_SizeDelta: {x: 261.73105, y: 277.15475}
+  m_AnchoredPosition: {x: -288, y: -749}
+  m_SizeDelta: {x: 192, y: 277.15475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1597613130
 SpriteRenderer:
@@ -3725,8 +3725,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -89, y: -293}
-  m_SizeDelta: {x: 261.73105, y: 277.15475}
+  m_AnchoredPosition: {x: -89, y: -749.0018}
+  m_SizeDelta: {x: 192, y: 277.15475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1650455497
 SpriteRenderer:
@@ -3946,8 +3946,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -484, y: -293}
-  m_SizeDelta: {x: 261.73105, y: 277.15475}
+  m_AnchoredPosition: {x: -484, y: -749.0018}
+  m_SizeDelta: {x: 192, y: 277.15475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1713790918
 SpriteRenderer:
@@ -4167,8 +4167,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -872, y: -293}
-  m_SizeDelta: {x: 261.73105, y: 277.15475}
+  m_AnchoredPosition: {x: -872, y: -749.0018}
+  m_SizeDelta: {x: 192, y: 277.15475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1874460129
 SpriteRenderer:
@@ -4255,8 +4255,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -676, y: -293}
-  m_SizeDelta: {x: 261.73105, y: 277.15475}
+  m_AnchoredPosition: {x: -676, y: -749.0008}
+  m_SizeDelta: {x: 192, y: 277.15475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1906285885
 SpriteRenderer:
