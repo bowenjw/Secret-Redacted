@@ -15,12 +15,18 @@ public class Roles : MonoBehaviour {
     private Sprite defaultBack;
     private GameObject[] children;
 
+    //Kirt's additions
+    private Sprite facistPartySprite;
+    private Sprite liberalPartySprite;
+
     void Start()
     {
         liberalSprites = Resources.LoadAll<Sprite>("Roles/Liberal");
         facistSprites = Resources.LoadAll<Sprite>("Roles/Fascist");
         hitlerSprite = Resources.Load<Sprite>("Roles/Hitler/Hitler");
         defaultBack = Resources.Load<Sprite>("defaultBack");
+        facistPartySprite = Resources.Load<Sprite>("PartyMembershipFascist");
+        liberalPartySprite = Resources.Load<Sprite>("PartyMebershipLiberal");
 
         //TODO: get # of players
         playerRoles = new string[players];
@@ -74,6 +80,61 @@ public class Roles : MonoBehaviour {
             children[i].SetActive(true);
         }
         
+    }
+
+    //Temp nasty changes -Kirt
+    public void showRoles(int playerIndex) {
+
+        int i = playerIndex;
+        int facistCnt = 0;
+
+            SpriteRenderer x = children[i].GetComponent<SpriteRenderer>();
+            if (playerRoles[i] == "Liberal") {
+                x.sprite = liberalSprites[i]; 
+            }
+            else if (playerRoles[i] == "Fascist") {
+                x.sprite = facistSprites[facistCnt];
+                facistCnt++;
+            }
+            else {
+                // is hitler
+                x.sprite = hitlerSprite;
+            }
+            children[i].SetActive(false);
+        
+            children[i].SetActive(true);
+        
+    }
+
+    
+
+     public void showParty(int playerIndex) {
+
+        int i = playerIndex;
+        
+            SpriteRenderer x = children[i].GetComponent<SpriteRenderer>();
+            if (playerRoles[i] == "Liberal") {
+                x.sprite = liberalPartySprite; 
+            }
+            else if (playerRoles[i] == "Fascist") {
+                x.sprite = facistPartySprite;
+            }
+            else {
+                // is hitler
+                x.sprite = facistPartySprite;
+            }
+            children[i].SetActive(false);
+
+
+            children[i].SetActive(true);
+        
+    }
+
+    public void buttonPress(GameObject player) {
+        
+        int playerIndex = Int32.Parse(player.name.Remove(0, 7)) - 1;
+
+        showParty(playerIndex);
     }
 
     public void hideRoles() {
