@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     private bool isChancellor;
     private bool wasChancellor;
     private bool isFascist;
-    private bool isHitlar;
+    private bool isHitler;
     private bool hasVoted;
     private bool votedYes;
     public Player(){
@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
         isChancellor = false;
         wasChancellor = false;
         isFascist = false;
-        isHitlar = false;
+        isHitler = false;
         hasVoted = false;
         votedYes = false;
     }
@@ -27,12 +27,12 @@ public class Player : MonoBehaviour
     public bool IsChancellor { get{return isChancellor;} }
     public bool WasChancellor { get{return wasChancellor;} }
     public bool IsFascist { get{return isFascist;} }
-    public bool IsHitler { get{return isHitlar;} }
+    public bool IsHitler { get{return isHitler;} }
     public bool HasVoted { get{return hasVoted;} }
     public bool VotedYes { get{return votedYes;} }
-    public void setHitlar() {
+    public void setHitler() {
         isFascist = true;
-        isHitlar = true;
+        isHitler = true;
     }
     public void setFascist(){
         isFascist = true;
