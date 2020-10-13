@@ -82,7 +82,7 @@ public class Roles : MonoBehaviour {
         
     }
 
-    //Temp nasty changes -Kirt
+    //Not needed, might be used so facist can see each other, shows complete roles given player index (0 to 4) -Kirt
     public void showRoles(int playerIndex) {
 
         int i = playerIndex;
@@ -107,7 +107,7 @@ public class Roles : MonoBehaviour {
     }
 
     
-
+    //Shows Party (Facist or Liberal) for show role executive action, protects whichi facist is hitler -Kirt
      public void showParty(int playerIndex) {
 
         int i = playerIndex;
@@ -130,12 +130,6 @@ public class Roles : MonoBehaviour {
         
     }
 
-    public void buttonPress(GameObject player) {
-        
-        int playerIndex = Int32.Parse(player.name.Remove(0, 7)) - 1;
-
-        showParty(playerIndex);
-    }
 
     public void hideRoles() {
 
