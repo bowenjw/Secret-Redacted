@@ -14,8 +14,6 @@ namespace customLobby {
 
         [SerializeField] private GameObject panel = null;
 
-        public static string displayName { get; set;}
-
         public TMP_Text nameInputField;
 
         public TMP_Text displayField;
@@ -34,32 +32,24 @@ namespace customLobby {
 
         public Button joinButton;
 
-        private const string PlayerPrefKey = "Username";
-
         private void Start() => SetUp();
 
         private void SetUp(){
-            if (!PlayerPrefs.HasKey(PlayerPrefKey)) {return;}
 
-            displayName = PlayerPrefs.GetString(PlayerPrefKey);
-
-            nameInputField.text = displayName;
-
-            SetPlayerName(displayName);
+            nameInputField.text = PlayerPrefs.GetString("Username");
 
             networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManagerLobby>();
 
         }
 
-        private void SetPlayerName(string name){
+        public void SetPlayerName(string name){
 
-            if(string.IsNullOrEmpty(name)) { continueButton.gameObject.SetActive(false);}
+            if(!string.IsNullOrEmpty(name)) { continueButton.gameObject.SetActive(true);}
+            else { continueButton.gameObject.SetActive(false);}
         }
 
-        public void SavePlayerName(){
-            name = displayField.text;
-            displayName = name;
-            PlayerPrefs.SetString(PlayerPrefKey,name);
+        public void SavePlayerName() {
+            PlayerPrefs.SetString("Username",displayField.text);
         }
 
         public void HostLobby() {

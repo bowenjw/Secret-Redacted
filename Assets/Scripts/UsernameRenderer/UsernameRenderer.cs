@@ -24,6 +24,7 @@ public class UsernameRenderer : MonoBehaviour {
 
             //TODO: get actual usernames
             usernames[i] = "Username" + (i + 1); 
+            children[i].transform.position = playersCards[i].transform.position + new Vector3(0,70,0);
         }
         usernames[0] = playerName;
     }
@@ -33,8 +34,6 @@ public class UsernameRenderer : MonoBehaviour {
             TMP_Text x = children[i].GetComponent<TMP_Text>();
 
             x.text = usernames[i];
-            children[i].transform.position = playersCards[i].transform.position + new Vector3(0,70,0);
-            Debug.Log(playersCards[i].transform.position + "," + children[i].transform.position);
         }
     }
 

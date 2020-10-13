@@ -3,3 +3,11 @@ INFO  2020-10-11T14:18:34.657 90    main:566: starting main loop
 INFO  2020-10-11T17:10:46.907 90    os_proc_tree_kill:96: sending SIGTERM to PID -92
 INFO  2020-10-11T17:10:46.917 90    on_process_exit:393: exited: pid=92 status=143 stoptime=10349935091400
 INFO  2020-10-11T17:10:46.921 90    os_exit:593: Nvim exit: 0
+INFO  2020-10-13T12:22:55.983 81    channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-10-13T12:22:56.171 81    main:566: starting main loop
+INFO  2020-10-13T12:46:41.792 81    emsg_multiline:687: E492: Not an editor command: Tabp
+INFO  2020-10-13T12:59:54.585 81    emsg_multiline:687: E492: Not an editor command: Tabp
+INFO  2020-10-13T14:59:10.872 81    emsg_multiline:687: E163: There is only one file to edit
+INFO  2020-10-13T18:03:17.700 81    os_proc_tree_kill:96: sending SIGTERM to PID -83
+INFO  2020-10-13T18:03:17.711 81    on_process_exit:393: exited: pid=83 status=143 stoptime=20442146576000
+INFO  2020-10-13T18:03:17.715 81    os_exit:593: Nvim exit: 0

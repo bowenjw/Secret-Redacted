@@ -10,9 +10,6 @@ using Mirror;
 namespace customLobby {
     public class NetworkRoomPlayerLobby : NetworkRoomPlayer {
 
-        [SyncVar(hook = nameof(usernameChanged))]
-        public string username;
-
         [SyncVar(hook = nameof(aliveChanged))]
         public bool isAlive;
 
@@ -22,61 +19,56 @@ namespace customLobby {
         [SyncVar(hook = nameof(voted))]
         public bool vote;
 
+        [SyncVar(hook = nameof(usernameChanged))]
+        public string username;
+
         public string party;
 
-        [SerializeField] public TMP_Text readyText;
+        public bool inPosition = false;
 
-        [SerializeField] public TMP_Text usernameText;
+        private bool loaded = false;
 
         [SerializeField] public Button readyButton;
 
-        private bool inPosition = false;
+        public static NetworkManagerLobby lobby;
 
+        public override void OnStartClient() {
+            lobby = GameObject.Find("NetworkManager").GetComponent<NetworkManagerLobby>();
+
+            username = "Player" + (index + 1);
+
+        }
         public override void OnClientEnterRoom() {
-
-            if (string.IsNullOrEmpty(username)) { usernameChanged("",Lobby.displayName);}
-
-            if (SceneManager.GetActiveScene().name == "Lobby" && isLocalPlayer){
+            if (SceneManager.GetActiveScene().name == "Lobby" && !inPosition) {
+                GameObject x = GameObject.Find("Player"+(index+1));
+                x.transform.localPosition = new Vector3( (-864 +(index * 192)), -295, 0);
+                inPosition = true;
+            }
+            if (SceneManager.GetActiveScene().name == "Lobby" && !loaded && hasAuthority){
                 // In Lobby Scene
 
-                if (usernameText == null){
-                  usernameText = GameObject.Find("Player"+(index+1)).GetComponentInChildren<TMP_Text>();
-                  usernameChanged(username,"");
-                }
-                if (readyText == null){
-                  readyText = GameObject.Find("Player"+(index+1)+"/"+"readyText").GetComponent<TMP_Text>();
-                }
                 if (readyButton == null){
                   readyButton = GameObject.Find("readyUpButton").GetComponent<Button>();
                   readyButton.onClick.AddListener(delegate {CmdChangeReadyState(true);});
                   readyButton.onClick.AddListener(delegate {changeReadyButton(true);});
                 }
-                if (!inPosition) {
-                    GameObject x = GameObject.Find("Player"+(index+1));
-                    x.transform.localPosition = new Vector3( (-864 +(index * 192)), -295, 0);
-                    inPosition = true;
-                }
+                loaded = true;
 
             }
-            else if(SceneManager.GetActiveScene().name == "5 Players" && isLocalPlayer) {
+            else if (SceneManager.GetActiveScene().name == "5 Players" && !loaded && hasAuthority) {
                 // In 5 Players
-            
-                if (usernameText == null) {
-                  usernameText = GameObject.Find("Username"+(index+1)).GetComponent<TMP_Text>();
-                  usernameChanged(username,"");
-                }
 
-                if (string.IsNullOrEmpty(party)) {
-                    party = GameObject.Find("RolesHolder").GetComponent<Roles>().playerRoles[index];
-                }
+                lobby.setPlayerUsername(username,index,"5 Players");
 
                 if (index == 0) {
-                    roleChanged("","President");
+                    role = "President";
                 }
 
             }
+            //username = PlayerPrefs.GetString("Username");
                 
         }
+        
 
         public void changeReadyButton(bool state){
           GameObject rB = GameObject.Find("readyUpButton");
@@ -91,21 +83,6 @@ namespace customLobby {
           }
           rB.GetComponent<Button>().onClick.AddListener(delegate {CmdChangeReadyState(!state);});
           rB.GetComponent<Button>().onClick.AddListener(delegate {changeReadyButton(!state);});
-        }
-
-        public void usernameChanged(string prevName, string userName) {
-            if (string.IsNullOrEmpty(userName)){
-                if (!string.IsNullOrEmpty(prevName)){
-                  username = prevName;
-                }
-                else {
-                  usernameChanged("",Lobby.displayName);
-                }
-            }
-            else {
-                username = userName;
-            }
-            if (usernameText != null) {usernameText.text = username;}
         }
 
         public void aliveChanged(bool prevState, bool state) {
@@ -134,13 +111,16 @@ namespace customLobby {
         }
 
         public override void ReadyStateChanged(bool _, bool state){
-          if (readyText != null) {readyText.text = state? "Ready":"Not Ready";}
+          lobby.playerChangedReadyState(state,index); 
+        }
+
+        public void usernameChanged(string prevName, string name) {
+            lobby.setPlayerUsername(name, index, SceneManager.GetActiveScene().name);
         }
 
         public override void OnClientExitRoom() {
           if (SceneManager.GetActiveScene().name == "Lobby") {
-              usernameChanged("","Player"+(index+1));
-              ReadyStateChanged(false,false);
+              loaded = false;
           }
         }
     }

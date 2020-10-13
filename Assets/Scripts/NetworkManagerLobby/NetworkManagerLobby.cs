@@ -13,6 +13,8 @@ namespace customLobby {
 
         [Scene] [SerializeField] private string menuScene = string.Empty;
 
+        [SerializeField] public Roles roles;
+
         public static event Action OnClientConnected;
         public static event Action OnClientDisconnected;
 
@@ -23,8 +25,6 @@ namespace customLobby {
                 if (!ClientScene.ready) ClientScene.Ready(conn);
                 ClientScene.AddPlayer(conn);
             }
-
-            Debug.Log("Connected" + conn);
             OnClientConnected?.Invoke();
         }
 
@@ -74,15 +74,44 @@ namespace customLobby {
             OnRoomClientConnected?.Invoke();
         }
 
+        public void playerChangedReadyState(bool state, int index) {
+            TMP_Text rT = GameObject.Find("Player"+(index+1)+"/"+"readyText").GetComponent<TMP_Text>();
+            rT.text = state? "Ready":"Not Ready";
+        }
+
+        public void setPlayerUsername(string username, int index, string scene) {
+            if (scene == "Lobby"){
+                TMP_Text uT = GameObject.Find("Player"+(index+1)).GetComponentInChildren<TMP_Text>();
+                uT.text = username;
+            }
+            else if (scene == "5 Players"){
+                int actIndex = index - (int)(roomSlots.Count() / 2) + 1;
+                TMP_Text uT = GameObject.Find("Username"+(actIndex)).GetComponent<TMP_Text>();
+                uT.text = username;
+            }
+        }
+
         public override void OnRoomServerPlayersReady() {
             ServerChangeScene(GameplayScene);
         }
 
         public override void OnClientSceneChanged(NetworkConnection conn) {
+            Debug.Log("ClientSceneChanged:" + conn);
             if (!ClientScene.ready) ClientScene.Ready(conn);
 
             if (ClientScene.localPlayer == null) {
                 ClientScene.AddPlayer(conn);
+            }
+        }
+
+        public override void OnRoomServerSceneChanged(string scene) {
+            if (scene == "Assets/Scenes/5 Players.unity") {
+                roles = GameObject.Find("RolesHolder").GetComponent<Roles>();
+                roles.generateRoles();
+
+                for (int i = 0; i < roomSlots.Count(); i++) {
+                    ((NetworkRoomPlayerLobby)roomSlots[i]).party = roles.playerRoles[i];
+                }
             }
         }
 

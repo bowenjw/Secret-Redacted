@@ -14,7 +14,9 @@ public class Username : MonoBehaviour {
 
     public void Start(){
         userName = PlayerPrefs.GetString("Username"," ");
-        usernameText.text = "USERNAME: " + userName;
+        if (usernameText != null) {
+            usernameText.text = "USERNAME: " + userName;
+        }
     }
 
     public void getUsername(){
@@ -27,6 +29,11 @@ public class Username : MonoBehaviour {
         usernameText.text = "USERNAME: " + userName;
         PlayerPrefs.SetString("Username", userName);
 
+    }
+
+    public void setUsername() {
+        userName = inputField.text;
+        PlayerPrefs.SetString("Username", userName);
     }
 
 }
