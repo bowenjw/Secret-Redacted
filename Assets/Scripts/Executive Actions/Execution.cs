@@ -9,7 +9,7 @@ public class Execution : MonoBehaviour
     public int playerCount = 5;
     public int maxDead = 3;
     private Sprite deathSprite;
-    private Button[] buttons;
+    private GameObject[] buttons;
     private int[] deadPlayers;
 
     void Start()
@@ -18,11 +18,11 @@ public class Execution : MonoBehaviour
         deathSprite = Resources.Load<Sprite>("deadDefaultBack");
 
         //Finds buttons and places them in array
-        buttons = new Button[playerCount];
+        buttons = new GameObject[playerCount];
 
         for(int i = 0; i < playerCount; i++)
         {
-            buttons[i] = (GameObject.Find("Execution Button " + (i+1)).GetComponent<Button>());
+            buttons[i] = GameObject.Find("Execution Button " + (i+1));
         }
 
         //Turns off Buttons
@@ -73,11 +73,11 @@ public class Execution : MonoBehaviour
             //Dead players are not turned on
             if (isDead(i))
             {
-                buttons[i].interactable = false;
+                buttons[i].SetActive(false);
             }
             else
             {
-                buttons[i].interactable = true;
+                buttons[i].SetActive(true);
             }
         }
     }
@@ -87,7 +87,7 @@ public class Execution : MonoBehaviour
     {
         for(int i = 0; i < playerCount; i++) 
         {
-            buttons[i].interactable = false;
+            buttons[i].SetActive(false);
         }
     }
 
@@ -102,6 +102,8 @@ public class Execution : MonoBehaviour
         return false;
     }
 
+
+    //Kills player
     void HasDied (int playerNumber)
     {
         for(int i = 0; i < maxDead; i++)

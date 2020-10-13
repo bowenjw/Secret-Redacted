@@ -8,18 +8,18 @@ public class ShowRoles : MonoBehaviour
 {
 
     public int playerCount = 5;
-    private Button[] buttons;
+    private GameObject[] buttons;
     Roles Roles;
 
     //Gets ducks in a row
     void Start()
     {
         //Finds buttons and places them in array
-        buttons = new Button[playerCount];
+        buttons = new GameObject[playerCount];
 
         for(int i = 0; i < playerCount; i++)
         {
-            buttons[i] = (GameObject.Find("Show Party Button " + (i+1)).GetComponent<Button>());
+            buttons[i] = GameObject.Find("Show Party Button " + (i+1));
         }
 
         //Turn off buttons
@@ -55,7 +55,7 @@ public class ShowRoles : MonoBehaviour
     {
         for(int i = 0; i < playerCount; i++) 
         {
-            buttons[i].interactable = true;
+            buttons[i].SetActive(true);
         }
     }
 
@@ -65,7 +65,7 @@ public class ShowRoles : MonoBehaviour
     {
         for(int i = 0; i < playerCount; i++) 
         {
-            buttons[i].interactable = false;
+            buttons[i].SetActive(false);
         }
     }
 
