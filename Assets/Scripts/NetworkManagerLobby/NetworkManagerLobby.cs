@@ -84,10 +84,20 @@ namespace customLobby {
                 TMP_Text uT = GameObject.Find("Player"+(index+1)).GetComponentInChildren<TMP_Text>();
                 uT.text = username;
             }
-            else if (scene == "5 Players"){
-                int actIndex = index - (int)(roomSlots.Count() / 2) + 1;
-                TMP_Text uT = GameObject.Find("Username"+(actIndex)).GetComponent<TMP_Text>();
-                uT.text = username;
+            else if (scene == "5 Players" && index < (int)(roomSlots.Count() / 2)){
+                for (int i = 0; i < (int)(roomSlots.Count() / 2); i++) {
+                    TMP_Text uT = GameObject.Find("Username"+(i+1)).GetComponent<TMP_Text>();
+                    uT.text = ((NetworkRoomPlayerLobby)roomSlots[i]).username; 
+                }
+            }
+        }
+
+        public void setPreviousUsernames(int index, string scene) {
+            if (scene == "Lobby") {
+                for (int i = index-1; i >= 0; i--) {
+                    TMP_Text uT = GameObject.Find("Player"+(i+1)).GetComponentInChildren<TMP_Text>();
+                    uT.text = ((NetworkRoomPlayerLobby)roomSlots[i]).username; 
+                }
             }
         }
 
@@ -112,6 +122,9 @@ namespace customLobby {
                 for (int i = 0; i < roomSlots.Count(); i++) {
                     ((NetworkRoomPlayerLobby)roomSlots[i]).party = roles.playerRoles[i];
                 }
+
+                //First player in the lobby is assigned president
+                ((NetworkRoomPlayerLobby)roomSlots[0]).role = "President";
             }
         }
 

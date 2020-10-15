@@ -35,6 +35,7 @@ namespace customLobby {
         public override void OnStartClient() {
             lobby = GameObject.Find("NetworkManager").GetComponent<NetworkManagerLobby>();
 
+            //username = PlayerPrefs.GetString("Username");
             username = "Player" + (index + 1);
 
         }
@@ -44,25 +45,24 @@ namespace customLobby {
                 x.transform.localPosition = new Vector3( (-864 +(index * 192)), -295, 0);
                 inPosition = true;
             }
-            if (SceneManager.GetActiveScene().name == "Lobby" && !loaded && hasAuthority){
+            if (SceneManager.GetActiveScene().name == "Lobby" && hasAuthority){
                 // In Lobby Scene
 
-                if (readyButton == null){
-                  readyButton = GameObject.Find("readyUpButton").GetComponent<Button>();
-                  readyButton.onClick.AddListener(delegate {CmdChangeReadyState(true);});
-                  readyButton.onClick.AddListener(delegate {changeReadyButton(true);});
+                if (!loaded) {
+                    if (readyButton == null){
+                      readyButton = GameObject.Find("readyUpButton").GetComponent<Button>();
+                      readyButton.onClick.AddListener(delegate {CmdChangeReadyState(true);});
+                      readyButton.onClick.AddListener(delegate {changeReadyButton(true);});
+                    }
+                    loaded = true;
                 }
-                loaded = true;
 
+                lobby.setPreviousUsernames(index,"Lobby");
             }
-            else if (SceneManager.GetActiveScene().name == "5 Players" && !loaded && hasAuthority) {
+            else if (SceneManager.GetActiveScene().name == "5 Players" && hasAuthority) {
                 // In 5 Players
 
                 lobby.setPlayerUsername(username,index,"5 Players");
-
-                if (index == 0) {
-                    role = "President";
-                }
 
             }
             //username = PlayerPrefs.GetString("Username");
@@ -115,6 +115,7 @@ namespace customLobby {
         }
 
         public void usernameChanged(string prevName, string name) {
+            if (SceneManager.GetActiveScene().name == "5 Players" && !readyToBegin) return;
             lobby.setPlayerUsername(name, index, SceneManager.GetActiveScene().name);
         }
 

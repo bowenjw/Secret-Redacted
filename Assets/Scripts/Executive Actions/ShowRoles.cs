@@ -9,7 +9,7 @@ public class ShowRoles : MonoBehaviour
 
     public int playerCount = 5;
     private GameObject[] buttons;
-    customLobby.Roles Roles;
+    Roles Roles;
 
     //Gets ducks in a row
     void Start()
@@ -26,7 +26,7 @@ public class ShowRoles : MonoBehaviour
         ButtonsOff();
 
         //Gets prepared to see Roles script
-        Roles = GameObject.Find("RolesHolder").GetComponent<customLobby.Roles>();
+        Roles = GameObject.Find("RolesHolder").GetComponent<Roles>();
     }
 
     //Update is called once per frame
