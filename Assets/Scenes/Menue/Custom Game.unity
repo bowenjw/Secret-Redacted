@@ -210,7 +210,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1704349804}
+      - m_Target: {fileID: 1472614012}
         m_MethodName: setPoliciesReqText
         m_Mode: 0
         m_Arguments:
@@ -686,7 +686,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1704349804}
+      - m_Target: {fileID: 1472614012}
         m_MethodName: setLiberalCardsText
         m_Mode: 0
         m_Arguments:
@@ -1065,7 +1065,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1704349804}
+      - m_Target: {fileID: 1472614012}
         m_MethodName: setAmtPlayersText
         m_Mode: 0
         m_Arguments:
@@ -1996,7 +1996,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1704349804}
+      - m_Target: {fileID: 1472614012}
         m_MethodName: loadCustomGame
         m_Mode: 1
         m_Arguments:
@@ -2008,7 +2008,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1704349806}
-        m_MethodName: playGame
+        m_MethodName: loadLobby
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2263,6 +2263,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1459834094}
   m_CullTransparentMesh: 0
+--- !u!1 &1472614011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1472614013}
+  - component: {fileID: 1472614012}
+  m_Layer: 0
+  m_Name: Settings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1472614012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472614011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e4d1630d33c7d4ca697f5cca40f844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  liberalCardsSlider: {fileID: 338014145}
+  amtPlayersSlider: {fileID: 671038354}
+  policiesReqSlider: {fileID: 31154349}
+  policyReportingToggle: {fileID: 1024284025}
+  liberalCardsText: {fileID: 236321934}
+  amtPlayersText: {fileID: 1500146563}
+  policiesReqText: {fileID: 1990713091}
+  settings: {fileID: 1472614011}
+--- !u!4 &1472614013
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472614011}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 626.89374, y: 271.00192, z: 57.07787}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1473791747
 GameObject:
   m_ObjectHideFlags: 0
@@ -2659,7 +2710,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Players
+  m_text: Max Players
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -3001,7 +3052,6 @@ GameObject:
   - component: {fileID: 1704349808}
   - component: {fileID: 1704349807}
   - component: {fileID: 1704349806}
-  - component: {fileID: 1704349804}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3009,25 +3059,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1704349804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1704349803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12e4d1630d33c7d4ca697f5cca40f844, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  liberalCardsSlider: {fileID: 338014145}
-  amtPlayersSlider: {fileID: 671038354}
-  policiesReqSlider: {fileID: 31154349}
-  policyReportingToggle: {fileID: 1024284025}
-  liberalCardsText: {fileID: 236321934}
-  amtPlayersText: {fileID: 1500146563}
-  policiesReqText: {fileID: 1990713091}
 --- !u!114 &1704349806
 MonoBehaviour:
   m_ObjectHideFlags: 0

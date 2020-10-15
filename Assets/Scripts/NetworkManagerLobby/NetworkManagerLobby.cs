@@ -125,6 +125,12 @@ namespace customLobby {
 
                 //First player in the lobby is assigned president
                 ((NetworkRoomPlayerLobby)roomSlots[0]).role = "President";
+
+                UsernameRenderer usernameHolder = GameObject.Find("UsernameHolder").GetComponent<UsernameRenderer>();
+
+                usernameHolder.setPlayerCards(roomSlots.Count());
+
+                usernameHolder.loadUsernames();
             }
         }
 
