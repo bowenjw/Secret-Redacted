@@ -26,7 +26,7 @@ public class ExecutiveLookup : MonoBehaviour
 
         LookupText.SetActive(true);
 
-       Invoke("HideCards", 2);
+       Invoke("HideCards", 5);
 
     }
 
