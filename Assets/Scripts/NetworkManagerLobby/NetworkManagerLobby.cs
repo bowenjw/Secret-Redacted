@@ -15,6 +15,8 @@ namespace customLobby {
 
         [SerializeField] public Roles roles;
 
+        [SerializeField] public static CustomGame settings;
+
         public static event Action OnClientConnected;
         public static event Action OnClientDisconnected;
 
@@ -46,8 +48,13 @@ namespace customLobby {
             Debug.Log(numPlayers + " " + networkAddress + " " + isNetworkActive);
         }
 
+        public override void OnRoomStartServer() {
+            //Get the custom settings
+            settings = GameObject.Find("Settings").GetComponent<CustomGame>();
+        }
+
         public override void OnServerConnect(NetworkConnection conn) {
-            if (numPlayers >= maxConnections) {
+            if (numPlayers >= settings.amtPlayers) {
                 conn.Disconnect();
                 return;
             }
@@ -80,15 +87,23 @@ namespace customLobby {
         }
 
         public void setPlayerUsername(string username, int index, string scene) {
+            int playerCnt = (int)(roomSlots.Count() / 2);
+
             if (scene == "Lobby"){
                 TMP_Text uT = GameObject.Find("Player"+(index+1)).GetComponentInChildren<TMP_Text>();
                 uT.text = username;
             }
-            else if (scene == "5 Players" && index < (int)(roomSlots.Count() / 2)){
-                for (int i = 0; i < (int)(roomSlots.Count() / 2); i++) {
+            else if (scene == "5 Players" && index < playerCnt){
+                for (int i = 0; i < playerCnt; i++) {
                     TMP_Text uT = GameObject.Find("Username"+(i+1)).GetComponent<TMP_Text>();
                     uT.text = ((NetworkRoomPlayerLobby)roomSlots[i]).username; 
                 }
+
+                UsernameRenderer usernameHolder = GameObject.Find("UsernameHolder").GetComponent<UsernameRenderer>();
+
+                usernameHolder.setPlayerCards(playerCnt);
+                
+                usernameHolder.loadUsernames();
             }
         }
 
@@ -122,6 +137,7 @@ namespace customLobby {
                 for (int i = 0; i < roomSlots.Count(); i++) {
                     ((NetworkRoomPlayerLobby)roomSlots[i]).party = roles.playerRoles[i];
                 }
+
 
                 //First player in the lobby is assigned president
                 ((NetworkRoomPlayerLobby)roomSlots[0]).role = "President";
