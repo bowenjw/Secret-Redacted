@@ -13,7 +13,7 @@ public class Settings : MonoBehaviour {
     public TMP_Dropdown resolutionDropdown;
     public TMP_Dropdown qualityDropdown;
     public Toggle fullscreenToggle;
-
+    public AudioMixer audioMixer;
     void Start() {
         resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate == 60).ToArray();
 
@@ -69,6 +69,10 @@ public class Settings : MonoBehaviour {
     public void setFullscreen ( bool isFullscreen ) {
         Screen.fullScreen = isFullscreen;
         PlayerPrefs.SetInt("Fullscreen", isFullscreen ? 1 : 0 );
+    }
+
+    public void setVolume(float volume){
+        audioMixer.SetFloat("volume", volume);
     }
 
 }
