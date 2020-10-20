@@ -12,10 +12,13 @@ using System;
 public class Veto : MonoBehaviour
 {
 
-
+    //private int numPlayers = 5;
     private GameObject chancBtn;
     private GameObject presBtn;
     private bool needVeto = false;
+
+    //customLobby.NetworkRoomPlayerLobby[] players; //TODO
+    
 
 
     //Finds buttons and turns them off
@@ -27,6 +30,17 @@ public class Veto : MonoBehaviour
 
 
         ButtonsOff();
+
+        //for(int i = 0; i < 5; i++) //TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+        //{
+        //    players[i] = GameObject.Find("NetworkManager").GetComponent<customLobby.NetworkManagerLobby>().roomSlots[i];
+        //}
+    }
+
+    //Makes sure only Chancellor and President can press the button
+    void Update()
+    {
+        
     }
 
     //Starts the veto process permanently keeps it enabled

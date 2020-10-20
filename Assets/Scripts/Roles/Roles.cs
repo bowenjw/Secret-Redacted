@@ -115,7 +115,7 @@ public class Roles : MonoBehaviour {
     }
 
     
-    //Shows Party (Facist or Liberal) for show role executive action, protects whichi facist is hitler -Kirt
+    //Shows Party (Facist or Liberal) for show role executive action, protects which facist is hitler -Kirt
      public void showParty(int playerIndex) {
 
         int i = playerIndex;

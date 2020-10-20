@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using customLobby;
+using Mirror;
+
+//isAlive tells the opposite, it is like isDead.
 
 public class Execution : MonoBehaviour
 {
-    public int playerCount = 5;
+    public int playerCount = 2;
     public int maxDead = 3;
     private Sprite deathSprite;
     private GameObject[] buttons;
     private int[] deadPlayers;
+    private NetworkRoomPlayerLobby[] players;
+    private GameObject[] playersCards;
 
     void Start()
     {
@@ -25,23 +31,49 @@ public class Execution : MonoBehaviour
             buttons[i] = GameObject.Find("Execution Button " + (i+1));
         }
 
+        //Finds player cards
+        playersCards = new GameObject[playerCount];
+
+        for(int i = 0; i < playerCount; i++)
+        {
+            playersCards[i] = GameObject.Find("Player " + (i+1));
+        }
+
         //Turns off Buttons
         ButtonsOff();
 
+        //Gets players from Network Manager
+        players = new NetworkRoomPlayerLobby[playerCount];
+
+        for(int i = 0; i < 5; i++) 
+        {
+            players[i] = (NetworkRoomPlayerLobby)GameObject.Find("NetworkManager").GetComponent<NetworkManagerLobby>().roomSlots[i];
+        }
+
+        
+        /*
         //Seed dead player with 99, I would use a list but it was giving me hassles so fooey
         deadPlayers = new int[maxDead];
         for(int i = 0; i < maxDead; i++)
         {
             deadPlayers[i] = 99;
         }
-
+        */
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        for(int i = 0; i < playerCount; i++)
+        {
+            if(isDead(i))
+            {
+                SpriteRenderer x = playersCards[i].GetComponent<SpriteRenderer>();
+                x.sprite = deathSprite;
+            }
+
+        }
     }
 
     //Figures out which button is pressed and kills that player
@@ -57,8 +89,8 @@ public class Execution : MonoBehaviour
         HasDied(playerKilledNumber);
 
         //Change sprite
-        SpriteRenderer x = player.GetComponent<SpriteRenderer>();
-        x.sprite = deathSprite;
+        //SpriteRenderer x = player.GetComponent<SpriteRenderer>();
+        //x.sprite = deathSprite;
 
 
 
@@ -94,18 +126,32 @@ public class Execution : MonoBehaviour
     //Checks to see if a player index number is dead
     bool isDead(int playerIndex)
     {
+        Debug.Log("Entered isDead");
+        Debug.Log(playerIndex);
+        Debug.Log(players[playerIndex].isAlive);
+        return players[playerIndex].isAlive;
+    
+        /*
         for(int i = 0; i < maxDead; i++)
         {
             if (playerIndex == deadPlayers[i])
                 return true;
         }
         return false;
+        */
     }
 
 
     //Kills player
     void HasDied (int playerNumber)
     {
+
+        int playerIndex = playerNumber - 1;
+
+        players[playerIndex].isAlive = true;
+
+
+        /*
         for(int i = 0; i < maxDead; i++)
         {
             if (deadPlayers[i] == 99)
@@ -114,6 +160,7 @@ public class Execution : MonoBehaviour
                 return;
             }
         }
+        */
     }
 
 
