@@ -15,6 +15,7 @@ public class Settings : MonoBehaviour {
     public Toggle fullscreenToggle;
     public AudioMixer audioMixer;
     void Start() {
+        setVolume(PlayerPrefs.GetFloat("volume"));
         resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate == 60).ToArray();
 
         resolutionDropdown.ClearOptions();
@@ -25,11 +26,6 @@ public class Settings : MonoBehaviour {
 
         for (int i = 0; i < resolutions.Length; i++){
             string option = resolutions[i].width + " x " + resolutions[i].height;
-            /*
-            if (options.Contains(option)){
-                continue;
-            }
-            */
             options.Add(option);
 
             if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height ) {
@@ -73,6 +69,7 @@ public class Settings : MonoBehaviour {
 
     public void setVolume(float volume){
         audioMixer.SetFloat("volume", volume);
+        PlayerPrefs.SetFloat("volume",(int)volume);
     }
 
 }
