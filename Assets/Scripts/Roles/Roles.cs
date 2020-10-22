@@ -46,10 +46,11 @@ public class Roles : MonoBehaviour {
         int maxFash = amtFash[players % 5];
         int[] fashIndex = new int[maxFash];
 
+        if (players < 5) maxFash = 2;
+
         for (int i = 0; i < maxFash; i++) {
             fashIndex[i] = rand.Next(players+1); // rand goes between 0 - players 
         }
-
 
         for (int i = 0; i < players; i++) {
 

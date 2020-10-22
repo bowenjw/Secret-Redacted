@@ -22,6 +22,8 @@ namespace customLobby {
 
         public static event Action OnRoomClientConnected;
 
+        [SerializeField] public int amtPlayers;
+
         public override void OnClientConnect(NetworkConnection conn) {
             if (!clientLoadedScene) {
                 if (!ClientScene.ready) ClientScene.Ready(conn);
@@ -116,6 +118,44 @@ namespace customLobby {
             }
         }
 
+        public void iHateUnity() {}
+
+        public bool callVote(int playerIndex) {
+
+            List<bool> votes = new List<bool>();
+
+            for (int i = 0;i < amtPlayers;i++) {
+                //Call a vote on each player
+                GameObject.Find("Player "+(i+1)).GetComponent<Voting>().callVote();
+            }
+
+            Invoke("iHateUnity", 10);
+
+            for (int i = 0;i < amtPlayers;i++) {
+
+                //Waits for each player to finish their vote before processing result
+                //while (!GameObject.Find("Player "+(i+1)).GetComponent<Voting>().setHist);
+
+                votes.Add(GameObject.Find("Player "+(i+1)).GetComponent<Voting>().result);
+
+            }
+
+            //All votes have been counted
+            
+            List<bool> yesVotes = votes.FindAll( delegate(bool vote) { return vote == true; } );
+
+            //Return result of vote
+            if (yesVotes.Count() > (int)(amtPlayers / 2)) {
+                //Majority, so elect chancellor
+                ((NetworkRoomPlayerLobby)roomSlots[playerIndex]).role = "Chancellor";
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+            
+
         public override void OnRoomServerPlayersReady() {
             ServerChangeScene(GameplayScene);
         }
@@ -134,10 +174,17 @@ namespace customLobby {
                 roles = GameObject.Find("RolesHolder").GetComponent<Roles>();
                 roles.generateRoles();
 
-                for (int i = 0; i < roomSlots.Count(); i++) {
-                    ((NetworkRoomPlayerLobby)roomSlots[i]).party = roles.playerRoles[i];
-                }
+                amtPlayers = roomSlots.Count();
 
+                for (int i = 0; i < amtPlayers; i++) {
+
+                    //Assign each player to their respective party
+                    ((NetworkRoomPlayerLobby)roomSlots[i]).party = roles.playerRoles[i];
+
+                    //Set up voting buttons
+                    GameObject.Find("Player "+(i+1)).GetComponent<Voting>().setUpBtns();
+
+                }
 
                 //First player in the lobby is assigned president
                 ((NetworkRoomPlayerLobby)roomSlots[0]).role = "President";

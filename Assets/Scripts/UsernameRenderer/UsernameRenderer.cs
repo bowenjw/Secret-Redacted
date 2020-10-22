@@ -30,7 +30,7 @@ public class UsernameRenderer : MonoBehaviour {
             children[i] = GameObject.Find("Username" + (i+1));
 
             usernames[i] = "Username" + (i + 1); 
-            children[i].transform.position = playersCards[i].transform.position + new Vector3(0,70,0);
+            children[i].transform.position = playersCards[i].transform.position + new Vector3(0,90,0);
         }
         usernames[0] = playerName;
     }

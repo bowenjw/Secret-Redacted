@@ -100,6 +100,9 @@ namespace customLobby {
         public void roleChanged(string prevRole, string role) {
             if (role == "President") {
                 //TODO: Get president text and move it to the current players card
+
+                //Call vote for Chancellor
+                GameObject.Find("Player " + (index + 1)).GetComponent<Voting>().loadObjs();
                 Debug.Log(username + " is president!");
             }
             else if (role == "Chancellor") {
