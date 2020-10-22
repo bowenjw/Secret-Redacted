@@ -22,6 +22,11 @@ namespace customLobby {
         [SyncVar(hook = nameof(usernameChanged))]
         public string username;
 
+        [SyncVar]
+        public int pathwayTracker = 0;
+
+        public int electionTracker = 0;
+
         public string party;
 
         public bool inPosition = false;
@@ -68,7 +73,7 @@ namespace customLobby {
             //username = PlayerPrefs.GetString("Username");
                 
         }
-        
+
 
         public void changeReadyButton(bool state){
           GameObject rB = GameObject.Find("readyUpButton");

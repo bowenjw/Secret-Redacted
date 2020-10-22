@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using customLobby;
+using Mirror;
+
 
 
 public class NewLiberalPathLogic : MonoBehaviour
@@ -11,8 +14,10 @@ public class NewLiberalPathLogic : MonoBehaviour
     private GameObject[] electionTokens;
     private int numCards = 5;
     private int numElectionTokens = 4;
-    private int pathwayTracker = 0;
-    private int electionTracker = 0;
+    //private int pathwayTracker = 0;
+    //private int electionTracker = 0;
+    private NetworkRoomPlayerLobby[] players;
+    private int numPlayers = 2;
 
     //Grabs cards and hides them all. Then does same for tracker.
     void Start()
@@ -34,6 +39,14 @@ public class NewLiberalPathLogic : MonoBehaviour
             electionTokens[i].GetComponent<Renderer>().enabled = false;
         }
 
+        //Gets players from Network Manager
+        players = new NetworkRoomPlayerLobby[numPlayers];
+
+        for(int i = 0; i < numPlayers; i++) 
+        {
+            players[i] = (NetworkRoomPlayerLobby)GameObject.Find("NetworkManager").GetComponent<NetworkManagerLobby>().roomSlots[i];
+        }
+
 
     }
 
@@ -41,63 +54,69 @@ public class NewLiberalPathLogic : MonoBehaviour
     void Update()
     {
         //Liberal Cards, shows them
-        for (int i = 0; i < pathwayTracker; i++)
+        for (int i = 0; i < players[0].pathwayTracker; i++)
             cards[i].GetComponent<Renderer>().enabled = true;
 
         //Hides remaining cards
-        for (int i = pathwayTracker; i < numCards; i++)
+        for (int i = players[0].pathwayTracker; i < numCards; i++)
             cards[i].GetComponent<Renderer>().enabled = false;
 
-        //Election Tracker, shows them
-        for (int i = 0; i < electionTracker; i++)
+        //Election Tracker, shows them 
+        for (int i = 0; i < players[0].electionTracker; i++)
             electionTokens[i].GetComponent<Renderer>().enabled = true;
 
         //Hides remaining tokens
-        for (int i = electionTracker; i < numElectionTokens; i++)
+        for (int i = players[0].electionTracker; i < numElectionTokens; i++)
             electionTokens[i].GetComponent<Renderer>().enabled = false;
     }
  
     //Increments liberal path
     public void IncrementLiberalPath()
     {
-       if (pathwayTracker < 5) 
-           pathwayTracker++;
+       if (players[0].pathwayTracker < 5) 
+           for (int i = 0; i < numPlayers; i++)
+                players[i].pathwayTracker++;
            
     }
 
     //Decrements liberal path
     public void DecrementLiberalPath()
     {
-       if (pathwayTracker > 0)
-           pathwayTracker--;
+       if (players[0].pathwayTracker > 0)
+           for (int i = 0; i < numPlayers; i++)
+                players[i].pathwayTracker--;
            
     }
 
     //Resets liberal path
     public void ResetLiberalPath()
     {
-        pathwayTracker = 0;
+        for (int i = 0; i < numPlayers; i++)
+                players[i].pathwayTracker = 0;
     }
 
     //Increments tracker path
     public void IncrementTracker()
     {
-       if (electionTracker < 4) 
-           electionTracker++;
+       if (players[0].electionTracker < 4) 
+           for (int i = 0; i < numPlayers; i++)
+                players[i].electionTracker++;
     }
 
     //Decrements tracker path
     public void DecrementTracker()
     {
-       if (electionTracker > 0)
-           electionTracker--;
+       if (players[0].electionTracker > 0)
+           for (int i = 0; i < numPlayers; i++)
+                players[i].electionTracker--;
            
     }
 
     //Resets trackers
     public void ResetTracker()
     {
-        electionTracker = 0;
+        for (int i = 0; i < numPlayers; i++)
+                players[i].electionTracker = 0;
     }
 
     
