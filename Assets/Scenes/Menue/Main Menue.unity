@@ -915,6 +915,7 @@ GameObject:
   - component: {fileID: 1412642979}
   - component: {fileID: 1412642978}
   - component: {fileID: 1412642982}
+  - component: {fileID: 1412642983}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1012,7 +1013,8 @@ AudioSource:
   m_GameObject: {fileID: 1412642977}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 6644d4a8520c2cb438cc6a50f407d9b5,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: da2b1c0689f4acd45a8445aedb956fef, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1099,6 +1101,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1412642983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412642977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e37f099ed87ce044999a72b25cc73ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolutionDropdown: {fileID: 0}
+  qualityDropdown: {fileID: 0}
+  fullscreenToggle: {fileID: 0}
+  audioMixer: {fileID: 0}
 --- !u!1 &1504679462
 GameObject:
   m_ObjectHideFlags: 0
