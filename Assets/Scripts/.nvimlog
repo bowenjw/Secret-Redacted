@@ -46,3 +46,12 @@ INFO  2020-10-20T16:52:25.013 78    on_process_exit:393: exited: pid=80 status=1
 INFO  2020-10-20T16:52:25.017 78    os_exit:593: Nvim exit: 0
 INFO  2020-10-22T12:17:06.902 114   channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
 INFO  2020-10-22T12:17:07.137 114   main:566: starting main loop
+INFO  2020-10-22T15:30:26.279 114   os_proc_tree_kill:96: sending SIGTERM to PID -116
+INFO  2020-10-22T15:30:26.291 114   on_process_exit:393: exited: pid=116 status=143 stoptime=11744389099500
+INFO  2020-10-22T15:30:26.295 114   os_exit:593: Nvim exit: 0
+INFO  2020-10-25T15:29:58.381 171   channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-10-25T15:29:58.601 171   main:566: starting main loop
+INFO  2020-10-25T15:32:55.555 171   emsg_multiline:687: E492: Not an editor command: Tabn
+INFO  2020-10-25T17:25:08.219 171   emsg_multiline:687: E492: Not an editor command: Tabn
+INFO  2020-10-25T17:49:41.197 171   emsg_multiline:687: E492: Not an editor command: Tabp
+INFO  2020-10-25T18:31:24.187 171   emsg_multiline:687: E492: Not an editor command: W

@@ -68,7 +68,7 @@ public class Execution : MonoBehaviour
     {
         for(int i = 0; i < numPlayers; i++)
         {
-            Debug.Log("Player count is " + numPlayers + " but i is " + i + " and they are " + isDead(i));
+            //Debug.Log("Player count is " + numPlayers + " but i is " + i + " and they are " + isDead(i));
 
             if(isDead(i))
             {
@@ -129,9 +129,11 @@ public class Execution : MonoBehaviour
     //Checks to see if a player index number is dead
     bool isDead(int playerIndex)
     {
+        /*
         Debug.Log("Entered isDead");
         Debug.Log(playerIndex);
         Debug.Log(players[playerIndex].isAlive);
+        */
         return players[playerIndex].isAlive;
     
         /*

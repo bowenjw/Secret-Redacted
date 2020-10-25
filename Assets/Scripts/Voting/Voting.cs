@@ -17,17 +17,23 @@ public class Voting : MonoBehaviour {
     [SerializeField] public Button yesVote;
     [SerializeField] public Button noVote;
     [SerializeField] public Button selectPlayerBtn;
+    public int playerIndex;
+
+    public customLobby.NetworkRoomPlayerLobby roomPlayer;
 
     void Start() {
         voteHistory = new List<bool>();
-        yesVote.onClick.AddListener(voteYes);
-        noVote.onClick.AddListener(voteNo);
     }
 
-    public void setUpBtns() {
+    public void setUpBtns(int x) {
+        playerIndex = x; 
         selectPlayerBtn.gameObject.transform.localPosition = new Vector3(0,-2000,0);
         yesVote.gameObject.transform.localPosition = new Vector3(0,-2000,0);
         noVote.gameObject.transform.localPosition = new Vector3(0,-2000,0);
+        yesVote.onClick.AddListener(voteYes);
+        noVote.onClick.AddListener(voteNo);
+        Mirror.NetworkRoomPlayer y = GameObject.Find("NetworkManager").GetComponent<customLobby.NetworkManagerLobby>().roomSlots[playerIndex];
+        roomPlayer = (customLobby.NetworkRoomPlayerLobby)y;
     }
 
     public void loadObjs() {
@@ -47,20 +53,13 @@ public class Voting : MonoBehaviour {
             GameObject.Find("Player "+(i+1)+"/Select").transform.localPosition = new Vector3(0,-2000,0);
         }
         
-        int playerIndex;
-        if (player.name.Length == 8) { playerIndex = player.name[7];}
-        else { playerIndex = Int32.Parse(player.name[7] + "" + player.name[8]);}
-        
-        if (!GameObject.Find("NetworkManager").GetComponent<customLobby.NetworkManagerLobby>().callVote(playerIndex - 1)) {
-            failedVotes++;
-            loadObjs();
-        }
+        GameObject.Find("NetworkManager").GetComponent<customLobby.NetworkManagerLobby>().callVote(playerIndex); 
     }
 
 
     public void callVote() {
-        yesVote.gameObject.transform.localPosition = new Vector3(551, -180, 0);
-        noVote.gameObject.transform.localPosition = new Vector3(828, -180, 0);
+        yesVote.gameObject.transform.localPosition = new Vector3(180, -280, 0);
+        noVote.gameObject.transform.localPosition = new Vector3(446, -280, 0);
         setHist = false;
     }
 
@@ -68,6 +67,7 @@ public class Voting : MonoBehaviour {
         yesVote.gameObject.transform.localPosition = new Vector3(0,-2000,0);
         noVote.gameObject.transform.localPosition = new Vector3(0,-2000,0);
         if (!setHist) { voteHistory.Add(result);setHist = true;}
+        roomPlayer.vote = result;
     }
 
     public void voteYes() {

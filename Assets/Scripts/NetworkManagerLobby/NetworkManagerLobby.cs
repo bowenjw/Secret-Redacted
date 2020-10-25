@@ -24,6 +24,10 @@ namespace customLobby {
 
         [SerializeField] public int amtPlayers;
 
+        public List<bool> votes;
+
+        private int possChanc;
+
         public override void OnClientConnect(NetworkConnection conn) {
             if (!clientLoadedScene) {
                 if (!ClientScene.ready) ClientScene.Ready(conn);
@@ -118,41 +122,50 @@ namespace customLobby {
             }
         }
 
-        public void iHateUnity() {}
+        public void checkIfAllVoted() {
+            for (int i = 0;i < amtPlayers;i++) {
 
-        public bool callVote(int playerIndex) {
+                if (!GameObject.Find("Player "+(i+1)).GetComponent<Voting>().setHist){
+                    // Someone still needs to vote
+                    return;
+                }
 
-            List<bool> votes = new List<bool>();
+            }
+            // Everyone is done voting 
+            List<bool> yesVotes = votes.FindAll( delegate(bool vote) { return vote == true; } );
+
+            if (yesVotes.Count() > (int)(amtPlayers / 2)) {
+                //Majority, so elect chancellor
+                ((NetworkRoomPlayerLobby)roomSlots[possChanc]).role = "Chancellor";
+            }
+            else {
+                //TODO: Add functionality for when vote fails 
+
+            }
+        }
+
+
+
+        public void callVote(int playerIndex) {
+
+            votes = new List<bool>();
+            possChanc = playerIndex; 
 
             for (int i = 0;i < amtPlayers;i++) {
                 //Call a vote on each player
-                GameObject.Find("Player "+(i+1)).GetComponent<Voting>().callVote();
+                ((NetworkRoomPlayerLobby)roomSlots[i]).callVote();
             }
 
-            Invoke("iHateUnity", 10);
+            //Calls the timer
+            GameObject.Find("Timer").GetComponent<Timer>().startTimer(delegate {
+                for (int i = 0;i < amtPlayers;i++) {
 
-            for (int i = 0;i < amtPlayers;i++) {
+                    votes.Add(GameObject.Find("Player "+(i+1)).GetComponent<Voting>().result);
 
-                //Waits for each player to finish their vote before processing result
-                //while (!GameObject.Find("Player "+(i+1)).GetComponent<Voting>().setHist);
+                }
+                
+            });
 
-                votes.Add(GameObject.Find("Player "+(i+1)).GetComponent<Voting>().result);
-
-            }
-
-            //All votes have been counted
-            
-            List<bool> yesVotes = votes.FindAll( delegate(bool vote) { return vote == true; } );
-
-            //Return result of vote
-            if (yesVotes.Count() > (int)(amtPlayers / 2)) {
-                //Majority, so elect chancellor
-                ((NetworkRoomPlayerLobby)roomSlots[playerIndex]).role = "Chancellor";
-                return true;
-            }
-            else {
-                return false;
-            }
         }
             
 
@@ -182,7 +195,7 @@ namespace customLobby {
                     ((NetworkRoomPlayerLobby)roomSlots[i]).party = roles.playerRoles[i];
 
                     //Set up voting buttons
-                    GameObject.Find("Player "+(i+1)).GetComponent<Voting>().setUpBtns();
+                    ((NetworkRoomPlayerLobby)roomSlots[i]).setUpBtns(i);
 
                 }
 

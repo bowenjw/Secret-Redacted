@@ -68,6 +68,7 @@ namespace customLobby {
                 // In 5 Players
 
                 lobby.setPlayerUsername(username,index,"5 Players");
+                setUpBtns(index);
 
             }
             //username = PlayerPrefs.GetString("Username");
@@ -114,8 +115,18 @@ namespace customLobby {
             }
         }
 
+        public void callVote() {
+            GameObject.Find("Player " + (index + 1) ).GetComponent<Voting>().callVote();
+        }
+
+        public void setUpBtns(int i) {
+            GameObject.Find("Player " + (index + 1) ).GetComponent<Voting>().setUpBtns(i);
+        }
+
+
         public void voted(bool _, bool vote) {
             Debug.Log(username + " voted " + (vote? "yes":"no"));
+            lobby.checkIfAllVoted();
         }
 
         public override void ReadyStateChanged(bool _, bool state){
