@@ -63,3 +63,5 @@ INFO  2020-10-27T12:47:50.729 132   main:566: starting main loop
 INFO  2020-10-27T13:17:31.485 132   emsg_multiline:687: E492: Not an editor command: Tabp
 INFO  2020-10-27T13:37:04.541 132   emsg_multiline:687: E492: Not an editor command: W
 INFO  2020-10-27T13:37:05.694 132   emsg_multiline:687: E492: Not an editor command: W
+INFO  2020-10-27T15:23:44.514 132   emsg_multiline:687: E486: Pattern not found: loadObj
+INFO  2020-10-27T15:46:31.358 132   emsg_multiline:687: E492: Not an editor command: Tabp

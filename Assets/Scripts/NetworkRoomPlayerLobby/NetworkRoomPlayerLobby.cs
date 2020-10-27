@@ -25,6 +25,9 @@ namespace customLobby {
         [SyncVar(hook = nameof(selectedPlayer))]
         public bool isSelected;
 
+        [SyncVar(hook = nameof(needsToVote))]
+        public bool hasToVote;
+
         [SyncVar]
         public int pathwayTracker = 0;
 
@@ -98,6 +101,25 @@ namespace customLobby {
           rB.GetComponent<Button>().onClick.AddListener(delegate {changeReadyButton(!state);});
         }
 
+        public void setUpBtns() {
+            GameObject.Find("Player " + (index + 1) ).GetComponent<Voting>().setUpBtns(index);
+        }
+
+        [Command(ignoreAuthority=true)]
+        public void CmdSelectPlayer() {
+            isSelected = true;
+        }
+
+        [Command]
+        public void CmdDeselectPlayer() {
+            isSelected = false;
+        }
+
+        [Command]
+        public void CmdVote(bool Vote) {
+            vote = Vote;
+        }
+
         public void selectedPlayer(bool _, bool selected) {
             //Player was selected and now we need to vote
 
@@ -112,15 +134,13 @@ namespace customLobby {
             }
         }
 
-        public void roleChanged(string prevRole, string role) {
-            if (role == "President") {
+        public void roleChanged(string prevRole, string currRole) {
+            if (currRole == "President") {
                 //TODO: Get president text and move it to the current players card
 
-                //Call vote for Chancellor
-                GameObject.Find("Player " + (index + 1)).GetComponent<Voting>().loadObjs();
                 Debug.Log(username + " is president!");
             }
-            else if (role == "Chancellor") {
+            else if (currRole == "Chancellor") {
                 //TODO: Get chancellor text and move it to the current players card
                 Debug.Log(username + " is chancellor!");
             }
@@ -129,10 +149,25 @@ namespace customLobby {
             }
         }
 
-        public void setUpBtns() {
-            GameObject.Find("Player " + (index + 1) ).GetComponent<Voting>().setUpBtns(index);
+        [Command(ignoreAuthority=false)]
+        public void CmdLoadSelectBtns() {
+            GameObject.Find("Player " + (index + 1)).GetComponent<Voting>().loadObjs(index);
         }
 
+
+        [Command]
+        public void CmdCallVote() {
+            hasToVote = true;
+        }
+
+        [Command]
+        public void CmdEndVote() {
+            hasToVote = false;
+        }
+
+        public void needsToVote(bool _, bool playerHasToVote) {
+            GameObject.Find("Player " + (index + 1) ).GetComponent<Voting>().callVote();
+        }
 
         public void voted(bool _, bool vote) {
             Debug.Log(username + " voted " + (vote? "yes":"no"));

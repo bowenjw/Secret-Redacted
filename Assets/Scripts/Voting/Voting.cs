@@ -27,20 +27,24 @@ public class Voting : MonoBehaviour {
 
     public void setUpBtns(int x) {
         playerIndex = x; 
-        selectPlayerBtn.gameObject.transform.localPosition = new Vector3(0,-2000,0);
+        Mirror.NetworkRoomPlayer y = GameObject.Find("NetworkManager").GetComponent<customLobby.NetworkManagerLobby>().roomSlots[playerIndex];
+        roomPlayer = (customLobby.NetworkRoomPlayerLobby)y;
+        int players = GameObject.Find("RolesHolder").GetComponent<Roles>().players;
+        for (int i = 0; i < players; i++ ) {
+            GameObject.Find("Player " + (i+1)+"/Select").transform.localPosition = new Vector3(0,-2000,0);
+        }
         yesVote.gameObject.transform.localPosition = new Vector3(0,-2000,0);
         noVote.gameObject.transform.localPosition = new Vector3(0,-2000,0);
         yesVote.onClick.AddListener(voteYes);
         noVote.onClick.AddListener(voteNo);
-        Mirror.NetworkRoomPlayer y = GameObject.Find("NetworkManager").GetComponent<customLobby.NetworkManagerLobby>().roomSlots[playerIndex];
-        roomPlayer = (customLobby.NetworkRoomPlayerLobby)y;
     }
 
-    public void loadObjs() {
+    public void loadObjs(int index) {
         int players = GameObject.Find("RolesHolder").GetComponent<Roles>().players;
 
         if (players > 0) {
             for (int i = 0;i < players; i++) {
+                if (i == index) continue;
                 GameObject.Find("Player "+(i+1)+"/Select").transform.localPosition = Vector3.zero;
             }
         }
@@ -54,9 +58,7 @@ public class Voting : MonoBehaviour {
             GameObject.Find("Player "+(i+1)+"/Select").transform.localPosition = new Vector3(0,-2000,0);
         }
 
-        roomPlayer.isSelected = true;
-        bool sent = roomPlayer.SerializeSyncVars(Mirror.NetworkWriterPool.GetWriter(),false);
-        Debug.Log("Were sync vars syncd? " + sent);
+        roomPlayer.CmdSelectPlayer();
     }
 
 
@@ -70,7 +72,8 @@ public class Voting : MonoBehaviour {
         yesVote.gameObject.transform.localPosition = new Vector3(0,-2000,0);
         noVote.gameObject.transform.localPosition = new Vector3(0,-2000,0);
         if (!setHist) { voteHistory.Add(result);setHist = true;}
-        roomPlayer.vote = result;
+        roomPlayer.CmdVote(result);
+        roomPlayer.CmdEndVote();
     }
 
     public void voteYes() {

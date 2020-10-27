@@ -165,7 +165,8 @@ namespace customLobby {
                 //Don't call vote if player is the selected player
                 if (i == playerIndex) continue;
 
-                GameObject.Find("Player " + (i + 1) ).GetComponent<Voting>().callVote();
+                //TODO: Make this called on every player somehow
+                ((NetworkRoomPlayerLobby)roomSlots[i]).CmdCallVote();
             }
 
             //Calls the timer
@@ -182,7 +183,10 @@ namespace customLobby {
             });
 
         }
-            
+
+        public void selectPlayer(int index) {
+            ((NetworkRoomPlayerLobby)roomSlots[index]).isSelected = true;
+        }
 
         public override void OnRoomServerPlayersReady() {
             ServerChangeScene(GameplayScene);
@@ -217,6 +221,8 @@ namespace customLobby {
 
                 //First player in the lobby is assigned president
                 ((NetworkRoomPlayerLobby)roomSlots[0]).role = "President";
+                ((NetworkRoomPlayerLobby)roomSlots[0]).CmdLoadSelectBtns();
+
 
                 UsernameRenderer usernameHolder = GameObject.Find("UsernameHolder").GetComponent<UsernameRenderer>();
 
