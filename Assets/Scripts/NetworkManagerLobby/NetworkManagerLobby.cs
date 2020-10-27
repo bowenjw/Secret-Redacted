@@ -24,7 +24,7 @@ namespace customLobby {
 
         [SerializeField] public int amtPlayers;
 
-        public List<bool> votes;
+        public List<bool> votes = null;
 
         private int possChanc;
 
@@ -132,7 +132,13 @@ namespace customLobby {
 
             }
             // Everyone is done voting 
-            List<bool> yesVotes = votes.FindAll( delegate(bool vote) { return vote == true; } );
+
+            List<bool> yesVotes = new List<bool>();
+            foreach (bool vote in votes) {
+                if (vote) yesVotes.Add(vote);
+            }
+
+            Debug.Log("Everyone voted! Yes votes: " + yesVotes.Count());
 
             if (yesVotes.Count() > (int)(amtPlayers / 2)) {
                 //Majority, so elect chancellor
@@ -148,12 +154,18 @@ namespace customLobby {
 
         public void callVote(int playerIndex) {
 
-            votes = new List<bool>();
+            //Make sure we don't overwrite the votes 
+            if (votes == null || votes.Count() > 0)
+                votes = new List<bool>();
             possChanc = playerIndex; 
 
             for (int i = 0;i < amtPlayers;i++) {
                 //Call a vote on each player
-                ((NetworkRoomPlayerLobby)roomSlots[i]).callVote();
+
+                //Don't call vote if player is the selected player
+                if (i == playerIndex) continue;
+
+                GameObject.Find("Player " + (i + 1) ).GetComponent<Voting>().callVote();
             }
 
             //Calls the timer
@@ -163,6 +175,9 @@ namespace customLobby {
                     votes.Add(GameObject.Find("Player "+(i+1)).GetComponent<Voting>().result);
 
                 }
+
+                Debug.Log("Finished Voting, size of votes: " + votes.Count());
+                checkIfAllVoted();
                 
             });
 
@@ -195,7 +210,8 @@ namespace customLobby {
                     ((NetworkRoomPlayerLobby)roomSlots[i]).party = roles.playerRoles[i];
 
                     //Set up voting buttons
-                    ((NetworkRoomPlayerLobby)roomSlots[i]).setUpBtns(i);
+                    NetworkServer.Spawn(GameObject.Find("votesHolder"),roomSlots[i].connectionToClient);
+                    ((NetworkRoomPlayerLobby)roomSlots[i]).setUpBtns();
 
                 }
 

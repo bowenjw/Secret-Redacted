@@ -49,11 +49,14 @@ public class Voting : MonoBehaviour {
     public void selectPlayer(GameObject player) {
         int players = GameObject.Find("RolesHolder").GetComponent<Roles>().players;
 
+        //This only happens on the client that started the vote
         for (int i = 0;i < players; i++) {
             GameObject.Find("Player "+(i+1)+"/Select").transform.localPosition = new Vector3(0,-2000,0);
         }
-        
-        GameObject.Find("NetworkManager").GetComponent<customLobby.NetworkManagerLobby>().callVote(playerIndex); 
+
+        roomPlayer.isSelected = true;
+        bool sent = roomPlayer.SerializeSyncVars(Mirror.NetworkWriterPool.GetWriter(),false);
+        Debug.Log("Were sync vars syncd? " + sent);
     }
 
 

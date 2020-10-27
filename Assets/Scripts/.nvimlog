@@ -55,3 +55,11 @@ INFO  2020-10-25T15:32:55.555 171   emsg_multiline:687: E492: Not an editor comm
 INFO  2020-10-25T17:25:08.219 171   emsg_multiline:687: E492: Not an editor command: Tabn
 INFO  2020-10-25T17:49:41.197 171   emsg_multiline:687: E492: Not an editor command: Tabp
 INFO  2020-10-25T18:31:24.187 171   emsg_multiline:687: E492: Not an editor command: W
+INFO  2020-10-25T18:37:53.359 171   os_proc_tree_kill:96: sending SIGTERM to PID -173
+INFO  2020-10-25T18:37:53.369 171   on_process_exit:393: exited: pid=173 status=143 stoptime=11307442368300
+INFO  2020-10-25T18:37:53.373 171   os_exit:593: Nvim exit: 0
+INFO  2020-10-27T12:47:50.536 132   channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-10-27T12:47:50.729 132   main:566: starting main loop
+INFO  2020-10-27T13:17:31.485 132   emsg_multiline:687: E492: Not an editor command: Tabp
+INFO  2020-10-27T13:37:04.541 132   emsg_multiline:687: E492: Not an editor command: W
+INFO  2020-10-27T13:37:05.694 132   emsg_multiline:687: E492: Not an editor command: W

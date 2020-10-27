@@ -22,6 +22,9 @@ namespace customLobby {
         [SyncVar(hook = nameof(usernameChanged))]
         public string username;
 
+        [SyncVar(hook = nameof(selectedPlayer))]
+        public bool isSelected;
+
         [SyncVar]
         public int pathwayTracker = 0;
 
@@ -68,7 +71,7 @@ namespace customLobby {
                 // In 5 Players
 
                 lobby.setPlayerUsername(username,index,"5 Players");
-                setUpBtns(index);
+                setUpBtns();
 
             }
             //username = PlayerPrefs.GetString("Username");
@@ -89,6 +92,13 @@ namespace customLobby {
           }
           rB.GetComponent<Button>().onClick.AddListener(delegate {CmdChangeReadyState(!state);});
           rB.GetComponent<Button>().onClick.AddListener(delegate {changeReadyButton(!state);});
+        }
+
+        public void selectedPlayer(bool _, bool selected) {
+            //Player was selected and now we need to vote
+
+            if (selected)
+                lobby.callVote(index); 
         }
 
         public void aliveChanged(bool prevState, bool state) {
@@ -115,12 +125,8 @@ namespace customLobby {
             }
         }
 
-        public void callVote() {
-            GameObject.Find("Player " + (index + 1) ).GetComponent<Voting>().callVote();
-        }
-
-        public void setUpBtns(int i) {
-            GameObject.Find("Player " + (index + 1) ).GetComponent<Voting>().setUpBtns(i);
+        public void setUpBtns() {
+            GameObject.Find("Player " + (index + 1) ).GetComponent<Voting>().setUpBtns(index);
         }
 
 
