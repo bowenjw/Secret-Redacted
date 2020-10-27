@@ -78,6 +78,10 @@ namespace customLobby {
                 
         }
 
+        [Command]
+        public void CmdIncrementLiberal() {
+            pathwayTracker++;
+        }
 
         public void changeReadyButton(bool state){
           GameObject rB = GameObject.Find("readyUpButton");

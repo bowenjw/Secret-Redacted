@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using customLobby;
+using Mirror;
 /*
 
 Desc: Script controls logic for fascist path, 5-6 players
@@ -10,7 +12,7 @@ TODO: Implement logic for gameplay changes
 
 */
 
-public class NewFascistPathFiveSixLogic : MonoBehaviour
+public class NewFascistPathFiveSixLogic : NetworkRoomPlayer
 {
     /*
     overflowPrevention keeps track of the current board state as follows
@@ -25,6 +27,8 @@ public class NewFascistPathFiveSixLogic : MonoBehaviour
     */
     private GameObject[] cards;
     private int numCards = 6;
+    
+    [SyncVar (hook = nameof(CheckGameState))]
     private int pathwayTracker = 0;
 
     //Other scripts in project
@@ -60,16 +64,17 @@ public class NewFascistPathFiveSixLogic : MonoBehaviour
     }
  
     //Increments fascist cards, then checks gamestate
-    public void IncrementFascistPath()
+    [Command(ignoreAuthority = true)]
+    public void CmdIncrementFascistPath()
     {
        if (pathwayTracker < 6){
            pathwayTracker++;
-           CheckGameState();
        }
     }
 
     //Decrements fascist cards
-    public void DecrementFascistPath()
+    [Command(ignoreAuthority = true)]
+    public void CmdDecrementFascistPath()
     {
        if (pathwayTracker > 0)
             pathwayTracker--;
@@ -77,14 +82,15 @@ public class NewFascistPathFiveSixLogic : MonoBehaviour
     }
 
     //Resets fascist board
-    public void ResetFascistPath()
+    [Command(ignoreAuthority = true)]
+    public void CmdResetFascistPath()
     {
         Debug.Log("");
         pathwayTracker = 0;
     }
 
     //Checks gamestate
-    private void CheckGameState()
+    private void CheckGameState(int prev, int current)
     {
         switch (pathwayTracker)
         {

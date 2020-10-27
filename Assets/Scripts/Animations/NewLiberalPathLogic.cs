@@ -8,7 +8,7 @@ using Mirror;
 
 
 
-public class NewLiberalPathLogic : MonoBehaviour
+public class NewLiberalPathLogic : NetworkRoomPlayer
 {
     private GameObject[] cards;
     private GameObject[] electionTokens;
@@ -18,6 +18,13 @@ public class NewLiberalPathLogic : MonoBehaviour
     //private int electionTracker = 0;
     private NetworkRoomPlayerLobby[] players;
     private int numPlayers = 2;
+    private NetworkRoomPlayerLobby player;
+
+    [SyncVar]
+    public int pathwayTracker = 0;
+
+    [SyncVar]
+    public int electionTracker = 0;
 
     //Grabs cards and hides them all. Then does same for tracker.
     void Start()
@@ -54,28 +61,70 @@ public class NewLiberalPathLogic : MonoBehaviour
     void Update()
     {
         //Liberal Cards, shows them
-        for (int i = 0; i < players[0].pathwayTracker; i++)
+        for (int i = 0; i < pathwayTracker; i++)
             cards[i].GetComponent<Renderer>().enabled = true;
 
         //Hides remaining cards
-        for (int i = players[0].pathwayTracker; i < numCards; i++)
+        for (int i = pathwayTracker; i < numCards; i++)
             cards[i].GetComponent<Renderer>().enabled = false;
 
         //Election Tracker, shows them 
-        for (int i = 0; i < players[0].electionTracker; i++)
+        for (int i = 0; i < electionTracker; i++)
             electionTokens[i].GetComponent<Renderer>().enabled = true;
 
         //Hides remaining tokens
-        for (int i = players[0].electionTracker; i < numElectionTokens; i++)
+        for (int i = electionTracker; i < numElectionTokens; i++)
             electionTokens[i].GetComponent<Renderer>().enabled = false;
     }
- 
+
+    [Command(ignoreAuthority = true)]
+    public void CmdIncrementLiberal(){
+        if(pathwayTracker < 5)
+            pathwayTracker++;
+    }
+
+    [Command(ignoreAuthority = true)]
+    public void CmdDecrementLiberal(){
+        if(pathwayTracker > 0)
+            pathwayTracker--;
+    }
+
+    [Command(ignoreAuthority = true)]
+    public void CmdResetLiberal(){    
+        pathwayTracker = 0;
+    }
+
+
+
+    [Command(ignoreAuthority = true)]
+    public void CmdIncrementElection(){
+        if(electionTracker < 4)
+            electionTracker++;
+    }
+
+    [Command(ignoreAuthority = true)]
+    public void CmdDecrementElection(){
+        if(electionTracker > 0)
+            electionTracker--;
+    }
+
+    [Command(ignoreAuthority = true)]
+    public void CmdResetElection(){
+        electionTracker = 0;
+    }
+
+
+
+
     //Increments liberal path
     public void IncrementLiberalPath()
     {
-       if (players[0].pathwayTracker < 5) 
-           for (int i = 0; i < numPlayers; i++)
-                players[i].pathwayTracker++;
+       if (players[0].pathwayTracker < 5)
+            CmdIncrementLiberal();
+            //pathwayTracker++;
+            //players[0].pathwayTracker++;
+           //for (int i = 0; i < numPlayers; i++)
+                //players[i].CmdIncrementLiberal();
            
     }
 

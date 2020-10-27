@@ -1512,7 +1512,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 613374461}
-        m_MethodName: ResetLiberalPath
+        m_MethodName: CmdResetLiberal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1642,7 +1642,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 613374461}
-        m_MethodName: IncrementLiberalPath
+        m_MethodName: CmdIncrementLiberal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1939,7 +1939,7 @@ GameObject:
   - component: {fileID: 163925369}
   - component: {fileID: 163925368}
   m_Layer: 5
-  m_Name: DecrementLiberalButton
+  m_Name: DecrementFascistButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2009,7 +2009,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2092244067}
-        m_MethodName: DecrementFascistPath
+        m_MethodName: CmdDecrementFascistPath
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5601,6 +5601,7 @@ GameObject:
   m_Component:
   - component: {fileID: 613374460}
   - component: {fileID: 613374461}
+  - component: {fileID: 613374462}
   m_Layer: 5
   m_Name: LiberalPathFunctionHolder
   m_TagString: Untagged
@@ -5639,6 +5640,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a0b1f3900f45a4497195eea961473a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  showRoomGUI: 1
+  readyToBegin: 0
+  index: 0
+  pathwayTracker: 0
+  electionTracker: 0
+--- !u!114 &613374462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613374459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3195658189
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &621464276
 GameObject:
   m_ObjectHideFlags: 0
@@ -7320,7 +7344,7 @@ GameObject:
   - component: {fileID: 804859079}
   - component: {fileID: 804859078}
   m_Layer: 5
-  m_Name: ResetLiberalButton
+  m_Name: ResetFascistButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7390,7 +7414,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2092244067}
-        m_MethodName: ResetFascistPath
+        m_MethodName: CmdResetFascistPath
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10455,7 +10479,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 613374461}
-        m_MethodName: DecrementTracker
+        m_MethodName: CmdDecrementElection
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11844,7 +11868,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 613374461}
-        m_MethodName: ResetTracker
+        m_MethodName: CmdResetElection
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17006,7 +17030,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 613374461}
-        m_MethodName: IncrementTracker
+        m_MethodName: CmdIncrementElection
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17374,7 +17398,7 @@ GameObject:
   - component: {fileID: 2038593522}
   - component: {fileID: 2038593521}
   m_Layer: 5
-  m_Name: IncrementLiberalButton
+  m_Name: IncrementFascistButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17444,7 +17468,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2092244067}
-        m_MethodName: IncrementFascistPath
+        m_MethodName: CmdIncrementFascistPath
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17837,7 +17861,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 613374461}
-        m_MethodName: DecrementLiberalPath
+        m_MethodName: CmdDecrementLiberal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18378,6 +18402,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2092244066}
   - component: {fileID: 2092244067}
+  - component: {fileID: 2092244068}
   m_Layer: 5
   m_Name: FascistPathFunctionHolder
   m_TagString: Untagged
@@ -18416,6 +18441,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee429c2a5d4fd442aefffa6dc52314d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  showRoomGUI: 1
+  readyToBegin: 0
+  index: 0
+--- !u!114 &2092244068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092244065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 2645180682
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &2100401666
 GameObject:
   m_ObjectHideFlags: 0
