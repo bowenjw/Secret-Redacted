@@ -74,7 +74,7 @@ namespace customLobby {
                 // In 5 Players
 
                 lobby.setPlayerUsername(username,index,"5 Players");
-                setUpBtns();
+                //setUpBtns();
 
             }
             //username = PlayerPrefs.GetString("Username");

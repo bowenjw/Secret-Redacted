@@ -61,13 +61,13 @@ namespace customLobby {
         public void OnEnable() {
             NetworkManagerLobby.OnClientConnected += HandleClientConnected;
             NetworkManagerLobby.OnClientDisconnected += HandleClientDisconnected;
-            NetworkManagerLobby.OnRoomClientConnected += HandleRoomClientConnected;
+            NetworkManagerLobby.OnLobbyClientConnected += HandleRoomClientConnected;
         }
 
         public void OnDisable() {
             NetworkManagerLobby.OnClientConnected -= HandleClientConnected;
             NetworkManagerLobby.OnClientDisconnected -= HandleClientDisconnected;
-            NetworkManagerLobby.OnRoomClientConnected -= HandleRoomClientConnected;
+            NetworkManagerLobby.OnLobbyClientConnected -= HandleRoomClientConnected;
         }
 
         public void JoinLobby() {

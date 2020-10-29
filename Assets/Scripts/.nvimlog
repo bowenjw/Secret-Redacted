@@ -65,3 +65,13 @@ INFO  2020-10-27T13:37:04.541 132   emsg_multiline:687: E492: Not an editor comm
 INFO  2020-10-27T13:37:05.694 132   emsg_multiline:687: E492: Not an editor command: W
 INFO  2020-10-27T15:23:44.514 132   emsg_multiline:687: E486: Pattern not found: loadObj
 INFO  2020-10-27T15:46:31.358 132   emsg_multiline:687: E492: Not an editor command: Tabp
+INFO  2020-10-27T16:28:08.563 132   os_proc_tree_kill:96: sending SIGTERM to PID -134
+INFO  2020-10-27T16:28:08.574 132   on_process_exit:393: exited: pid=134 status=143 stoptime=13234917997500
+INFO  2020-10-27T16:28:08.578 132   os_exit:593: Nvim exit: 0
+INFO  2020-10-29T10:39:19.763 78    channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-10-29T10:39:19.974 78    main:566: starting main loop
+INFO  2020-10-29T11:27:31.853 78    emsg_multiline:687: E492: Not an editor command: W
+INFO  2020-10-29T11:35:18.462 78    emsg_multiline:687: E492: Not an editor command: W
+INFO  2020-10-29T12:04:13.632 78    os_proc_tree_kill:96: sending SIGTERM to PID -80
+INFO  2020-10-29T12:04:13.643 78    on_process_exit:393: exited: pid=80 status=143 stoptime=5140785636400
+INFO  2020-10-29T12:04:13.647 78    os_exit:593: Nvim exit: 0

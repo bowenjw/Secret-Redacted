@@ -20,7 +20,7 @@ namespace customLobby {
         public static event Action OnClientConnected;
         public static event Action OnClientDisconnected;
 
-        public static event Action OnRoomClientConnected;
+        public static event Action OnLobbyClientConnected;
 
         [SerializeField] public int amtPlayers;
 
@@ -32,6 +32,8 @@ namespace customLobby {
             if (!clientLoadedScene) {
                 if (!ClientScene.ready) ClientScene.Ready(conn);
                 ClientScene.AddPlayer(conn);
+
+
             }
             OnClientConnected?.Invoke();
         }
@@ -84,7 +86,7 @@ namespace customLobby {
         }
 
         public override void OnRoomClientEnter() {
-            OnRoomClientConnected?.Invoke();
+            OnLobbyClientConnected?.Invoke();
         }
 
         public void playerChangedReadyState(bool state, int index) {
@@ -197,8 +199,20 @@ namespace customLobby {
             if (!ClientScene.ready) ClientScene.Ready(conn);
 
             if (ClientScene.localPlayer == null) {
-                ClientScene.AddPlayer(conn);
+                //ClientScene.AddPlayer(conn);
             }
+
+            //Set up voting buttons
+            //TODO: WHy is it only fucking using conn 0 why tf is the local conneciton the only one this stupid func gets called on
+
+            //GameObject.Find("DEBUG").GetComponent<TMP_Text>().text = "Conn Id: "+conn.connectionId;
+            GameObject.Find("Player " + (conn.connectionId + 1)).GetComponent<Voting>().setUpBtns(conn.connectionId);
+            if (conn.connectionId == 0) {
+                //First player so set up their select buttons
+                GameObject.Find("Player " + (conn.connectionId + 1)).GetComponent<Voting>().loadObjs(conn.connectionId);
+            }
+
+
         }
 
         public override void OnRoomServerSceneChanged(string scene) {
@@ -213,16 +227,14 @@ namespace customLobby {
                     //Assign each player to their respective party
                     ((NetworkRoomPlayerLobby)roomSlots[i]).party = roles.playerRoles[i];
 
-                    //Set up voting buttons
+                    //Give each player a votesHolder
                     NetworkServer.Spawn(GameObject.Find("votesHolder"),roomSlots[i].connectionToClient);
-                    ((NetworkRoomPlayerLobby)roomSlots[i]).setUpBtns();
+
 
                 }
 
                 //First player in the lobby is assigned president
                 ((NetworkRoomPlayerLobby)roomSlots[0]).role = "President";
-                ((NetworkRoomPlayerLobby)roomSlots[0]).CmdLoadSelectBtns();
-
 
                 UsernameRenderer usernameHolder = GameObject.Find("UsernameHolder").GetComponent<UsernameRenderer>();
 
