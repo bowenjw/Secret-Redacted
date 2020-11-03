@@ -3431,7 +3431,7 @@ MonoBehaviour:
   dontDestroyOnLoad: 1
   runInBackground: 1
   autoStartServerBuild: 1
-  showDebugMessages: 0
+  showDebugMessages: 1
   serverTickRate: 30
   offlineScene: 
   onlineScene: Assets/Scenes/Lobby.unity
@@ -3456,6 +3456,8 @@ MonoBehaviour:
   roomSlots: []
   menuScene: Assets/Scenes/Lobby.unity
   roles: {fileID: 0}
+  amtPlayers: 0
+  votes: 
 --- !u!4 &1479393621
 Transform:
   m_ObjectHideFlags: 0
