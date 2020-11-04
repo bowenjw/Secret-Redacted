@@ -89,7 +89,6 @@ namespace customLobby {
 
                 //TODO: Call this somewhere else
                 lobby.updateUsername(username,index,"5 Players");
-                //setUpBtns();
 
             }
             //username = PlayerPrefs.GetString("Username");
@@ -121,9 +120,9 @@ namespace customLobby {
             //Hook to handle when a player is selected 
 
             //Player was selected and now we need to vote
-            if (selected)
+            if (selected && role != "President")
                 //Calling the server to start a vote
-                lobby.callVote(index); 
+                lobby.callVote(index, isSelected); 
         }
 
         public void aliveChanged(bool prevState, bool state) {
@@ -158,18 +157,14 @@ namespace customLobby {
 
             //Finds the player obj that represents this roomPlayer and calls it's callVote func
             //TODO: It shouldn't matter what player obj this is called on because all callVote does it set buttons active 
-            GameObject.Find("Player " + (index + 1) ).GetComponent<Voting>().callVote();
+            if (playerHasToVote)
+                GameObject.Find("Player " + (index + 1) ).GetComponent<Voting>().callVote();
         }
 
         public void voted(bool _, bool vote) {
             //Hook to handle when a player has voted
 
             Debug.Log(username + " voted " + (vote? "yes":"no"));
-
-            //Calling the server to check if everyone has voted
-            //This makes sure that after every vote has been casted the server will know 
-            //TODO: This is called by every roomPlayer when any roomPlayer votes, maybe make it so it only gets called once?
-            lobby.checkIfAllVoted();
         }
 
         public override void ReadyStateChanged(bool _, bool state){
@@ -235,13 +230,6 @@ namespace customLobby {
         }
 
         [Command(ignoreAuthority=true)]
-        public void CmdSetUpBtns() {
-            //Called to set up the voting buttons
-            //TODO: Move this to a better place or make it a custom function 
-            GameObject.Find("Player " + (index + 1) ).GetComponent<Voting>().setUpBtns(index);
-        }
-
-        [Command(ignoreAuthority=true)]
         public void CmdSelectPlayer() {
             //Called to update the isSelected sync var
             isSelected = true;
@@ -257,13 +245,6 @@ namespace customLobby {
         public void CmdVote(bool Vote) {
             //Called to update the vote sync var
             vote = Vote;
-        }
-
-        [Command(ignoreAuthority=false)]
-        public void CmdLoadSelectBtns() {
-            //Called to load the select player buttons 
-            //TODO: Move this to a better place or make it a custom function 
-            GameObject.Find("Player " + (index + 1)).GetComponent<Voting>().loadObjs(index);
         }
 
         [Command]

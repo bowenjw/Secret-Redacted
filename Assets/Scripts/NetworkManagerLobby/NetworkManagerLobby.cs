@@ -24,10 +24,10 @@ namespace customLobby {
 
         [SerializeField] public int amtPlayers;
 
-        public List<bool> votes = null;
+        //Index of the chancellor
+        private int chancIndex;
 
-        // Index for the possible chancellor
-        private int possChanc;
+        public List<bool> votes = null;
 
         public override void OnClientConnect(NetworkConnection conn) {
             //Called on each client when they connect initially 
@@ -89,24 +89,16 @@ namespace customLobby {
             return false;
         }
 
-        public override void OnClientSceneChanged(NetworkConnection conn) {
+        public override void OnRoomClientSceneChanged(NetworkConnection conn) {
             //Called on every client when the scene has changed 
-
-            Debug.Log("ClientSceneChanged:" + conn);
-            if (!ClientScene.ready) ClientScene.Ready(conn);
-
-            if (ClientScene.localPlayer == null) {
-                //ClientScene.AddPlayer(conn);
-            }
+            //ATTN: This might be called on the gamePlayers also
 
             //Set up voting buttons
-            //TODO: WHy is it only fucking using conn 0 why tf is the local connection the only one this stupid func gets called on
+            GameObject.Find("Player " + (conn.connectionId + 1)).GetComponent<Voting>().setUpBtns(conn.connectionId);
 
-            //GameObject.Find("DEBUG").GetComponent<TMP_Text>().text = "Conn Id: "+conn.connectionId;
-            //GameObject.Find("Player " + (conn.connectionId + 1)).GetComponent<Voting>().setUpBtns(conn.connectionId);
             if (conn.connectionId == 0) {
                 //First player so set up their select buttons
-                //GameObject.Find("Player " + (conn.connectionId + 1)).GetComponent<Voting>().loadObjs(conn.connectionId);
+                GameObject.Find("Player " + (conn.connectionId + 1)).GetComponent<Voting>().loadObjs(conn.connectionId);
             }
 
 
@@ -129,16 +121,10 @@ namespace customLobby {
                     //Give each player a votesHolder
                     NetworkServer.Spawn(GameObject.Find("votesHolder"),roomSlots[i].connectionToClient);
 
-                    //Set up voting buttons
-                    ((RoomPlayer)roomSlots[i]).CmdSetUpBtns();
-
-
                 }
 
                 //First player in the lobby is assigned president
                 ((RoomPlayer)roomSlots[0]).role = "President";
-
-                ((RoomPlayer)roomSlots[0]).CmdLoadSelectBtns();
 
                 GameRenderer usernameHolder = GameObject.Find("UsernameHolder").GetComponent<GameRenderer>();
 
@@ -214,7 +200,8 @@ namespace customLobby {
             for (int i = 0;i < amtPlayers;i++) {
 
                 if (!GameObject.Find("Player "+(i+1)).GetComponent<Voting>().setHist){
-                    // Someone still needs to vote
+                    // Someone didn't vote 
+                    //TODO: Add functionality for when someone didn't vote
                     return;
                 }
 
@@ -230,7 +217,7 @@ namespace customLobby {
 
             if (yesVotes.Count() > (int)(amtPlayers / 2)) {
                 //Majority, so elect chancellor
-                ((RoomPlayer)roomSlots[possChanc]).role = "Chancellor";
+                ((RoomPlayer)roomSlots[chancIndex]).role = "Chancellor";
             }
             else {
                 //TODO: Add functionality for when vote fails 
@@ -238,25 +225,20 @@ namespace customLobby {
             }
         }
 
-        public void callVote(int playerIndex) {
+        public void callVote(int playerIndex, bool isChancellor) {
             //Called from RoomPlayer when a player has been selected
             //ATTN: This is called by every RoomPlayer
 
             //Make sure we don't overwrite the votes 
-            if (votes == null || votes.Count() > 0)
+            if (votes == null)
                 votes = new List<bool>();
 
-            possChanc = playerIndex; 
+            //If the calling RoomPlayer is chancellor set the chancellor index
+            if (isChancellor)
+                chancIndex = playerIndex;
 
-            for (int i = 0;i < amtPlayers;i++) {
-                //Call a vote on each player
-
-                //Don't call vote if player is the selected player
-                if (i == playerIndex) continue;
-
-                //TODO: Make this called on every player somehow
-                ((RoomPlayer)roomSlots[i]).CmdCallVote();
-            }
+            //Call for vote on RoomPlayer
+            ((RoomPlayer)roomSlots[playerIndex]).CmdCallVote();
 
             //Calls the timer
             GameObject.Find("Timer").GetComponent<Timer>().startTimer(delegate {
@@ -267,6 +249,7 @@ namespace customLobby {
                 }
 
                 Debug.Log("Finished Voting, size of votes: " + votes.Count());
+                checkIfAllVoted();
                 
             });
 
