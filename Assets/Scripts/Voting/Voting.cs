@@ -19,7 +19,7 @@ public class Voting : MonoBehaviour {
     [SerializeField] public Button selectPlayerBtn;
     public int playerIndex;
 
-    public customLobby.NetworkRoomPlayerLobby roomPlayer;
+    public customLobby.RoomPlayer roomPlayer;
 
     void Start() {
         voteHistory = new List<bool>();
@@ -28,7 +28,7 @@ public class Voting : MonoBehaviour {
     public void setUpBtns(int x) {
         playerIndex = x; 
         Mirror.NetworkRoomPlayer y = GameObject.Find("NetworkManager").GetComponent<customLobby.NetworkManagerLobby>().roomSlots[playerIndex];
-        roomPlayer = (customLobby.NetworkRoomPlayerLobby)y;
+        roomPlayer = (customLobby.RoomPlayer)y;
         int players = GameObject.Find("RolesHolder").GetComponent<Roles>().players;
         for (int i = 0; i < players; i++ ) {
             GameObject.Find("Player " + (i+1)+"/Select").transform.localPosition = new Vector3(0,-2000,0);

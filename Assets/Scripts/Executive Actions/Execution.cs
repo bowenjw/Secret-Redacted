@@ -16,7 +16,7 @@ public class Execution : MonoBehaviour
     private Sprite deathSprite;
     private GameObject[] buttons;
     private int[] deadPlayers;
-    private NetworkRoomPlayerLobby[] players;
+    private RoomPlayer[] players;
     private GameObject[] playersCards;
 
     void Start()
@@ -44,11 +44,11 @@ public class Execution : MonoBehaviour
         ButtonsOff();
 
         //Gets players from Network Manager
-        players = new NetworkRoomPlayerLobby[numPlayers];
+        players = new RoomPlayer[numPlayers];
 
         for(int i = 0; i < numPlayers; i++) 
         {
-            players[i] = (NetworkRoomPlayerLobby)GameObject.Find("NetworkManager").GetComponent<NetworkManagerLobby>().roomSlots[i];
+            players[i] = (RoomPlayer)GameObject.Find("NetworkManager").GetComponent<NetworkManagerLobby>().roomSlots[i];
         }
 
         
