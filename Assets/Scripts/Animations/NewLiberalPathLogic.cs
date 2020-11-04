@@ -8,7 +8,7 @@ using Mirror;
 
 
 
-public class NewLiberalPathLogic : NetworkRoomPlayer
+public class NewLiberalPathLogic : NetworkBehaviour
 {
     private GameObject[] cards;
     private GameObject[] electionTokens;

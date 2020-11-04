@@ -73,6 +73,7 @@ namespace customLobby {
             else if (SceneManager.GetActiveScene().name == "5 Players" && hasAuthority) {
                 // In 5 Players
 
+                //TODO: Call this somewhere else
                 lobby.setPlayerUsername(username,index,"5 Players");
                 //setUpBtns();
 
@@ -101,7 +102,8 @@ namespace customLobby {
           rB.GetComponent<Button>().onClick.AddListener(delegate {changeReadyButton(!state);});
         }
 
-        public void setUpBtns() {
+        [Command(ignoreAuthority=true)]
+        public void CmdSetUpBtns() {
             GameObject.Find("Player " + (index + 1) ).GetComponent<Voting>().setUpBtns(index);
         }
 
