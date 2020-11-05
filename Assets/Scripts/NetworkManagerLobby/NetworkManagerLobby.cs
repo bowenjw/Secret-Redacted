@@ -26,6 +26,8 @@ namespace customLobby {
 
         //Index of the chancellor
         private int chancIndex;
+        //Index for the room
+        private int roomCnt = 1;
 
         public List<bool> votes = null;
 
@@ -86,20 +88,26 @@ namespace customLobby {
 
         public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer) {
             //Default implementation returns true and replaces roomPlayer with gamePlayer
-            return false;
+            //Setting this to true will cause OnRoomClientSceneChanged to update every client's scene 
+            return true;
         }
 
         public override void OnRoomClientSceneChanged(NetworkConnection conn) {
             //Called on every client when the scene has changed 
             //ATTN: This might be called on the gamePlayers also
+            //It doesn't seem to be called on the gamePlayers
+
+            int pIndex = conn.connectionId;
+            int cnt = 1;
 
             //Set up voting buttons
-            GameObject.Find("Player " + (conn.connectionId + 1)).GetComponent<Voting>().setUpBtns(conn.connectionId);
-
-            if (conn.connectionId == 0) {
-                //First player so set up their select buttons
-                GameObject.Find("Player " + (conn.connectionId + 1)).GetComponent<Voting>().loadObjs(conn.connectionId);
+            foreach (RoomPlayer player in roomSlots) {
+                GameObject.Find("Player " + cnt).GetComponent<Voting>().setUpBtns(cnt-1);
+                cnt++;
             }
+
+            GameObject.Find("Player " + roomCnt).GetComponent<Voting>().addFuncs();
+            roomCnt++;
 
             GameRenderer usernameHolder = GameObject.Find("UsernameHolder").GetComponent<GameRenderer>();
 
@@ -127,9 +135,6 @@ namespace customLobby {
                     NetworkServer.Spawn(GameObject.Find("votesHolder"),roomSlots[i].connectionToClient);
 
                 }
-
-                //First player in the lobby is assigned president
-                ((RoomPlayer)roomSlots[0]).role = "President";
 
             }
         }

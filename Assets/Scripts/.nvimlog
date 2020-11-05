@@ -96,3 +96,7 @@ INFO  2020-11-05T11:02:42.510 74    channel_create_event:204: new channel 3 (fun
 INFO  2020-11-05T11:02:42.721 74    main:566: starting main loop
 INFO  2020-11-05T11:17:41.435 74    emsg_multiline:687: E486: Pattern not found: OnServerAdd
 INFO  2020-11-05T11:24:46.413 74    emsg_multiline:687: E486: Pattern not found: OnServerChanged
+INFO  2020-11-05T11:54:26.638 74    emsg_multiline:687: E486: Pattern not found: OnClientScene
+INFO  2020-11-05T13:52:59.003 74    emsg_multiline:687: E492: Not an editor command: W
+INFO  2020-11-05T14:01:49.917 74    emsg_multiline:687: E492: Not an editor command: Tabp
+INFO  2020-11-05T14:39:50.014 74    emsg_multiline:687: E492: Not an editor command: W

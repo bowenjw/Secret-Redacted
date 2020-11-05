@@ -30,10 +30,6 @@ public class Voting : MonoBehaviour {
     void Start() {
         //Generate a list
         voteHistory = new List<bool>();
-
-        //Add the funcs to the buttons 
-        yesVote.onClick.AddListener(voteYes);
-        noVote.onClick.AddListener(voteNo);
     }
 
     public void setUpBtns(int x) {
@@ -58,6 +54,13 @@ public class Voting : MonoBehaviour {
         //Move the vote buttons offscreen
         yesVote.gameObject.transform.localPosition = new Vector3(0,-2000,0);
         noVote.gameObject.transform.localPosition = new Vector3(0,-2000,0);
+    }
+
+    public void addFuncs() {
+        //Make sure this is called after setUpBtns
+        //Add the funcs to the buttons 
+        yesVote.onClick.AddListener(voteYes);
+        noVote.onClick.AddListener(voteNo);
     }
 
     public void loadObjs(int index) {

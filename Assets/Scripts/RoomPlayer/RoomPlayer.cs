@@ -120,7 +120,7 @@ namespace customLobby {
             //Hook to handle when a player is selected 
 
             //Player was selected and now we need to vote
-            if (selected && role != "President")
+            if (role != "President")
                 //Calling the server to start a vote
                 lobby.callVote(index, isSelected); 
         }
@@ -140,6 +140,7 @@ namespace customLobby {
             if (currRole == "President") {
                 //TODO: Get president text and move it to the current players card
 
+                GameObject.Find("Player " + (index + 1)).GetComponent<Voting>().loadObjs(index);
                 Debug.Log(username + " is president!");
             }
             else if (currRole == "Chancellor") {
@@ -241,19 +242,25 @@ namespace customLobby {
             isSelected = false;
         }
 
-        [Command]
+        [Command(ignoreAuthority=true)]
+        public void CmdChangeRole(string Role) {
+            //Called to update the role sync var
+            role = Role;
+        }
+
+        [Command(ignoreAuthority=true)]
         public void CmdVote(bool Vote) {
             //Called to update the vote sync var
             vote = Vote;
         }
 
-        [Command]
+        [Command(ignoreAuthority=true)]
         public void CmdCallVote() {
             //Called to update the hasToVote sync var
             hasToVote = true;
         }
 
-        [Command]
+        [Command(ignoreAuthority=true)]
         public void CmdEndVote() {
             //Called to update the hasToVote sync var
             hasToVote = false;

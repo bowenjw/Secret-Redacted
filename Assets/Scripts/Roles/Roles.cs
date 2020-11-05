@@ -49,7 +49,7 @@ public class Roles : MonoBehaviour {
         if (players < 5) maxFash = 2;
 
         for (int i = 0; i < maxFash; i++) {
-            fashIndex[i] = rand.Next(players+1); // rand goes between 0 - players 
+            fashIndex[i] = rand.Next(players); // rand goes between 0 - players 
         }
 
         for (int i = 0; i < players; i++) {
