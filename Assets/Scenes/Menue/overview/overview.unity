@@ -287,8 +287,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -172.8, y: -74.76}
-  m_SizeDelta: {x: 98.91159, y: 28.221252}
+  m_AnchoredPosition: {x: -172.46, y: -67.85}
+  m_SizeDelta: {x: 103.50882, y: 28.221252}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &54928770
 MonoBehaviour:
@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
-    m_HighlightedColor: {r: 0.35174307, g: 0.30588233, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.38039216, g: 0.78431374, b: 0.8509804, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -439,8 +439,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: OVERVIEW
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7db393e9e0c90044a90a933e6ebad32b, type: 2}
+  m_sharedMaterial: {fileID: 1812787496524887048, guid: 7db393e9e0c90044a90a933e6ebad32b,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -616,8 +617,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -101.57, y: -17.43}
-  m_SizeDelta: {x: 279.7657, y: 27.522575}
+  m_AnchoredPosition: {x: -101.57, y: -15.596}
+  m_SizeDelta: {x: 279.7657, y: 31.191292}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &143779939
 MonoBehaviour:
@@ -896,8 +897,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Fascist
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 22f880004558dd54190910df43f657e6, type: 2}
+  m_sharedMaterial: {fileID: 3833685719828793568, guid: 22f880004558dd54190910df43f657e6,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -937,7 +939,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1159,8 +1161,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Back
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7db393e9e0c90044a90a933e6ebad32b, type: 2}
+  m_sharedMaterial: {fileID: 1812787496524887048, guid: 7db393e9e0c90044a90a933e6ebad32b,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1268,8 +1271,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00017167, y: 5.1}
-  m_SizeDelta: {x: 279.766, y: 27.522552}
+  m_AnchoredPosition: {x: 0.00013351, y: 7}
+  m_SizeDelta: {x: 279.766, y: 32.622055}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &547554917
 MonoBehaviour:
@@ -1292,8 +1295,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Legislative Session
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 22f880004558dd54190910df43f657e6, type: 2}
+  m_sharedMaterial: {fileID: 3833685719828793568, guid: 22f880004558dd54190910df43f657e6,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1333,7 +1337,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1555,8 +1559,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Roles
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7db393e9e0c90044a90a933e6ebad32b, type: 2}
+  m_sharedMaterial: {fileID: 1812787496524887048, guid: 7db393e9e0c90044a90a933e6ebad32b,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1586,7 +1591,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 6
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -1697,8 +1702,9 @@ MonoBehaviour:
 
     Liberal, Fascist, or Hitler.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 22f880004558dd54190910df43f657e6, type: 2}
+  m_sharedMaterial: {fileID: 3833685719828793568, guid: 22f880004558dd54190910df43f657e6,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1808,8 +1814,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -55.98, y: -75.31}
-  m_SizeDelta: {x: 104.13986, y: 29.320854}
+  m_AnchoredPosition: {x: 2.3, y: -68.4}
+  m_SizeDelta: {x: 108.73712, y: 29.320854}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &884051295
 MonoBehaviour:
@@ -1938,8 +1944,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -80.32, y: 58.29}
-  m_SizeDelta: {x: 115.18205, y: 27.486023}
+  m_AnchoredPosition: {x: -48.2, y: 62}
+  m_SizeDelta: {x: 112.12297, y: 27.486023}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1330031668
 MonoBehaviour:
@@ -2066,7 +2072,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00021553, y: 4.9}
+  m_AnchoredPosition: {x: -0.00021172, y: -22}
   m_SizeDelta: {x: 241.4519, y: 28.608337}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1467900946
@@ -2090,8 +2096,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Executive Action
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 22f880004558dd54190910df43f657e6, type: 2}
+  m_sharedMaterial: {fileID: 3833685719828793568, guid: 22f880004558dd54190910df43f657e6,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2131,7 +2138,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -2223,8 +2230,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Liberal
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 22f880004558dd54190910df43f657e6, type: 2}
+  m_sharedMaterial: {fileID: 3833685719828793568, guid: 22f880004558dd54190910df43f657e6,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2264,7 +2272,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -2334,7 +2342,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.21176471, g: 0.21960784, b: 0.20784314, a: 0}
+  m_BackGroundColor: {r: 0.8941177, g: 0.38431376, b: 0.28235295, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2440,8 +2448,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Gameplay
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7db393e9e0c90044a90a933e6ebad32b, type: 2}
+  m_sharedMaterial: {fileID: 1812787496524887048, guid: 7db393e9e0c90044a90a933e6ebad32b,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2471,7 +2480,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 6
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -2549,7 +2558,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.5, y: 3.8}
+  m_AnchoredPosition: {x: -271.7, y: -26.1}
   m_SizeDelta: {x: 80.27852, y: 28.220581}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1737638555
@@ -2573,8 +2582,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Hitler
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 22f880004558dd54190910df43f657e6, type: 2}
+  m_sharedMaterial: {fileID: 3833685719828793568, guid: 22f880004558dd54190910df43f657e6,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2614,7 +2624,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -2718,8 +2728,9 @@ MonoBehaviour:
     Executive
     Action to exercise governmental power.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 22f880004558dd54190910df43f657e6, type: 2}
+  m_sharedMaterial: {fileID: 3833685719828793568, guid: 22f880004558dd54190910df43f657e6,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2851,8 +2862,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Election
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 22f880004558dd54190910df43f657e6, type: 2}
+  m_sharedMaterial: {fileID: 3833685719828793568, guid: 22f880004558dd54190910df43f657e6,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2892,7 +2904,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
