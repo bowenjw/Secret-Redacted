@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System.Linq;
 
-public class UsernameRenderer : MonoBehaviour {
+public class GameRenderer : MonoBehaviour {
     public GameObject[] children;
     public GameObject[] playersCards;
     public int players = 5;

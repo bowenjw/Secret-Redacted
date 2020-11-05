@@ -8,7 +8,7 @@ using Mirror;
 
 
 
-public class NewLiberalPathLogic : NetworkRoomPlayer
+public class NewLiberalPathLogic : NetworkBehaviour
 {
     private GameObject[] cards;
     private GameObject[] electionTokens;
@@ -16,9 +16,9 @@ public class NewLiberalPathLogic : NetworkRoomPlayer
     private int numElectionTokens = 4;
     //private int pathwayTracker = 0;
     //private int electionTracker = 0;
-    private NetworkRoomPlayerLobby[] players;
+    private RoomPlayer[] players;
     private int numPlayers = 2;
-    private NetworkRoomPlayerLobby player;
+    private RoomPlayer player;
 
     [SyncVar]
     public int pathwayTracker = 0;
@@ -47,11 +47,11 @@ public class NewLiberalPathLogic : NetworkRoomPlayer
         }
 
         //Gets players from Network Manager
-        players = new NetworkRoomPlayerLobby[numPlayers];
+        players = new RoomPlayer[numPlayers];
 
         for(int i = 0; i < numPlayers; i++) 
         {
-            players[i] = (NetworkRoomPlayerLobby)GameObject.Find("NetworkManager").GetComponent<NetworkManagerLobby>().roomSlots[i];
+            players[i] = (RoomPlayer)GameObject.Find("NetworkManager").GetComponent<NetworkManagerLobby>().roomSlots[i];
         }
 
 

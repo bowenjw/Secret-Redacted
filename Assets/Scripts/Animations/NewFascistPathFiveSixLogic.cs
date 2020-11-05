@@ -12,7 +12,7 @@ TODO: Implement logic for gameplay changes
 
 */
 
-public class NewFascistPathFiveSixLogic : NetworkRoomPlayer
+public class NewFascistPathFiveSixLogic : NetworkBehaviour
 {
     /*
     overflowPrevention keeps track of the current board state as follows

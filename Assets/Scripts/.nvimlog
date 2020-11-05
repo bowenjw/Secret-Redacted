@@ -75,3 +75,17 @@ INFO  2020-10-29T11:35:18.462 78    emsg_multiline:687: E492: Not an editor comm
 INFO  2020-10-29T12:04:13.632 78    os_proc_tree_kill:96: sending SIGTERM to PID -80
 INFO  2020-10-29T12:04:13.643 78    on_process_exit:393: exited: pid=80 status=143 stoptime=5140785636400
 INFO  2020-10-29T12:04:13.647 78    os_exit:593: Nvim exit: 0
+INFO  2020-11-01T19:01:23.118 74    channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-11-01T19:01:23.362 74    main:566: starting main loop
+INFO  2020-11-01T19:23:56.382 74    os_proc_tree_kill:96: sending SIGTERM to PID -76
+INFO  2020-11-01T19:23:56.393 74    on_process_exit:393: exited: pid=76 status=143 stoptime=1363363425900
+INFO  2020-11-01T19:23:56.399 74    os_exit:593: Nvim exit: 0
+INFO  2020-11-03T11:08:12.875 75    channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-11-03T11:08:13.103 75    main:566: starting main loop
+INFO  2020-11-03T12:29:03.221 75    os_proc_tree_kill:96: sending SIGTERM to PID -77
+INFO  2020-11-03T12:29:03.233 75    on_process_exit:393: exited: pid=77 status=143 stoptime=4865411918400
+INFO  2020-11-03T12:29:03.238 75    os_exit:593: Nvim exit: 0
+INFO  2020-11-04T12:21:25.786 73    channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-11-04T12:21:26.123 73    main:566: starting main loop
+INFO  2020-11-04T13:11:23.353 73    emsg_multiline:687: E492: Not an editor command: W
+INFO  2020-11-04T13:36:18.209 73    emsg_multiline:687: E486: Pattern not found: NetworkRoomPlayerLobby
