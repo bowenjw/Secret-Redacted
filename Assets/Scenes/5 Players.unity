@@ -5642,9 +5642,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  showRoomGUI: 1
-  readyToBegin: 0
-  index: 0
   pathwayTracker: 0
   electionTracker: 0
 --- !u!114 &613374462
@@ -15252,7 +15249,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1790883373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0f24b05c61a1b848ba2bbd7405fef2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d391f6797a2ee5429ec101e8e2247f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   children: []
@@ -18443,9 +18440,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  showRoomGUI: 1
-  readyToBegin: 0
-  index: 0
 --- !u!114 &2092244068
 MonoBehaviour:
   m_ObjectHideFlags: 0

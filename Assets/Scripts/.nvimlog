@@ -89,3 +89,10 @@ INFO  2020-11-04T12:21:25.786 73    channel_create_event:204: new channel 3 (fun
 INFO  2020-11-04T12:21:26.123 73    main:566: starting main loop
 INFO  2020-11-04T13:11:23.353 73    emsg_multiline:687: E492: Not an editor command: W
 INFO  2020-11-04T13:36:18.209 73    emsg_multiline:687: E486: Pattern not found: NetworkRoomPlayerLobby
+INFO  2020-11-04T15:41:33.844 73    os_proc_tree_kill:96: sending SIGTERM to PID -75
+INFO  2020-11-04T15:41:33.858 73    on_process_exit:393: exited: pid=75 status=143 stoptime=12022604392400
+INFO  2020-11-04T15:41:33.862 73    os_exit:593: Nvim exit: 0
+INFO  2020-11-05T11:02:42.510 74    channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-11-05T11:02:42.721 74    main:566: starting main loop
+INFO  2020-11-05T11:17:41.435 74    emsg_multiline:687: E486: Pattern not found: OnServerAdd
+INFO  2020-11-05T11:24:46.413 74    emsg_multiline:687: E486: Pattern not found: OnServerChanged

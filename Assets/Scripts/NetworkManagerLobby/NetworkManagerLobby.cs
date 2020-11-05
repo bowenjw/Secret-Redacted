@@ -101,6 +101,11 @@ namespace customLobby {
                 GameObject.Find("Player " + (conn.connectionId + 1)).GetComponent<Voting>().loadObjs(conn.connectionId);
             }
 
+            GameRenderer usernameHolder = GameObject.Find("UsernameHolder").GetComponent<GameRenderer>();
+
+            usernameHolder.setPlayerCards(amtPlayers);
+
+            usernameHolder.loadUsernames();
 
         }
 
@@ -126,11 +131,6 @@ namespace customLobby {
                 //First player in the lobby is assigned president
                 ((RoomPlayer)roomSlots[0]).role = "President";
 
-                GameRenderer usernameHolder = GameObject.Find("UsernameHolder").GetComponent<GameRenderer>();
-
-                usernameHolder.setPlayerCards(roomSlots.Count());
-
-                usernameHolder.loadUsernames();
             }
         }
 
@@ -172,8 +172,8 @@ namespace customLobby {
                     uT.text = ((RoomPlayer)roomSlots[i]).username; 
                 }
 
-                //Get the UsernameRenderer obj
-                UsernameRenderer usernameHolder = GameObject.Find("UsernameHolder").GetComponent<UsernameRenderer>();
+                //Get the GameRenderer obj
+                GameRenderer usernameHolder = GameObject.Find("UsernameHolder").GetComponent<GameRenderer>();
 
                 //Move the player cards onto the board 
                 usernameHolder.setPlayerCards(playerCnt);

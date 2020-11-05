@@ -57,18 +57,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 3233974726073481358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfd0202b3fd32f04c9068d3039ea5d38, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a7dc28d94cc1e54f83a303a9c280cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  showRoomGUI: 0
+  showRoomGUI: 1
   readyToBegin: 0
   index: 0
   isAlive: 0
   role: 
   vote: 0
   username: 
+  isSelected: 0
+  hasToVote: 0
+  pathwayTracker: 0
+  electionTracker: 0
   party: 
-  inPosition: 0
   readyButton: {fileID: 0}
