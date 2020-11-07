@@ -669,7 +669,6 @@ GameObject:
   m_Component:
   - component: {fileID: 62619483}
   - component: {fileID: 62619484}
-  - component: {fileID: 62619485}
   m_Layer: 0
   m_Name: Player 6
   m_TagString: Untagged
@@ -744,27 +743,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &62619485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 62619482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d6346809ce768409c8e6dc6e316a4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  result: 0
-  voteHistory: 
-  failedVotes: 0
-  setHist: 0
-  yesVote: {fileID: 1442199521}
-  noVote: {fileID: 1269110988}
-  selectPlayerBtn: {fileID: 911704447}
-  playerIndex: 0
-  roomPlayer: {fileID: 0}
 --- !u!1 &66144337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,7 +1097,6 @@ GameObject:
   m_Component:
   - component: {fileID: 101865456}
   - component: {fileID: 101865457}
-  - component: {fileID: 101865458}
   m_Layer: 0
   m_Name: Player 8
   m_TagString: Untagged
@@ -1194,27 +1171,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &101865458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 101865455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d6346809ce768409c8e6dc6e316a4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  result: 0
-  voteHistory: 
-  failedVotes: 0
-  setHist: 0
-  yesVote: {fileID: 1442199521}
-  noVote: {fileID: 1269110988}
-  selectPlayerBtn: {fileID: 2127642501}
-  playerIndex: 0
-  roomPlayer: {fileID: 0}
 --- !u!1 &102295405
 GameObject:
   m_ObjectHideFlags: 0
@@ -2783,18 +2739,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 226029042}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1594067380}
-        m_MethodName: selectPlayer
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1594067377}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &226029042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3046,18 +2991,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 242152616}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1392350720}
-        m_MethodName: selectPlayer
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1392350717}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &242152616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3499,7 +3433,6 @@ GameObject:
   m_Component:
   - component: {fileID: 272934070}
   - component: {fileID: 272934071}
-  - component: {fileID: 272934072}
   m_Layer: 0
   m_Name: Player 5
   m_TagString: Untagged
@@ -3574,27 +3507,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &272934072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 272934069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d6346809ce768409c8e6dc6e316a4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  result: 0
-  voteHistory: 
-  failedVotes: 0
-  setHist: 0
-  yesVote: {fileID: 1442199521}
-  noVote: {fileID: 1269110988}
-  selectPlayerBtn: {fileID: 672311376}
-  playerIndex: 0
-  roomPlayer: {fileID: 0}
 --- !u!1 &291704301
 GameObject:
   m_ObjectHideFlags: 0
@@ -3605,7 +3517,6 @@ GameObject:
   m_Component:
   - component: {fileID: 291704302}
   - component: {fileID: 291704303}
-  - component: {fileID: 291704304}
   m_Layer: 0
   m_Name: Player 7
   m_TagString: Untagged
@@ -3680,27 +3591,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &291704304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 291704301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d6346809ce768409c8e6dc6e316a4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  result: 0
-  voteHistory: 
-  failedVotes: 0
-  setHist: 0
-  yesVote: {fileID: 1442199521}
-  noVote: {fileID: 1269110988}
-  selectPlayerBtn: {fileID: 1980787637}
-  playerIndex: 0
-  roomPlayer: {fileID: 0}
 --- !u!1 &293496768
 GameObject:
   m_ObjectHideFlags: 0
@@ -6314,7 +6204,6 @@ GameObject:
   m_Component:
   - component: {fileID: 670893799}
   - component: {fileID: 670893800}
-  - component: {fileID: 670893801}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Untagged
@@ -6389,27 +6278,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &670893801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670893798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d6346809ce768409c8e6dc6e316a4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  result: 0
-  voteHistory: 
-  failedVotes: 0
-  setHist: 0
-  yesVote: {fileID: 1442199521}
-  noVote: {fileID: 1269110988}
-  selectPlayerBtn: {fileID: 2051237505}
-  playerIndex: 0
-  roomPlayer: {fileID: 0}
 --- !u!1 &672311374
 GameObject:
   m_ObjectHideFlags: 0
@@ -6491,18 +6359,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 672311377}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 272934072}
-        m_MethodName: selectPlayer
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 272934069}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &672311377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7950,7 +7807,6 @@ GameObject:
   m_Component:
   - component: {fileID: 820751602}
   - component: {fileID: 820751603}
-  - component: {fileID: 820751604}
   m_Layer: 0
   m_Name: Player 10
   m_TagString: Untagged
@@ -8025,27 +7881,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &820751604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 820751601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d6346809ce768409c8e6dc6e316a4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  result: 0
-  voteHistory: 
-  failedVotes: 0
-  setHist: 0
-  yesVote: {fileID: 1442199521}
-  noVote: {fileID: 1269110988}
-  selectPlayerBtn: {fileID: 2043424581}
-  playerIndex: 0
-  roomPlayer: {fileID: 0}
 --- !u!1 &827503953
 GameObject:
   m_ObjectHideFlags: 0
@@ -8104,7 +7939,6 @@ GameObject:
   m_Component:
   - component: {fileID: 834001984}
   - component: {fileID: 834001985}
-  - component: {fileID: 834001986}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Untagged
@@ -8179,27 +8013,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &834001986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 834001983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d6346809ce768409c8e6dc6e316a4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  result: 0
-  voteHistory: 
-  failedVotes: 0
-  setHist: 0
-  yesVote: {fileID: 1442199521}
-  noVote: {fileID: 1269110988}
-  selectPlayerBtn: {fileID: 1840001069}
-  playerIndex: 0
-  roomPlayer: {fileID: 0}
 --- !u!1 &865009320
 GameObject:
   m_ObjectHideFlags: 0
@@ -8583,18 +8396,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 911704448}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 62619485}
-        m_MethodName: selectPlayer
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 62619482}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &911704448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10797,6 +10599,7 @@ MonoBehaviour:
   startBtn: {fileID: 4006137}
   prevPresidents: 
   readyToStart: 0
+  havePres: 0
 --- !u!1 &1204666150
 GameObject:
   m_ObjectHideFlags: 0
@@ -11472,7 +11275,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1392350718}
   - component: {fileID: 1392350719}
-  - component: {fileID: 1392350720}
   m_Layer: 0
   m_Name: Player 3
   m_TagString: Untagged
@@ -11547,27 +11349,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1392350720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1392350717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d6346809ce768409c8e6dc6e316a4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  result: 0
-  voteHistory: 
-  failedVotes: 0
-  setHist: 0
-  yesVote: {fileID: 1442199521}
-  noVote: {fileID: 1269110988}
-  selectPlayerBtn: {fileID: 242152615}
-  playerIndex: 0
-  roomPlayer: {fileID: 0}
 --- !u!1 &1394641027
 GameObject:
   m_ObjectHideFlags: 0
@@ -11711,7 +11492,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1401408751}
   - component: {fileID: 1401408752}
-  - component: {fileID: 1401408753}
   m_Layer: 0
   m_Name: Player 4
   m_TagString: Untagged
@@ -11786,27 +11566,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1401408753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401408750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d6346809ce768409c8e6dc6e316a4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  result: 0
-  voteHistory: 
-  failedVotes: 0
-  setHist: 0
-  yesVote: {fileID: 1442199521}
-  noVote: {fileID: 1269110988}
-  selectPlayerBtn: {fileID: 1617125117}
-  playerIndex: 0
-  roomPlayer: {fileID: 0}
 --- !u!1 &1435106642
 GameObject:
   m_ObjectHideFlags: 0
@@ -13375,7 +13134,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1594067378}
   - component: {fileID: 1594067379}
-  - component: {fileID: 1594067380}
   m_Layer: 0
   m_Name: Player 9
   m_TagString: Untagged
@@ -13450,27 +13208,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1594067380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1594067377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d6346809ce768409c8e6dc6e316a4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  result: 0
-  voteHistory: 
-  failedVotes: 0
-  setHist: 0
-  yesVote: {fileID: 1442199521}
-  noVote: {fileID: 1269110988}
-  selectPlayerBtn: {fileID: 226029041}
-  playerIndex: 0
-  roomPlayer: {fileID: 0}
 --- !u!1 &1594257697
 GameObject:
   m_ObjectHideFlags: 0
@@ -13916,18 +13653,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1617125118}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1401408753}
-        m_MethodName: selectPlayer
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1401408750}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1617125118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15918,18 +15644,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1840001070}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 834001986}
-        m_MethodName: selectPlayer
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 834001983}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1840001070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17343,18 +17058,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1980787638}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 291704304}
-        m_MethodName: selectPlayer
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 291704301}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1980787638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18174,18 +17878,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2043424582}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 820751604}
-        m_MethodName: selectPlayer
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 820751601}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2043424582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18528,18 +18221,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2051237506}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 670893801}
-        m_MethodName: selectPlayer
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 670893798}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2051237506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19181,18 +18863,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2127642502}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 101865458}
-        m_MethodName: selectPlayer
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 101865455}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2127642502
 MonoBehaviour:
   m_ObjectHideFlags: 0

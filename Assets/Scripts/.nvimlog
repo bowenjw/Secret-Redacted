@@ -100,3 +100,14 @@ INFO  2020-11-05T11:54:26.638 74    emsg_multiline:687: E486: Pattern not found:
 INFO  2020-11-05T13:52:59.003 74    emsg_multiline:687: E492: Not an editor command: W
 INFO  2020-11-05T14:01:49.917 74    emsg_multiline:687: E492: Not an editor command: Tabp
 INFO  2020-11-05T14:39:50.014 74    emsg_multiline:687: E492: Not an editor command: W
+INFO  2020-11-05T15:42:53.040 74    emsg_multiline:687: E492: Not an editor command: W
+INFO  2020-11-05T16:01:32.913 74    emsg_multiline:687: E492: Not an editor command: Tabp
+INFO  2020-11-05T16:01:40.154 74    emsg_multiline:687: E486: Pattern not found: selectPlayer
+INFO  2020-11-05T17:04:32.288 74    os_proc_tree_kill:96: sending SIGTERM to PID -76
+INFO  2020-11-05T17:04:32.298 74    on_process_exit:393: exited: pid=76 status=143 stoptime=21726030153400
+INFO  2020-11-05T17:04:32.302 74    os_exit:593: Nvim exit: 0
+INFO  2020-11-07T17:49:05.710 79    channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-11-07T17:49:05.807 79    main:566: starting main loop
+INFO  2020-11-07T18:58:46.178 79    os_proc_tree_kill:96: sending SIGTERM to PID -81
+INFO  2020-11-07T18:58:46.187 79    on_process_exit:393: exited: pid=81 status=143 stoptime=4202724003700
+INFO  2020-11-07T18:58:46.192 79    os_exit:593: Nvim exit: 0

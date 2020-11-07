@@ -44,11 +44,15 @@ namespace customLobby {
         //Server
         public static NetworkManagerLobby lobby;
 
+        //Voting obj
+        public static Voting voting;
+
         public override void OnStartClient() {
             //Called when the client starts 
             //Use this as if it's the Start() func
 
             lobby = GameObject.Find("NetworkManager").GetComponent<NetworkManagerLobby>();
+            voting = this.GetComponent<Voting>();
 
             //username = PlayerPrefs.GetString("Username");
             username = "Player" + (index + 1);
@@ -140,7 +144,7 @@ namespace customLobby {
             if (currRole == "President") {
                 //TODO: Get president text and move it to the current players card
 
-                GameObject.Find("Player " + (index + 1)).GetComponent<Voting>().loadObjs(index);
+                voting.loadObjs(index);
                 Debug.Log(username + " is president!");
             }
             else if (currRole == "Chancellor") {
@@ -158,8 +162,8 @@ namespace customLobby {
 
             //Finds the player obj that represents this roomPlayer and calls it's callVote func
             //TODO: It shouldn't matter what player obj this is called on because all callVote does it set buttons active 
-            if (playerHasToVote)
-                GameObject.Find("Player " + (index + 1) ).GetComponent<Voting>().callVote();
+            if (playerHasToVote && hasAuthority)
+                voting.callVote();
         }
 
         public void voted(bool _, bool vote) {
@@ -207,6 +211,15 @@ namespace customLobby {
             }
             rB.GetComponent<Button>().onClick.AddListener(delegate {CmdChangeReadyState(!state);});
             rB.GetComponent<Button>().onClick.AddListener(delegate {changeReadyButton(!state);});
+        }
+
+        public void setUpVoting() {
+            voting.setUpBtns();
+            voting.addFuncs();
+        }
+
+        public bool hasVoted() {
+            return voting.setHist;
         }
 
         /*

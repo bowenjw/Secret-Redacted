@@ -26,8 +26,6 @@ namespace customLobby {
 
         //Index of the chancellor
         private int chancIndex;
-        //Index for the room
-        private int roomCnt = 1;
 
         public List<bool> votes = null;
 
@@ -98,16 +96,12 @@ namespace customLobby {
             //It doesn't seem to be called on the gamePlayers
 
             int pIndex = conn.connectionId;
-            int cnt = 1;
 
             //Set up voting buttons
             foreach (RoomPlayer player in roomSlots) {
-                GameObject.Find("Player " + cnt).GetComponent<Voting>().setUpBtns(cnt-1);
-                cnt++;
+                player.setUpVoting();
             }
 
-            GameObject.Find("Player " + roomCnt).GetComponent<Voting>().addFuncs();
-            roomCnt++;
 
             GameRenderer usernameHolder = GameObject.Find("UsernameHolder").GetComponent<GameRenderer>();
 
@@ -202,9 +196,9 @@ namespace customLobby {
             //Called from RoomPlayer when a player has voted
             //ATTN: This is called by every RoomPlayer
 
-            for (int i = 0;i < amtPlayers;i++) {
+            foreach (RoomPlayer player in roomSlots) {
 
-                if (!GameObject.Find("Player "+(i+1)).GetComponent<Voting>().setHist){
+                if (!player.hasVoted()){
                     // Someone didn't vote 
                     //TODO: Add functionality for when someone didn't vote
                     return;
@@ -247,9 +241,9 @@ namespace customLobby {
 
             //Calls the timer
             GameObject.Find("Timer").GetComponent<Timer>().startTimer(delegate {
-                for (int i = 0;i < amtPlayers;i++) {
+                foreach (RoomPlayer player in roomSlots) {
 
-                    votes.Add(GameObject.Find("Player "+(i+1)).GetComponent<Voting>().result);
+                    votes.Add(player.vote);
 
                 }
 

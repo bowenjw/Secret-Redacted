@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3233974726073481357}
   - component: {fileID: 3233974726073481356}
   - component: {fileID: 3233974726073481359}
+  - component: {fileID: 3276931270269053217}
   m_Layer: 0
   m_Name: roomPlayer
   m_TagString: Untagged
@@ -75,3 +76,24 @@ MonoBehaviour:
   electionTracker: 0
   party: 
   readyButton: {fileID: 0}
+--- !u!114 &3276931270269053217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3233974726073481358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31d6346809ce768409c8e6dc6e316a4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  result: 0
+  voteHistory: 
+  failedVotes: 0
+  setHist: 0
+  yesVote: {fileID: 0}
+  noVote: {fileID: 0}
+  selectPlayerBtn: {fileID: 0}
+  playerIndex: 0
+  roomPlayer: {fileID: 0}
