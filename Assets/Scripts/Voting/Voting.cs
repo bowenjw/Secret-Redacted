@@ -71,8 +71,6 @@ namespace customLobby {
 
         public void loadObjs(int index) {
             //Called from RoomPlayer when a player is selected,
-            //but the initial call is from the server
-            //Also this is only initially called on the first RoomPlayer
 
             int players = GameObject.Find("RolesHolder").GetComponent<Roles>().players;
 

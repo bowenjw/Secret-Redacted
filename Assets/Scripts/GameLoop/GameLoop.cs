@@ -25,7 +25,6 @@ public class GameLoop : MonoBehaviour {
     public List<int> prevPresidents;
     public System.Random rand;
     public bool readyToStart = false;
-    public bool havePres = false;
     
 
     void Start() {
@@ -54,7 +53,7 @@ public class GameLoop : MonoBehaviour {
         //We are now ready and in the main game loop
         
         //Check if we have a president
-        if (!havePres) {
+        if (!server.havePres()) {
             //If we don't have a president get one
 
             int nextPresIndex = getNewPres();
@@ -67,8 +66,6 @@ public class GameLoop : MonoBehaviour {
 
             //Check if president was assigned 
             if (nextPres.role != "President") return;
-
-            havePres = true;
 
             //Add the new president to the prevPresidents list
             prevPresidents.Add(nextPresIndex);
@@ -107,7 +104,7 @@ public class GameLoop : MonoBehaviour {
         //TODO: send message to server to remove everyone's start button
         readyToStart = true;
         startBtn.gameObject.SetActive(false);
-        mainLoop();
+        server.playerStarted();
     }
 
 }

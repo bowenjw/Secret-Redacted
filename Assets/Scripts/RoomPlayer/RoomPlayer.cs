@@ -45,7 +45,7 @@ namespace customLobby {
         public static NetworkManagerLobby lobby;
 
         //Voting obj
-        public static Voting voting;
+        public Voting voting;
 
         public override void OnStartClient() {
             //Called when the client starts 
@@ -124,9 +124,8 @@ namespace customLobby {
             //Hook to handle when a player is selected 
 
             //Player was selected and now we need to vote
-            if (role != "President")
-                //Calling the server to start a vote
-                lobby.callVote(index, isSelected); 
+            //Calling the server to start a vote
+            lobby.callVote(index, isSelected); 
         }
 
         public void aliveChanged(bool prevState, bool state) {
@@ -144,7 +143,10 @@ namespace customLobby {
             if (currRole == "President") {
                 //TODO: Get president text and move it to the current players card
 
-                voting.loadObjs(index);
+                if (role == "President") {
+                    //We are the president and we need to vote on a chancellor
+                    voting.loadObjs(index);
+                }
                 Debug.Log(username + " is president!");
             }
             else if (currRole == "Chancellor") {
@@ -162,7 +164,7 @@ namespace customLobby {
 
             //Finds the player obj that represents this roomPlayer and calls it's callVote func
             //TODO: It shouldn't matter what player obj this is called on because all callVote does it set buttons active 
-            if (playerHasToVote && hasAuthority)
+            if (playerHasToVote)
                 voting.callVote();
         }
 
@@ -220,6 +222,11 @@ namespace customLobby {
 
         public bool hasVoted() {
             return voting.setHist;
+        }
+
+        public void startGame() {
+            GameObject.Find("GameLoop").GetComponent<GameLoop>().startBtn.gameObject.SetActive(false);
+            GameObject.Find("GameLoop").GetComponent<GameLoop>().readyToStart = true;
         }
 
         /*

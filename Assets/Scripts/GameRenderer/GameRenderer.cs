@@ -32,7 +32,6 @@ public class GameRenderer : MonoBehaviour {
             usernames[i] = "Username" + (i + 1); 
             children[i].transform.position = playersCards[i].transform.position + new Vector3(0,90,0);
         }
-        usernames[0] = playerName;
     }
 
 

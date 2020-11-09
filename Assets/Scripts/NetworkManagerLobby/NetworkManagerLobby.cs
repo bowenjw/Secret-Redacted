@@ -125,9 +125,6 @@ namespace customLobby {
                     //Assign each player to their respective party
                     ((RoomPlayer)roomSlots[i]).party = roles.playerRoles[i];
 
-                    //Give each player a votesHolder
-                    NetworkServer.Spawn(GameObject.Find("votesHolder"),roomSlots[i].connectionToClient);
-
                 }
 
             }
@@ -253,6 +250,25 @@ namespace customLobby {
             });
 
         }
+
+        public bool havePres() {
+            foreach (RoomPlayer player in roomSlots) {
+                if (player.role == "President"){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void playerStarted() {
+            //Player has pressed start button on their client
+            //TODO: Maybe only show the start button on host???
+
+            foreach (RoomPlayer player in roomSlots) {
+                player.startGame();
+            }
+        }
+            
 
     }
 }

@@ -4707,7 +4707,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 502344533}
-  - component: {fileID: 502344532}
   m_Layer: 0
   m_Name: votesHolder
   m_TagString: Untagged
@@ -4715,22 +4714,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &502344532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 502344531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 2151439348
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
 --- !u!4 &502344533
 Transform:
   m_ObjectHideFlags: 0
