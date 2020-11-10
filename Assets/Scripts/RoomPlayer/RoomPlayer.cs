@@ -29,6 +29,9 @@ namespace customLobby {
         [SyncVar(hook = nameof(needsToVote))]
         public bool hasToVote;
 
+        [SyncVar(hook = nameof(gameStarted))]
+        public bool startGame;
+
         [SyncVar]
         public int pathwayTracker = 0;
 
@@ -125,7 +128,9 @@ namespace customLobby {
 
             //Player was selected and now we need to vote
             //Calling the server to start a vote
-            lobby.callVote(index, isSelected); 
+            if (selected) {
+                lobby.callVote(index, isSelected); 
+            }
         }
 
         public void aliveChanged(bool prevState, bool state) {
@@ -193,6 +198,14 @@ namespace customLobby {
             lobby.updateUsername(name, index, SceneManager.GetActiveScene().name);
         }
 
+        public void gameStarted(bool _, bool canStartGame) {
+            //Hook to handle when the game starts  
+            if (canStartGame) {
+                GameObject.Find("GameLoop").GetComponent<GameLoop>().startBtn.gameObject.SetActive(false);
+                GameObject.Find("GameLoop").GetComponent<GameLoop>().readyToStart = true;
+            }
+        }
+
         /*
          ***********************************************************
          *******************CUSTOM FUNCTIONS************************
@@ -224,11 +237,6 @@ namespace customLobby {
             return voting.setHist;
         }
 
-        public void startGame() {
-            GameObject.Find("GameLoop").GetComponent<GameLoop>().startBtn.gameObject.SetActive(false);
-            GameObject.Find("GameLoop").GetComponent<GameLoop>().readyToStart = true;
-        }
-
         /*
          ***********************************************************
          ************************COMMANDS***************************
@@ -244,6 +252,11 @@ namespace customLobby {
 
         */
 
+        [Command(ignoreAuthority=true)]
+        public void CmdStartGame() {
+            startGame = true;
+        }
+
         [Command]
         public void CmdIncrementLiberal() {
             //Called to update the pathwayTracker sync var
@@ -256,7 +269,7 @@ namespace customLobby {
             isSelected = true;
         }
 
-        [Command]
+        [Command(ignoreAuthority=true)]
         public void CmdDeselectPlayer() {
             //Called to update the isSelected sync var
             isSelected = false;

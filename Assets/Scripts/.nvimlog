@@ -125,3 +125,9 @@ INFO  2020-11-09T17:12:57.468 76    on_process_exit:393: exited: pid=78 status=1
 INFO  2020-11-09T17:12:57.472 76    os_exit:593: Nvim exit: 0
 INFO  2020-11-09T17:12:59.969 97    channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
 INFO  2020-11-09T17:13:00.071 97    main:566: starting main loop
+INFO  2020-11-09T18:27:46.271 97    os_proc_tree_kill:96: sending SIGTERM to PID -99
+INFO  2020-11-09T18:27:46.283 97    on_process_exit:393: exited: pid=99 status=143 stoptime=4618984696100
+INFO  2020-11-09T18:27:46.288 97    os_exit:593: Nvim exit: 0
+INFO  2020-11-10T13:57:03.020 83    channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-11-10T13:57:03.121 83    main:566: starting main loop
+INFO  2020-11-10T14:38:39.033 83    emsg_multiline:687: E486: Pattern not found: isSelected

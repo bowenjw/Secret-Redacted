@@ -193,12 +193,31 @@ namespace customLobby {
             //Called from RoomPlayer when a player has voted
             //ATTN: This is called by every RoomPlayer
 
+            ((RoomPlayer)roomSlots[chancIndex]).CmdDeselectPlayer();
             foreach (RoomPlayer player in roomSlots) {
+
+                if (player.voting.selectPlayerBtn == null) continue;
 
                 if (!player.hasVoted()){
                     // Someone didn't vote 
-                    //TODO: Add functionality for when someone didn't vote
-                    return;
+                    Debug.Log(player + "index: " + player.index + " didn't vote");
+
+                    //Find the president
+                    foreach (RoomPlayer iPlayer in roomSlots) {
+                        if (iPlayer.role == "President") {
+                            //ATTN: This might cause a data race
+                            if (iPlayer.voting.failedVotes < 3) {
+                                //Start another selection for chancellor
+                                iPlayer.voting.loadObjs(iPlayer.index);
+                            }
+                            else {
+                                //We have already failed 3 votes so select new pres
+                                //Our GameLoop will handle it
+                                iPlayer.CmdChangeRole("");
+                            }
+                            return;
+                        }
+                    }
                 }
 
             }
@@ -206,18 +225,25 @@ namespace customLobby {
 
             List<bool> yesVotes = new List<bool>();
             foreach (bool vote in votes) {
-                if (vote) yesVotes.Add(vote);
+                if (vote) {
+                    yesVotes.Add(vote);
+                }
             }
 
-            Debug.Log("Everyone voted! Yes votes: " + yesVotes.Count());
+            Debug.Log("Everyone voted! Yes votes: " + yesVotes.Count() + "Total votes: "+ votes.Count());
 
             if (yesVotes.Count() > (int)(amtPlayers / 2)) {
                 //Majority, so elect chancellor
-                ((RoomPlayer)roomSlots[chancIndex]).role = "Chancellor";
+                ((RoomPlayer)roomSlots[chancIndex]).CmdChangeRole("Chancellor");
             }
             else {
                 //TODO: Add functionality for when vote fails 
-
+                foreach (RoomPlayer player in roomSlots) {
+                    if (player.role == "President") {
+                        player.voting.failedVotes++;
+                        return;
+                    }
+                }
             }
         }
 
@@ -239,6 +265,8 @@ namespace customLobby {
             //Calls the timer
             GameObject.Find("Timer").GetComponent<Timer>().startTimer(delegate {
                 foreach (RoomPlayer player in roomSlots) {
+
+                    if (player.voting.selectPlayerBtn == null) continue;
 
                     votes.Add(player.vote);
 
@@ -265,7 +293,7 @@ namespace customLobby {
             //TODO: Maybe only show the start button on host???
 
             foreach (RoomPlayer player in roomSlots) {
-                player.startGame();
+                player.CmdStartGame();
             }
         }
             
