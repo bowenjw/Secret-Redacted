@@ -5,7 +5,6 @@ using UnityEngine;
 public class DebugButtons : MonoBehaviour
 {
     private GameObject[] buttons;
-    private bool buttonsOn = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +31,7 @@ public class DebugButtons : MonoBehaviour
         buttons[17] = GameObject.Find("ResetFascistButton");
         buttons[18] = GameObject.Find("presInput");
         buttons[19] = GameObject.Find("chancInput");
+        buttons[20] = GameObject.Find("LiberalVictoryButton");
 
         ButtonsOff();
 
@@ -40,7 +40,7 @@ public class DebugButtons : MonoBehaviour
 
     public void ButtonsOff() 
     {
-        for(int i = 0; i < 100; i++) 
+        for(int i = 0; i < 21; i++) 
         {
             buttons[i].SetActive(false);
         }
@@ -49,7 +49,7 @@ public class DebugButtons : MonoBehaviour
     
     public void ButtonsOn() 
     {
-        for(int i = 0; i < 100; i++) 
+        for(int i = 0; i < 21; i++) 
         {
             buttons[i].SetActive(true);
         }
