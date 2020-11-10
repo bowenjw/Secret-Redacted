@@ -32,7 +32,8 @@ public class DebugButtons : MonoBehaviour
         buttons[18] = GameObject.Find("presInput");
         buttons[19] = GameObject.Find("chancInput");
         buttons[20] = GameObject.Find("LiberalVictoryButton");
-
+        buttons[21] = GameObject.Find("FascistVictoryButton");
+       
         ButtonsOff();
 
 
@@ -40,7 +41,7 @@ public class DebugButtons : MonoBehaviour
 
     public void ButtonsOff() 
     {
-        for(int i = 0; i < 21; i++) 
+        for(int i = 0; i < 22; i++) 
         {
             buttons[i].SetActive(false);
         }
@@ -49,7 +50,7 @@ public class DebugButtons : MonoBehaviour
     
     public void ButtonsOn() 
     {
-        for(int i = 0; i < 21; i++) 
+        for(int i = 0; i < 22; i++) 
         {
             buttons[i].SetActive(true);
         }

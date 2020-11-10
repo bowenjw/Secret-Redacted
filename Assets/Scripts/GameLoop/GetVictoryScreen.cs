@@ -6,20 +6,27 @@ using UnityEngine.SceneManagement;
 public class GetVictoryScreen : MonoBehaviour
 {
 
+    //The win screens
     private GameObject liberalsWin;
+    private GameObject fascistsWin;
 
     //These pathways get in the way
     private GameObject liberalPath;
     private GameObject fascistPath;
 
-    // Start is called before the first frame update
+    private Roles Roles;
+
+
+    //Find game objects
     void Start()
     {
         liberalsWin = GameObject.Find("LiberalsWin");
+        fascistsWin = GameObject.Find("FascistsWin");
 
         liberalPath = GameObject.Find("Liberal Path");
         fascistPath = GameObject.Find("Fascist Path");
 
+        Roles = GameObject.Find("RolesHolder").GetComponent<Roles>();
 
 
     }
@@ -32,6 +39,23 @@ public class GetVictoryScreen : MonoBehaviour
 
         //Moves Pathways out of way
         MovePaths();
+
+        //Shows roles
+        Roles.showRoles(); 
+
+    }
+
+    //Call this if Fascists Win
+    public void FascistVictory() {
+
+        //Brings Win Screen
+        fascistsWin.transform.localPosition = new Vector3(0, 0, 0);
+
+        //Moves Pathways out of way
+        MovePaths();
+
+        //Shows roles
+        Roles.showRoles(); 
 
     }
 
@@ -46,9 +70,4 @@ public class GetVictoryScreen : MonoBehaviour
         fascistPath.transform.localPosition = new Vector3(2000, 0, 0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
