@@ -18,12 +18,14 @@ public class Roles : MonoBehaviour {
     //Kirt's additions
     private Sprite facistPartySprite;
     private Sprite liberalPartySprite;
+    private Sprite churchillSprite;
 
     void Start()
     {
         liberalSprites = Resources.LoadAll<Sprite>("Roles/Liberal");
         facistSprites = Resources.LoadAll<Sprite>("Roles/Fascist");
         hitlerSprite = Resources.Load<Sprite>("Roles/Hitler/Hitler");
+        churchillSprite = Resources.Load<Sprite>("Roles/Churchill/ChurchillPrototype");
         defaultBack = Resources.Load<Sprite>("defaultBack");
         facistPartySprite = Resources.Load<Sprite>("PartyMembershipFascist");
         liberalPartySprite = Resources.Load<Sprite>("PartyMebershipLiberal");
@@ -52,12 +54,34 @@ public class Roles : MonoBehaviour {
             fashIndex[i] = rand.Next(players); // rand goes between 0 - players 
         }
 
+        //Loop gets random player, makes sure they are not fash and makes them Churchill
+        bool churchillAssigned = false;
+        int churchill = -1;
+
+        while(!churchillAssigned) {
+            
+            churchill = rand.Next(players);
+
+            if(fashIndex.Contains(churchill)) {
+
+            }
+            
+            else {
+                churchillAssigned = true;
+            }
+        }
+
         for (int i = 0; i < players; i++) {
 
             if ( fashIndex.Contains(i) ) {
                 // player is fash 
                 playerRoles[i] = "Fascist";
             }
+
+            else if (i == churchill) {
+                playerRoles[i] = "Churchill";
+            }
+
             else {
                 playerRoles[i] = "Liberal";
             }
@@ -78,6 +102,9 @@ public class Roles : MonoBehaviour {
             else if (playerRoles[i] == "Fascist") {
                 x.sprite = facistSprites[facistCnt];
                 facistCnt++;
+            }
+            else if (playerRoles[i] == "Churchill") {
+                x.sprite = churchillSprite;
             }
             else {
                 // is hitler
