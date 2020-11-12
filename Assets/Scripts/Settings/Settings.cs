@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 
@@ -10,8 +11,11 @@ public class Settings : MonoBehaviour {
     Resolution[] resolutions;
 
     public TMP_Dropdown resolutionDropdown;
-
+    public TMP_Dropdown qualityDropdown;
+    public Toggle fullscreenToggle;
+    public AudioMixer audioMixer;
     void Start() {
+        setVolume(PlayerPrefs.GetFloat("volume"));
         resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate == 60).ToArray();
 
         resolutionDropdown.ClearOptions();
@@ -22,11 +26,6 @@ public class Settings : MonoBehaviour {
 
         for (int i = 0; i < resolutions.Length; i++){
             string option = resolutions[i].width + " x " + resolutions[i].height;
-            /*
-            if (options.Contains(option)){
-                continue;
-            }
-            */
             options.Add(option);
 
             if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height ) {
@@ -38,6 +37,18 @@ public class Settings : MonoBehaviour {
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+
+        if (PlayerPrefs.GetInt("Fullscreen", 1) == 0) {
+            fullscreenToggle.isOn = false;
+        }
+        else{
+            fullscreenToggle.isOn = true;
+        }
+
+        int qualityIndex = PlayerPrefs.GetInt("Quality", 0);
+        qualityDropdown.value = qualityIndex;
+        qualityDropdown.RefreshShownValue();
+
     }
 
     public void setResolution (int resolutionIndex) {
@@ -48,10 +59,17 @@ public class Settings : MonoBehaviour {
 
     public void setQuality( int qualityIndex ) {
         QualitySettings.SetQualityLevel(qualityIndex);
+        PlayerPrefs.SetInt("Quality",qualityIndex);
     }
 
     public void setFullscreen ( bool isFullscreen ) {
         Screen.fullScreen = isFullscreen;
+        PlayerPrefs.SetInt("Fullscreen", isFullscreen ? 1 : 0 );
+    }
+
+    public void setVolume(float volume){
+        audioMixer.SetFloat("volume", volume);
+        PlayerPrefs.SetFloat("volume",(int)volume);
     }
 
 }

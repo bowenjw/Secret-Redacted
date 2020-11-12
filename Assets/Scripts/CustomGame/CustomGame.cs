@@ -15,7 +15,12 @@ public class CustomGame : MonoBehaviour {
     public TMP_Text amtPlayersText;
     public TMP_Text policiesReqText;
 
-    public CustomGameSettings customSettings = new CustomGameSettings();
+    [SerializeField] public int liberalCards {get;set;}
+    [SerializeField] public int amtPlayers {get;set;}
+    [SerializeField] public int policiesReq {get;set;}
+    [SerializeField] public bool isPolicyReportingReq {get;set;}
+
+    [SerializeField] public GameObject settings;
 
     public void setLiberalCardsText(float amt){
         liberalCardsText.text = string.Format("{0}",amt);
@@ -30,39 +35,15 @@ public class CustomGame : MonoBehaviour {
     }
 
     public void loadCustomGame(){
-        customSettings.setLiberalCards((int)liberalCardsSlider.value);
-        customSettings.setAmtPlayers((int)amtPlayersSlider.value);
-        customSettings.setPoliciesReq((int)policiesReqSlider.value);
-        customSettings.setPolicyReporting(policyReportingToggle.isOn);
+        settings = GameObject.Find("Settings");
+        CustomGame x = settings.GetComponent<CustomGame>();
+        x.liberalCards = ((int)liberalCardsSlider.value);
+        x.amtPlayers = ((int)amtPlayersSlider.value);
+        x.policiesReq = ((int)policiesReqSlider.value);
+        x.isPolicyReportingReq = (policyReportingToggle.isOn);
+        DontDestroyOnLoad(settings.gameObject);
         //customSettings.testVals();
     } 
-}
-
-public class CustomGameSettings {
-        private int liberalCards;
-        private int amtPlayers;
-        private int policiesReq;
-        private bool isPolicyReportingReq;
-
-        public void setLiberalCards(int x){
-            liberalCards = x;
-        }
-        
-        public void setAmtPlayers(int x){
-            amtPlayers = x;
-        }
-        
-        public void setPoliciesReq(int x){
-            policiesReq = x;
-        }
-
-        public void setPolicyReporting(bool x){
-            isPolicyReportingReq = x;
-        }
-
-        public void testVals(){
-            Debug.Log("liberalCards:" + liberalCards + "\nPlayers" + amtPlayers + "\nPolicies req:" + policiesReq + "\npolicyReporting:" + isPolicyReportingReq);
-        }
 }
 
 

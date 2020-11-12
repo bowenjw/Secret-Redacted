@@ -12,6 +12,13 @@ public class Username : MonoBehaviour {
 
     public string[] bannedUsernames = {"fuck","shit"};
 
+    public void Start(){
+        userName = PlayerPrefs.GetString("Username"," ");
+        if (usernameText != null) {
+            usernameText.text = "USERNAME: " + userName;
+        }
+    }
+
     public void getUsername(){
         userName = inputField.text;
         if (bannedUsernames.Contains(userName)){
@@ -20,7 +27,13 @@ public class Username : MonoBehaviour {
         }
 
         usernameText.text = "USERNAME: " + userName;
+        PlayerPrefs.SetString("Username", userName);
 
+    }
+
+    public void setUsername() {
+        userName = inputField.text;
+        PlayerPrefs.SetString("Username", userName);
     }
 
 }
