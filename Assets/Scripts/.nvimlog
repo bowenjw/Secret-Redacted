@@ -131,3 +131,16 @@ INFO  2020-11-09T18:27:46.288 97    os_exit:593: Nvim exit: 0
 INFO  2020-11-10T13:57:03.020 83    channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
 INFO  2020-11-10T13:57:03.121 83    main:566: starting main loop
 INFO  2020-11-10T14:38:39.033 83    emsg_multiline:687: E486: Pattern not found: isSelected
+INFO  2020-11-10T14:49:31.161 83    os_proc_tree_kill:96: sending SIGTERM to PID -85
+INFO  2020-11-10T14:49:31.172 83    on_process_exit:393: exited: pid=85 status=143 stoptime=3194748493700
+INFO  2020-11-10T14:49:31.177 83    os_exit:593: Nvim exit: 0
+INFO  2020-11-10T14:52:16.951 85    channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-11-10T14:52:17.009 85    main:566: starting main loop
+INFO  2020-11-10T14:53:31.781 85    os_proc_tree_kill:96: sending SIGTERM to PID -87
+INFO  2020-11-10T14:53:31.792 85    on_process_exit:393: exited: pid=87 status=143 stoptime=91325997100
+INFO  2020-11-10T14:53:31.797 85    os_exit:593: Nvim exit: 0
+INFO  2020-11-17T12:29:57.391 83    channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-11-17T12:29:57.615 83    main:566: starting main loop
+INFO  2020-11-17T12:55:10.327 83    emsg_multiline:687: E492: Not an editor command: Tabp
+INFO  2020-11-17T13:42:06.048 83    emsg_multiline:687: E486: Pattern not found: havePres
+INFO  2020-11-17T14:51:16.207 83    emsg_multiline:687: E486: Pattern not found: CmdDeselect

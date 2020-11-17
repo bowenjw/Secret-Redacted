@@ -55,23 +55,7 @@ public class GameLoop : MonoBehaviour {
         //Check if we have a president
         if (!server.havePres()) {
             //If we don't have a president get one
-
-            int nextPresIndex = getNewPres();
-
-            //We have found a suitable president
-
-            Mirror.NetworkRoomPlayer x = server.roomSlots[nextPresIndex]; 
-            customLobby.RoomPlayer nextPres = (customLobby.RoomPlayer)x;
-            nextPres.CmdChangeRole("President");
-
-            //Check if president was assigned 
-            if (nextPres.role != "President") return;
-
-            //Add the new president to the prevPresidents list
-            prevPresidents.Add(nextPresIndex);
-            //Remove the old president so that they can be president again
-            if (prevPresidents.Count > 1 ) prevPresidents.RemoveAt(0);
-
+            selectPres();
         }
 
         //Wait for president to select a chancellor
@@ -100,11 +84,29 @@ public class GameLoop : MonoBehaviour {
         }
     }
 
+    public void selectPres() {
+        int nextPresIndex = getNewPres();
+
+        //We have found a suitable president
+
+        Mirror.NetworkRoomPlayer x = server.roomSlots[nextPresIndex]; 
+        customLobby.RoomPlayer nextPres = (customLobby.RoomPlayer)x;
+        nextPres.CmdChangeRole("President");
+
+        //Check if president was assigned 
+        if (nextPres.role != "President") return;
+
+        //Add the new president to the prevPresidents list
+        prevPresidents.Add(nextPresIndex);
+        //Remove the old president so that they can be president again
+        if (prevPresidents.Count > 1 ) prevPresidents.RemoveAt(0);
+    }
+
     public void startGameLoop() {
         //TODO: send message to server to remove everyone's start button
-        readyToStart = true;
-        startBtn.gameObject.SetActive(false);
-        server.playerStarted();
+        selectPres();
+        customLobby.RoomPlayer x = (customLobby.RoomPlayer)server.roomSlots[0];
+        x.callStartGame();
     }
 
 }

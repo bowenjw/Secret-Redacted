@@ -94,7 +94,7 @@ namespace customLobby {
             }
 
             //Calling the roomPlayer to let other clients know we selected someone
-            roomPlayer.CmdSelectPlayer();
+            roomPlayer.isSelected = true;
         }
 
 
@@ -112,9 +112,9 @@ namespace customLobby {
             if (!setHist) { voteHistory.Add(result);setHist = true;}
 
             //Calling RoomPlayer to change the vote sync var 
-            roomPlayer.CmdVote(result);
+            roomPlayer.castVote(result);
             //Calling RoomPlayer to let other clients know we are done voting
-            roomPlayer.CmdEndVote();
+            roomPlayer.endVote();
         }
 
         //********Button Functions***********

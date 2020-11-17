@@ -87,15 +87,14 @@ namespace customLobby {
                 }
 
                 //Loading the new username because another player joined 
-                lobby.setLobbyUsernames(index);
+                setLobbyUsernames();
             }
             else if (SceneManager.GetActiveScene().name == "5 Players" && hasAuthority) {
                 // In 5 Players
                 // This is only called because mirror creates gamePlayers and they "join" the room
                 // So keep in mind that the gamePlayers are now calling this
 
-                //TODO: Call this somewhere else
-                lobby.updateUsername(username,index,"5 Players");
+                loadUsernames();
 
             }
             //username = PlayerPrefs.GetString("Username");
@@ -129,7 +128,8 @@ namespace customLobby {
             //Player was selected and now we need to vote
             //Calling the server to start a vote
             if (selected) {
-                lobby.callVote(index, isSelected); 
+                selectPlayer();
+                callVote(); 
             }
         }
 
@@ -183,8 +183,7 @@ namespace customLobby {
             //Hook to handle when the readyState has changed 
             
             //Calling the server to update the ready button and text 
-            //It is fine that every player calls this because every player needs to render the updated ready text 
-            lobby.playerChangedReadyState(state,index); 
+            setReadyState(); 
         }
 
         public void usernameChanged(string prevName, string name) {
@@ -194,8 +193,7 @@ namespace customLobby {
             //This check is to see if we are the gamePlayer 
             if (SceneManager.GetActiveScene().name == "5 Players" && !readyToBegin) return;
 
-            //Calling the server to set the player usernames
-            lobby.updateUsername(name, index, SceneManager.GetActiveScene().name);
+            setLobbyUsernames();
         }
 
         public void gameStarted(bool _, bool canStartGame) {
@@ -208,11 +206,29 @@ namespace customLobby {
 
         /*
          ***********************************************************
-         *******************CUSTOM FUNCTIONS************************
+         ************************Client Functions*******************
          ***********************************************************
+
+         Functions that are only called by the client
+
         */
 
+        [Client]
+        public void setLobbyUsernames() {
+            CmdSetUsernames();
+        }
 
+        [Client]
+        public void loadUsernames() {
+            CmdLoadUsernames();
+        }
+
+        [Client]
+        public void setReadyState() {
+            CmdSetReadyState();
+        }
+
+        [Client]
         public void changeReadyButton(bool state){
             GameObject rB = GameObject.Find("readyUpButton");
             if (rB.GetComponent<Button>().onClick.GetPersistentEventCount() != 0) {
@@ -228,13 +244,56 @@ namespace customLobby {
             rB.GetComponent<Button>().onClick.AddListener(delegate {changeReadyButton(!state);});
         }
 
+        [Client]
         public void setUpVoting() {
             voting.setUpBtns();
             voting.addFuncs();
         }
 
+        [Client]
         public bool hasVoted() {
             return voting.setHist;
+        }
+
+        [Client]
+        public void callStartGame() {
+            CmdStartGame();
+        }
+
+        [Client]
+        public void selectPlayer() {
+            CmdSelectPlayer(true);
+        }
+
+        [Client]
+        public void deselectPlayer() {
+            CmdSelectPlayer(false);
+        }
+
+        [Client]
+        public void callVote() {
+            //We have to vote
+            CmdCallVote();
+
+            GameObject.Find("Timer").GetComponent<Timer>().startTimer(delegate {
+                CmdCheckIfAllVoted();
+            });
+            
+        }
+
+        [Client]
+        public void endVote() {
+            hasToVote = false;
+        }
+
+        [Client]
+        public void castVote(bool vote) {
+            CmdVote(vote);
+        }
+
+        [Client]
+        public void setRole(string role) {
+            CmdChangeRole(role);
         }
 
         /*
@@ -243,60 +302,217 @@ namespace customLobby {
          ***********************************************************
 
          Commands are the only way to safely update sync vars,
-         they are slow and require the server and client to send
-         messages back and forth to update; use them only when neccesary
+         Commands are called from the server, they have all the authority
+         and values from the server.
 
          If you get authority warning giving the command the ignoreAuthority
          tag will fix the problem, but this is probably just a sign that
          we are not using the command correctly.
 
         */
-
-        [Command(ignoreAuthority=true)]
-        public void CmdStartGame() {
-            startGame = true;
+        [Command]
+        public void CmdSetUsernames() {
+            //Update the usernames for the players
+            RpcSetUsernames();
         }
 
+        [Command]
+        public void CmdLoadUsernames() {
+            //Loads the usernames for the players
+            int playerCnt = (int)(lobby.roomSlots.Count / 2);
+
+            if (index < playerCnt){
+
+                //Set the username text to the correct usernames 
+                RpcSetGameUsernames();
+
+            }
+        }
+
+        [Command]
+        public void CmdSetReadyState() {
+            //Update the readyState text for the changed player
+            RpcSetReadyStates();
+        }
+
+        [Command]
+        public void CmdStartGame() {
+            //Called to start the game 
+            RpcStartGame();
+        }
         [Command]
         public void CmdIncrementLiberal() {
             //Called to update the pathwayTracker sync var
             pathwayTracker++;
         }
 
-        [Command(ignoreAuthority=true)]
-        public void CmdSelectPlayer() {
+        [Command]
+        public void CmdSelectPlayer(bool state) {
             //Called to update the isSelected sync var
-            isSelected = true;
+            RpcSelectPlayer(state);
         }
 
-        [Command(ignoreAuthority=true)]
-        public void CmdDeselectPlayer() {
-            //Called to update the isSelected sync var
-            isSelected = false;
-        }
-
-        [Command(ignoreAuthority=true)]
+        [Command]
         public void CmdChangeRole(string Role) {
             //Called to update the role sync var
+            RpcChangeRole(Role);
+        }
+
+        [Command]
+        public void CmdVote(bool Vote) {
+            //Called to update the vote sync var
+            RpcVote(Vote);
+        }
+
+        [Command]
+        public void CmdCallVote() {
+            //Called to update the hasToVote sync var
+            RpcCallVote();
+        }
+
+        [Command]
+        public void CmdCheckIfAllVoted() {
+            //Called to see if everyone has voted 
+            List<bool> yesVotes = new List<bool>();
+
+            foreach (RoomPlayer player in lobby.roomSlots) {
+
+                if (player.voting.selectPlayerBtn == null) continue;
+
+                if (!player.hasVoted()){
+                    // Someone didn't vote 
+                    Debug.Log(player + "index: " + player.index + " didn't vote");
+
+                    //Find the president
+                    foreach (RoomPlayer iPlayer in lobby.roomSlots) {
+                        if (iPlayer.role == "President") {
+                            //ATTN: This might cause a data race
+                            if (iPlayer.voting.failedVotes < 3) {
+                                //Start another selection for chancellor
+                                iPlayer.voting.loadObjs(iPlayer.index);
+                            }
+                            else {
+                                //We have already failed 3 votes so select new pres
+                                //Our GameLoop will handle it
+                                iPlayer.setRole("");
+                            }
+                            return;
+                        }
+                    }
+                }
+
+            }
+            // Everyone is done voting 
+            // Count all the votes
+            foreach (RoomPlayer player in lobby.roomSlots) {
+
+                if (player.voting.selectPlayerBtn == null) continue;
+
+                if (player.vote) {
+                    yesVotes.Add(vote);
+                }
+            }
+
+            Debug.Log("Everyone voted! Yes votes: " + yesVotes.Count);
+
+            if (yesVotes.Count > (int)(lobby.roomSlots.Count / 4)) {
+                //Majority, so elect chancellor
+                foreach (RoomPlayer player in lobby.roomSlots) {
+                    if (player.isSelected) {
+                        player.setRole("Chancellor");
+                    }
+                }
+            }
+            else {
+                //TODO: Add functionality for when vote fails 
+                foreach (RoomPlayer player in lobby.roomSlots) {
+                    if (player.role == "President") {
+                        player.voting.failedVotes++;
+                    }
+                }
+            }
+            //ATTN: Might have to individual deselect every player
+            RpcDeselectPlayers();
+        }
+
+        /*
+         ***********************************************************
+         ************************ClientRpc**************************
+         ***********************************************************
+
+         ClientRpc is called on every client from the server.
+         Use them when you want every client to do something.
+         Treat them as similtanious calls.
+
+        */
+
+        [ClientRpc]
+        public void RpcSetUsernames() {
+            TMP_Text uT = GameObject.Find("Player"+(index+1)).GetComponentInChildren<TMP_Text>();
+            uT.text = username;
+        }
+
+        [ClientRpc]
+        public void RpcSetReadyStates() {
+            TMP_Text rT = GameObject.Find("Player"+(index+1)+"/"+"readyText").GetComponent<TMP_Text>();
+            rT.text = readyToBegin? "Ready":"Not Ready";
+        }
+
+
+        [ClientRpc]
+        public void RpcSetGameUsernames() {
+            int playerCnt = (int)(lobby.roomSlots.Count / 2);
+
+            TMP_Text uT = GameObject.Find("Username"+(index+1)).GetComponent<TMP_Text>();
+            uT.text = username; 
+
+            //Get the GameRenderer obj
+            GameRenderer usernameHolder = GameObject.Find("UsernameHolder").GetComponent<GameRenderer>();
+
+            //Move the player cards onto the board 
+            usernameHolder.setPlayerCards(playerCnt);
+            
+            //Move the usernames onto the board
+            usernameHolder.loadUsernames();
+        }
+
+        [ClientRpc]
+        public void RpcChangeRole(string Role) {
             role = Role;
         }
 
-        [Command(ignoreAuthority=true)]
-        public void CmdVote(bool Vote) {
-            //Called to update the vote sync var
-            vote = Vote;
+        [ClientRpc]
+        public void RpcStartGame() {
+            //Called on every client to start the game 
+            startGame = true;
+            GameObject.Find("GameLoop").GetComponent<GameLoop>().readyToStart = true;
+            GameObject.Find("GameLoop").GetComponent<GameLoop>().startBtn.gameObject.SetActive(false);
         }
 
-        [Command(ignoreAuthority=true)]
-        public void CmdCallVote() {
-            //Called to update the hasToVote sync var
+        [ClientRpc]
+        public void RpcSelectPlayer(bool state) {
+            //Called on every client to select a player
+            isSelected = state;
+        }
+
+        [ClientRpc]
+        public void RpcCallVote() {
+            //Called on every client to initiate vote
             hasToVote = true;
         }
 
-        [Command(ignoreAuthority=true)]
-        public void CmdEndVote() {
-            //Called to update the hasToVote sync var
-            hasToVote = false;
+        [ClientRpc]
+        public void RpcVote(bool Vote) {
+            //Called on every client to set their vote
+            vote = Vote;
         }
+
+
+        [ClientRpc]
+        public void RpcDeselectPlayers() {
+            //Called on every client to deselect players
+            isSelected = false;
+        }
+
     }
 }
