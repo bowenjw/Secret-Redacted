@@ -26,9 +26,6 @@ namespace customLobby {
         [SyncVar(hook = nameof(selectedPlayer))]
         public bool isSelected;
 
-        [SyncVar(hook = nameof(needsToVote))]
-        public bool hasToVote;
-
         [SyncVar(hook = nameof(gameStarted))]
         public bool startGame;
 
@@ -65,15 +62,16 @@ namespace customLobby {
         public override void OnClientEnterRoom() {
             //Called on every RoomPlayer when a RoomPlayer enters the room
 
-            if (SceneManager.GetActiveScene().name == "Lobby" && !inPosition) {
-                //Setting up the lobby scene 
-
-                GameObject x = GameObject.Find("Player"+(index+1));
-                x.transform.localPosition = new Vector3( (-864 +(index * 192)), -295, 0);
-                inPosition = true;
-            }
-            if (SceneManager.GetActiveScene().name == "Lobby" && hasAuthority){
+            if (SceneManager.GetActiveScene().name == "Lobby") {
                 // In Lobby Scene
+
+                if (!inPosition) {
+                    //Setting up the lobby scene 
+
+                    GameObject x = GameObject.Find("Player"+(index+1));
+                    x.transform.localPosition = new Vector3( (-864 +(index * 192)), -295, 0);
+                    inPosition = true;
+                }
 
                 if (!loaded) {
                     //Loads the readyButton if it hasn't already been loaded 
@@ -89,15 +87,6 @@ namespace customLobby {
                 //Loading the new username because another player joined 
                 setLobbyUsernames();
             }
-            else if (SceneManager.GetActiveScene().name == "5 Players" && hasAuthority) {
-                // In 5 Players
-                // This is only called because mirror creates gamePlayers and they "join" the room
-                // So keep in mind that the gamePlayers are now calling this
-
-                loadUsernames();
-
-            }
-            //username = PlayerPrefs.GetString("Username");
                 
         }
 
@@ -127,9 +116,14 @@ namespace customLobby {
 
             //Player was selected and now we need to vote
             //Calling the server to start a vote
+            foreach (RoomPlayer player in lobby.roomSlots) {
+                if (player.voting.selectPlayerBtn == null) continue;
+                player.callVote();
+            }
+
+
             if (selected) {
                 selectPlayer();
-                callVote(); 
             }
         }
 
@@ -162,15 +156,6 @@ namespace customLobby {
             else {
                 Debug.Log("ERROR:" + username + "'s role was: " + role);
             }
-        }
-
-        public void needsToVote(bool _, bool playerHasToVote) {
-            //Hook to handle when a player needs to vote 
-
-            //Finds the player obj that represents this roomPlayer and calls it's callVote func
-            //TODO: It shouldn't matter what player obj this is called on because all callVote does it set buttons active 
-            if (playerHasToVote)
-                voting.callVote();
         }
 
         public void voted(bool _, bool vote) {
@@ -275,25 +260,100 @@ namespace customLobby {
             //We have to vote
             CmdCallVote();
 
-            GameObject.Find("Timer").GetComponent<Timer>().startTimer(delegate {
-                CmdCheckIfAllVoted();
-            });
+            if (isSelected) {
+                GameObject.Find("Timer").GetComponent<Timer>().startTimer(delegate {
+                    checkIfAllVoted();
+                });
+            }
+            else {
+                GameObject.Find("Timer").GetComponent<Timer>().startTimer();
+            }
             
-        }
-
-        [Client]
-        public void endVote() {
-            hasToVote = false;
-        }
-
-        [Client]
-        public void castVote(bool vote) {
-            CmdVote(vote);
         }
 
         [Client]
         public void setRole(string role) {
             CmdChangeRole(role);
+        }
+
+        [Client]
+        public void checkIfAllVoted() {
+            //Called to see if everyone has voted 
+            List<bool> yesVotes = new List<bool>();
+
+            foreach (RoomPlayer player in lobby.roomSlots) {
+
+                if (player.voting.selectPlayerBtn == null) continue;
+
+                if (!player.hasVoted()){
+                    // Someone didn't vote 
+                    Debug.Log(player + "index: " + player.index + " didn't vote");
+
+                    //Find the president
+                    foreach (RoomPlayer iPlayer in lobby.roomSlots) {
+                        if (iPlayer.role == "President") {
+                            //ATTN: This might cause a data race
+                            iPlayer.voting.failedVotes++;
+                            if (iPlayer.voting.failedVotes < 3) {
+                                //Start another selection for chancellor
+                                iPlayer.voting.loadObjs(iPlayer.index);
+                            }
+                            else {
+                                //We have already failed 3 votes so select new pres
+                                //Our GameLoop will handle it
+                                iPlayer.setRole("");
+                            }
+                            return;
+                        }
+                    }
+                }
+
+            }
+            // Everyone is done voting 
+            // Count all the votes
+            foreach (RoomPlayer player in lobby.roomSlots) {
+
+                if (player.voting.selectPlayerBtn == null) continue;
+
+                if (player.vote) {
+                    yesVotes.Add(vote);
+                }
+            }
+
+            Debug.Log("Everyone voted! Yes votes: " + yesVotes.Count);
+
+            if (yesVotes.Count > (int)(lobby.roomSlots.Count / 4)) {
+                //Majority, so elect chancellor
+                foreach (RoomPlayer player in lobby.roomSlots) {
+                    if (player.isSelected) {
+                        player.setRole("Chancellor");
+                    }
+                }
+            }
+            else {
+                //Vote failed
+                foreach (RoomPlayer player in lobby.roomSlots) {
+                        if (player.role == "President") {
+                            player.voting.failedVotes++;
+                            //ATTN: This might cause a data race
+                            if (player.voting.failedVotes < 3) {
+                                //Start another selection for chancellor
+                                player.voting.loadObjs(iPlayer.index);
+                            }
+                            else {
+                                //We have already failed 3 votes so select new pres
+                                //Our GameLoop will handle it
+                                player.setRole("");
+                            }
+                            return;
+                        }
+                    }
+                }
+            }
+            //ATTN: Might have to individual deselect every player
+            foreach (RoomPlayer player in lobby.roomSlots) {
+                player.deselectPlayer();
+            }
         }
 
         /*
@@ -359,80 +419,9 @@ namespace customLobby {
         }
 
         [Command]
-        public void CmdVote(bool Vote) {
-            //Called to update the vote sync var
-            RpcVote(Vote);
-        }
-
-        [Command]
         public void CmdCallVote() {
             //Called to update the hasToVote sync var
             RpcCallVote();
-        }
-
-        [Command]
-        public void CmdCheckIfAllVoted() {
-            //Called to see if everyone has voted 
-            List<bool> yesVotes = new List<bool>();
-
-            foreach (RoomPlayer player in lobby.roomSlots) {
-
-                if (player.voting.selectPlayerBtn == null) continue;
-
-                if (!player.hasVoted()){
-                    // Someone didn't vote 
-                    Debug.Log(player + "index: " + player.index + " didn't vote");
-
-                    //Find the president
-                    foreach (RoomPlayer iPlayer in lobby.roomSlots) {
-                        if (iPlayer.role == "President") {
-                            //ATTN: This might cause a data race
-                            if (iPlayer.voting.failedVotes < 3) {
-                                //Start another selection for chancellor
-                                iPlayer.voting.loadObjs(iPlayer.index);
-                            }
-                            else {
-                                //We have already failed 3 votes so select new pres
-                                //Our GameLoop will handle it
-                                iPlayer.setRole("");
-                            }
-                            return;
-                        }
-                    }
-                }
-
-            }
-            // Everyone is done voting 
-            // Count all the votes
-            foreach (RoomPlayer player in lobby.roomSlots) {
-
-                if (player.voting.selectPlayerBtn == null) continue;
-
-                if (player.vote) {
-                    yesVotes.Add(vote);
-                }
-            }
-
-            Debug.Log("Everyone voted! Yes votes: " + yesVotes.Count);
-
-            if (yesVotes.Count > (int)(lobby.roomSlots.Count / 4)) {
-                //Majority, so elect chancellor
-                foreach (RoomPlayer player in lobby.roomSlots) {
-                    if (player.isSelected) {
-                        player.setRole("Chancellor");
-                    }
-                }
-            }
-            else {
-                //TODO: Add functionality for when vote fails 
-                foreach (RoomPlayer player in lobby.roomSlots) {
-                    if (player.role == "President") {
-                        player.voting.failedVotes++;
-                    }
-                }
-            }
-            //ATTN: Might have to individual deselect every player
-            RpcDeselectPlayers();
         }
 
         /*
@@ -458,6 +447,11 @@ namespace customLobby {
             rT.text = readyToBegin? "Ready":"Not Ready";
         }
 
+        [ClientRpc]
+        public void RpcCallVote() {
+            //Called on every client to initiate vote
+            voting.callVote();
+        }
 
         [ClientRpc]
         public void RpcSetGameUsernames() {
@@ -494,19 +488,6 @@ namespace customLobby {
             //Called on every client to select a player
             isSelected = state;
         }
-
-        [ClientRpc]
-        public void RpcCallVote() {
-            //Called on every client to initiate vote
-            hasToVote = true;
-        }
-
-        [ClientRpc]
-        public void RpcVote(bool Vote) {
-            //Called on every client to set their vote
-            vote = Vote;
-        }
-
 
         [ClientRpc]
         public void RpcDeselectPlayers() {

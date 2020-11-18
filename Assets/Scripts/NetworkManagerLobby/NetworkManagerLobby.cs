@@ -100,6 +100,7 @@ namespace customLobby {
             //Set up voting buttons
             foreach (RoomPlayer player in roomSlots) {
                 player.setUpVoting();
+                player.loadUsernames();
             }
 
 

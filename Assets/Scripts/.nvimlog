@@ -144,3 +144,6 @@ INFO  2020-11-17T12:29:57.615 83    main:566: starting main loop
 INFO  2020-11-17T12:55:10.327 83    emsg_multiline:687: E492: Not an editor command: Tabp
 INFO  2020-11-17T13:42:06.048 83    emsg_multiline:687: E486: Pattern not found: havePres
 INFO  2020-11-17T14:51:16.207 83    emsg_multiline:687: E486: Pattern not found: CmdDeselect
+INFO  2020-11-17T20:02:01.429 83    os_proc_tree_kill:96: sending SIGTERM to PID -85
+INFO  2020-11-17T20:02:01.444 83    on_process_exit:393: exited: pid=85 status=143 stoptime=27287749327100
+INFO  2020-11-17T20:02:01.450 83    os_exit:593: Nvim exit: 0
