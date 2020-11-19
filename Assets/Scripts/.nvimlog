@@ -147,3 +147,5 @@ INFO  2020-11-17T14:51:16.207 83    emsg_multiline:687: E486: Pattern not found:
 INFO  2020-11-17T20:02:01.429 83    os_proc_tree_kill:96: sending SIGTERM to PID -85
 INFO  2020-11-17T20:02:01.444 83    on_process_exit:393: exited: pid=85 status=143 stoptime=27287749327100
 INFO  2020-11-17T20:02:01.450 83    os_exit:593: Nvim exit: 0
+INFO  2020-11-19T11:53:16.168 102   channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-11-19T11:53:16.356 102   main:566: starting main loop

@@ -99,16 +99,19 @@ namespace customLobby {
 
             //Set up voting buttons
             foreach (RoomPlayer player in roomSlots) {
-                player.setUpVoting();
-                player.loadUsernames();
+                player.setUpVoting(player);
+                //player.loadUsernames();
             }
 
 
+            /*
+             * is only applying to host
             GameRenderer usernameHolder = GameObject.Find("UsernameHolder").GetComponent<GameRenderer>();
 
             usernameHolder.setPlayerCards(amtPlayers);
 
             usernameHolder.loadUsernames();
+            */
 
         }
 

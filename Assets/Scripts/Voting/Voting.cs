@@ -33,32 +33,33 @@ namespace customLobby {
             voteHistory = new List<bool>();
         }
 
-        public void setUpBtns() {
+        public void setUpVotingBtns() {
             //Called from RoomPlayer to set up the voting buttons,
             //but the initial call is from the server
 
             yesVote = GameObject.Find("yesVote").GetComponent<Button>();
             noVote = GameObject.Find("noVote").GetComponent<Button>();
 
+            //Move the vote buttons offscreen
+            yesVote.gameObject.transform.localPosition = new Vector3(0,-2000,0);
+            noVote.gameObject.transform.localPosition = new Vector3(0,-2000,0);
+        }
+
+        public void setUpSelectBtn(RoomPlayer iPlayer)  {
+            //Called from RoomPlayer to set up the select button 
             //Set the player
-            roomPlayer = this.GetComponent<RoomPlayer>();
+            roomPlayer = iPlayer;
 
             //Set the player index
             playerIndex = roomPlayer.index; 
 
             selectPlayerBtn = GameObject.Find("Player "+ (playerIndex+1) + "/Select").GetComponent<Button>();
 
-            //Get the num of players
-            int players = GameObject.Find("RolesHolder").GetComponent<Roles>().players;
+            //Move player's select button offscreen
+            GameObject.Find("Player " + (playerIndex+1)+"/Select").transform.localPosition = new Vector3(0,-2000,0);
 
-            //Move every player's select button offscreen
-            for (int i = 0; i < players; i++ ) {
-                GameObject.Find("Player " + (i+1)+"/Select").transform.localPosition = new Vector3(0,-2000,0);
-            }
-
-            //Move the vote buttons offscreen
-            yesVote.gameObject.transform.localPosition = new Vector3(0,-2000,0);
-            noVote.gameObject.transform.localPosition = new Vector3(0,-2000,0);
+            //Add listener
+            selectPlayerBtn.onClick.AddListener(selectPlayer);
         }
 
         public void addFuncs() {
@@ -66,7 +67,6 @@ namespace customLobby {
             //Add the funcs to the buttons 
             yesVote.onClick.AddListener(voteYes);
             noVote.onClick.AddListener(voteNo);
-            selectPlayerBtn.onClick.AddListener(selectPlayer);
         }
 
         public void loadObjs(int index) {
@@ -112,7 +112,7 @@ namespace customLobby {
             if (!setHist) { voteHistory.Add(result);setHist = true;}
 
             //Calling RoomPlayer to change the vote sync var 
-            roomPlayer.vote = result;
+            //roomPlayer.castVote(result);
         }
 
         //********Button Functions***********

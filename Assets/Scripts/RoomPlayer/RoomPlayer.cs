@@ -84,8 +84,14 @@ namespace customLobby {
                     loaded = true;
                 }
 
-                //Loading the new username because another player joined 
-                setLobbyUsernames();
+                if (hasAuthority) {
+                    //Loading the new username because another player joined 
+                    setLobbyUsernames();
+                }
+            }
+            else if (SceneManager.GetActiveScene().name == "5 Players" && hasAuthority && !isLocalPlayer) {
+                loadUsernames();
+                setUpVotingBtns();
             }
                 
         }
@@ -188,6 +194,21 @@ namespace customLobby {
                 GameObject.Find("GameLoop").GetComponent<GameLoop>().readyToStart = true;
             }
         }
+        /*
+         ***********************************************************
+         ************************Custom Functions*******************
+         ***********************************************************
+        */
+
+        private void deselectPlayers() {
+            foreach (RoomPlayer player in lobby.roomSlots) {
+                player.deselectPlayer();
+            }
+        }
+
+        private bool hasVoted() {
+            return voting.setHist;
+        }
 
         /*
          ***********************************************************
@@ -230,14 +251,14 @@ namespace customLobby {
         }
 
         [Client]
-        public void setUpVoting() {
-            voting.setUpBtns();
-            voting.addFuncs();
+        public void setUpVoting(RoomPlayer iPlayer) {
+            voting.setUpSelectBtn(iPlayer);
         }
 
         [Client]
-        public bool hasVoted() {
-            return voting.setHist;
+        public void setUpVotingBtns() {
+            voting.setUpVotingBtns();
+            voting.addFuncs();
         }
 
         [Client]
@@ -272,6 +293,11 @@ namespace customLobby {
         }
 
         [Client]
+        public void castVote(bool Vote) {
+            CmdCastVote(Vote);
+        }
+
+        [Client]
         public void setRole(string role) {
             CmdChangeRole(role);
         }
@@ -285,37 +311,35 @@ namespace customLobby {
 
                 if (player.voting.selectPlayerBtn == null) continue;
 
+                //TODO:This isnt working 
                 if (!player.hasVoted()){
                     // Someone didn't vote 
                     Debug.Log(player + "index: " + player.index + " didn't vote");
 
                     //Find the president
-                    foreach (RoomPlayer iPlayer in lobby.roomSlots) {
-                        if (iPlayer.role == "President") {
-                            //ATTN: This might cause a data race
-                            iPlayer.voting.failedVotes++;
-                            if (iPlayer.voting.failedVotes < 3) {
-                                //Start another selection for chancellor
-                                iPlayer.voting.loadObjs(iPlayer.index);
-                            }
-                            else {
-                                //We have already failed 3 votes so select new pres
-                                //Our GameLoop will handle it
-                                iPlayer.setRole("");
-                            }
-                            return;
-                        }
+                    if (voting.failedVotes < 3) {
+                        //Start another selection for chancellor
+                        voting.loadObjs(index);
                     }
+                    else {
+                        //We have already failed 3 votes so select new pres
+                        //Our GameLoop will handle it
+                        setRole("");
+                    }
+                    deselectPlayers();
+                    return;
                 }
-
             }
+
             // Everyone is done voting 
             // Count all the votes
             foreach (RoomPlayer player in lobby.roomSlots) {
 
+                Debug.Log(player + " voted: " + player.vote);
+
                 if (player.voting.selectPlayerBtn == null) continue;
 
-                if (player.vote) {
+                if (player.voting.result) {
                     yesVotes.Add(vote);
                 }
             }
@@ -332,28 +356,17 @@ namespace customLobby {
             }
             else {
                 //Vote failed
-                foreach (RoomPlayer player in lobby.roomSlots) {
-                        if (player.role == "President") {
-                            player.voting.failedVotes++;
-                            //ATTN: This might cause a data race
-                            if (player.voting.failedVotes < 3) {
-                                //Start another selection for chancellor
-                                player.voting.loadObjs(iPlayer.index);
-                            }
-                            else {
-                                //We have already failed 3 votes so select new pres
-                                //Our GameLoop will handle it
-                                player.setRole("");
-                            }
-                            return;
-                        }
-                    }
+                if (voting.failedVotes < 3) {
+                    //Start another selection for chancellor
+                    voting.loadObjs(index);
+                }
+                else {
+                    //We have already failed 3 votes so select new pres
+                    //Our GameLoop will handle it
+                    setRole("");
                 }
             }
-            //ATTN: Might have to individual deselect every player
-            foreach (RoomPlayer player in lobby.roomSlots) {
-                player.deselectPlayer();
-            }
+            deselectPlayers();
         }
 
         /*
@@ -406,22 +419,29 @@ namespace customLobby {
             pathwayTracker++;
         }
 
-        [Command]
+        [Command(ignoreAuthority=true)]
         public void CmdSelectPlayer(bool state) {
             //Called to update the isSelected sync var
             RpcSelectPlayer(state);
         }
 
-        [Command]
+        [Command(ignoreAuthority=true)]
         public void CmdChangeRole(string Role) {
             //Called to update the role sync var
             RpcChangeRole(Role);
         }
 
-        [Command]
+        [Command(ignoreAuthority=true)]
         public void CmdCallVote() {
             //Called to update the hasToVote sync var
+            //TODO: dont call this on the game players
             RpcCallVote();
+        }
+
+        [Command]
+        public void CmdCastVote(bool Vote) {
+            //Called to cast vote
+            RpcCastVote(Vote);
         }
 
         /*
@@ -451,6 +471,12 @@ namespace customLobby {
         public void RpcCallVote() {
             //Called on every client to initiate vote
             voting.callVote();
+        }
+
+        [ClientRpc]
+        public void RpcCastVote(bool Vote) {
+            //Called to cast vote
+            vote = Vote;
         }
 
         [ClientRpc]
