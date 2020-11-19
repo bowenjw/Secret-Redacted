@@ -12,7 +12,7 @@ namespace customLobby {
 
         //****************SYNC VARS*****************
         [SyncVar(hook = nameof(aliveChanged))]
-        public bool isAlive;
+        public bool isAlive = true;
 
         [SyncVar(hook = nameof(roleChanged))]
         public string role;

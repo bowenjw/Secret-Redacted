@@ -118,51 +118,77 @@ public class Roles : MonoBehaviour {
         
     }
 
-    //Not needed, might be used so facist can see each other, shows complete roles given player index (0 to 4) -Kirt
-    public void showRoles(int playerIndex) {
+    //shows complete roles given player index (0 to 4)
+    public void showRole(int playerIndex) {
 
-        int i = playerIndex;
-        int facistCnt = 0;
 
-            SpriteRenderer x = children[i].GetComponent<SpriteRenderer>();
-            if (playerRoles[i] == "Liberal") {
-                x.sprite = liberalSprites[i]; 
+
+            SpriteRenderer x = children[playerIndex].GetComponent<SpriteRenderer>();
+            
+            if (playerRoles[playerIndex] == "Liberal") { //Is Liberal
+                x.sprite = liberalSprites[playerIndex]; 
             }
-            else if (playerRoles[i] == "Fascist") {
-                x.sprite = facistSprites[facistCnt];
-                facistCnt++;
+
+            else if (playerRoles[playerIndex] == "Fascist") { //Is Fascist
+                x.sprite = facistSprites[1];
             }
-            else {
-                // is hitler
+
+            else if (playerRoles[playerIndex] == "Churchill") { //Is Churchill
+                x.sprite = churchillSprite;
+            }
+            else { //Is Hitler
                 x.sprite = hitlerSprite;
             }
-            children[i].SetActive(false);
+            children[playerIndex].SetActive(false);
         
-            children[i].SetActive(true);
+            children[playerIndex].SetActive(true);
         
     }
 
+
+    //Shows all liberal player Roles, including Churchill
+    public void showLiberalRoles() {
+
+            for (int i = 0; i < players; i++) {
+                if ((playerRoles[i] == "Liberal") || (playerRoles[i] == "Churchill"))
+                    showRole(i);
+            }
+
+    }
+
+    //Shows all facist player Roles, including Hitler
+    public void showFascistRoles() {
+
+            for (int i = 0; i < players; i++) {
+                if ((playerRoles[i] == "Fascist") || (playerRoles[i] == "Hitler"))
+                    showRole(i);
+            }
+
+    }
+
     
-    //Shows Party (Facist or Liberal) for show role executive action, protects whichi facist is hitler -Kirt
+
+    
+    //Shows Party (Facist or Liberal) for show role executive action, protects which facist is hitler
+    //and which liberal is churchill
      public void showParty(int playerIndex) {
 
-        int i = playerIndex;
-        
-            SpriteRenderer x = children[i].GetComponent<SpriteRenderer>();
-            if (playerRoles[i] == "Liberal") {
+            SpriteRenderer x = children[playerIndex].GetComponent<SpriteRenderer>();
+
+            //Is liberal
+            if ((playerRoles[playerIndex] == "Liberal") || (playerRoles[playerIndex] == "Churchill")) {
                 x.sprite = liberalPartySprite; 
             }
-            else if (playerRoles[i] == "Fascist") {
-                x.sprite = facistPartySprite;
-            }
+            
+            //Is facist
             else {
-                // is hitler
                 x.sprite = facistPartySprite;
             }
-            children[i].SetActive(false);
+            
+            children[playerIndex].SetActive(false);
 
 
-            children[i].SetActive(true);
+            children[playerIndex].SetActive(true);
         
     }
 
@@ -177,6 +203,20 @@ public class Roles : MonoBehaviour {
         for (int i = 0; i < players; i++) {
             children[i].SetActive(true);
         }
+
+    }
+
+    //Hides role of the player index passed
+    public void hideRole(int playerIndex) {
+
+        
+        SpriteRenderer x = children[playerIndex].GetComponent<SpriteRenderer>();
+        x.sprite = defaultBack; 
+
+
+        children[playerIndex].SetActive(false);
+        children[playerIndex].SetActive(true);
+        
 
     }
         
