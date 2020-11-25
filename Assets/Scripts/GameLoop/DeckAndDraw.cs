@@ -48,7 +48,7 @@ public class DeckAndDraw : NetworkBehaviour
     void Start()
     {
         //Turns off discard buttons
-        //ButtonsOff();
+        ButtonsOff();
 
         //Makes sure deck is populated and shuffled
         if(isServer)
