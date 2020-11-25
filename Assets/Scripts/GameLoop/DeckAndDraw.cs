@@ -79,6 +79,9 @@ public class DeckAndDraw : NetworkBehaviour
         if(index == president)
             PresidentDraws();
 
+
+        
+
     }
 
 
@@ -88,6 +91,8 @@ public class DeckAndDraw : NetworkBehaviour
         
         //Gets three cards, for everyone
         DrawThreeCard();
+
+        //SHOW CARDS IN HAND Brett
 
         //Turns on needed buttons
         PresButtonsOn();
@@ -107,6 +112,8 @@ public class DeckAndDraw : NetworkBehaviour
         //If the player is the chancellor they get to see the cards and discard
         if(index == chancellorIndex) {
             ChancButtonsOn();
+
+            //SHOW CARDS IN HAND Brett
 
 
             //Debug to show the hand TODO: HOW TO SHOW HAND SHOULD BE PLACE HERE/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -164,6 +171,7 @@ public class DeckAndDraw : NetworkBehaviour
         discardChancLiberalButton.SetActive(false);
         discardPresFascistButton.SetActive(false);
         discardChancFascistButton.SetActive(false);
+        //STOP SHOWING ALL CARDS Brett
     }
 
 
