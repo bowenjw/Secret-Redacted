@@ -8,7 +8,7 @@ using Mirror;
 using TMPro;
 
 
-
+//Handles Execution
 public class NewExecution : NetworkBehaviour
 {
 
@@ -31,8 +31,6 @@ public class NewExecution : NetworkBehaviour
         for (int i = 0; i < numPlayers; i++) {
             players[i] = GameObject.Find("Player " + (i+1));
         }
-
-
 
 
     }
