@@ -112,7 +112,7 @@ namespace customLobby {
             if (!setHist) { voteHistory.Add(result);setHist = true;}
 
             //Calling RoomPlayer to change the vote sync var 
-            //roomPlayer.castVote(result);
+            roomPlayer.castVote(result);
         }
 
         //********Button Functions***********

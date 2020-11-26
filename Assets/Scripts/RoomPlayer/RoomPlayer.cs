@@ -38,6 +38,7 @@ namespace customLobby {
         public string party;
         private bool inPosition = false;
         private bool loaded = false;
+        public List<bool> voteCount;
 
         [SerializeField] public Button readyButton;
 
@@ -120,6 +121,10 @@ namespace customLobby {
         public void selectedPlayer(bool _, bool selected) {
             //Hook to handle when a player is selected 
 
+            voteCount = new List<bool>();
+
+            if (!selected) return;
+
             //Player was selected and now we need to vote
             //Calling the server to start a vote
             foreach (RoomPlayer player in lobby.roomSlots) {
@@ -127,10 +132,7 @@ namespace customLobby {
                 player.callVote();
             }
 
-
-            if (selected) {
-                selectPlayer();
-            }
+            selectPlayer();
         }
 
         public void aliveChanged(bool prevState, bool state) {
@@ -166,6 +168,9 @@ namespace customLobby {
 
         public void voted(bool _, bool vote) {
             //Hook to handle when a player has voted
+
+            //TODO: This only works when the vote val is being changed, maybe find a way for it to add to the list either way
+            voteCount.Add(vote);
 
             Debug.Log(username + " voted " + (vote? "yes":"no"));
         }
@@ -286,9 +291,6 @@ namespace customLobby {
                     checkIfAllVoted();
                 });
             }
-            else {
-                GameObject.Find("Timer").GetComponent<Timer>().startTimer();
-            }
             
         }
 
@@ -312,9 +314,12 @@ namespace customLobby {
                 if (player.voting.selectPlayerBtn == null) continue;
 
                 //TODO:This isnt working 
-                if (!player.hasVoted()){
+                if (voteCount.Count != lobby.amtPlayers){
                     // Someone didn't vote 
-                    Debug.Log(player + "index: " + player.index + " didn't vote");
+                    Debug.Log("Someone didn't vote");
+
+                    //Vote failed
+                    voting.failedVotes++;
 
                     //Find the president
                     if (voting.failedVotes < 3) {
@@ -333,21 +338,18 @@ namespace customLobby {
 
             // Everyone is done voting 
             // Count all the votes
-            foreach (RoomPlayer player in lobby.roomSlots) {
+            foreach (bool Vote in voteCount) {
 
-                Debug.Log(player + " voted: " + player.vote);
-
-                if (player.voting.selectPlayerBtn == null) continue;
-
-                if (player.voting.result) {
+                if (Vote == true) {
                     yesVotes.Add(vote);
                 }
             }
 
             Debug.Log("Everyone voted! Yes votes: " + yesVotes.Count);
 
-            if (yesVotes.Count > (int)(lobby.roomSlots.Count / 4)) {
+            if (yesVotes.Count > (int)(lobby.amtPlayers / 2)) {
                 //Majority, so elect chancellor
+                //TODO: This might not be working, it is setting the local player chancellor every time for some reason
                 foreach (RoomPlayer player in lobby.roomSlots) {
                     if (player.isSelected) {
                         player.setRole("Chancellor");
@@ -356,6 +358,8 @@ namespace customLobby {
             }
             else {
                 //Vote failed
+                voting.failedVotes++;
+
                 if (voting.failedVotes < 3) {
                     //Start another selection for chancellor
                     voting.loadObjs(index);
@@ -435,10 +439,12 @@ namespace customLobby {
         public void CmdCallVote() {
             //Called to update the hasToVote sync var
             //TODO: dont call this on the game players
-            RpcCallVote();
+            if (!isLocalPlayer) {
+                RpcCallVote();
+            }
         }
 
-        [Command]
+        [Command(ignoreAuthority=true)]
         public void CmdCastVote(bool Vote) {
             //Called to cast vote
             RpcCastVote(Vote);
@@ -470,6 +476,7 @@ namespace customLobby {
         [ClientRpc]
         public void RpcCallVote() {
             //Called on every client to initiate vote
+            GameObject.Find("Timer").GetComponent<Timer>().startTimer();
             voting.callVote();
         }
 

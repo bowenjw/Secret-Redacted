@@ -149,3 +149,22 @@ INFO  2020-11-17T20:02:01.444 83    on_process_exit:393: exited: pid=85 status=1
 INFO  2020-11-17T20:02:01.450 83    os_exit:593: Nvim exit: 0
 INFO  2020-11-19T11:53:16.168 102   channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
 INFO  2020-11-19T11:53:16.356 102   main:566: starting main loop
+INFO  2020-11-19T15:00:54.374 102   os_proc_tree_kill:96: sending SIGTERM to PID -104
+INFO  2020-11-19T15:00:54.385 102   on_process_exit:393: exited: pid=104 status=143 stoptime=11576878619500
+INFO  2020-11-19T15:00:54.389 102   os_exit:593: Nvim exit: 0
+INFO  2020-11-22T18:52:14.987 131   channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-11-22T18:52:15.081 131   main:566: starting main loop
+INFO  2020-11-22T20:21:29.847 131   os_proc_tree_kill:96: sending SIGTERM to PID -133
+INFO  2020-11-22T20:21:29.859 131   on_process_exit:393: exited: pid=133 status=143 stoptime=5393476342000
+INFO  2020-11-22T20:21:29.864 131   os_exit:593: Nvim exit: 0
+INFO  2020-11-25T20:37:45.100 90    channel_create_event:204: new channel 3 (function coc#rpc#start_server[17]..<SNR>16_start:34) : {"id": 3, "client": {}, "mode": "rpc", "stream": "job"}
+INFO  2020-11-25T20:37:45.326 90    main:566: starting main loop
+INFO  2020-11-25T20:46:30.912 90    emsg_multiline:687: E486: Pattern not found: RPC
+INFO  2020-11-25T20:51:50.955 90    emsg_multiline:687: E486: Pattern not found: RpcV
+INFO  2020-11-25T20:52:17.618 90    emsg_multiline:687: E492: Not an editor command: W
+INFO  2020-11-25T21:04:06.861 90    emsg_multiline:687: E492: Not an editor command: W
+INFO  2020-11-25T21:09:00.121 90    emsg_multiline:687: E492: Not an editor command: W
+INFO  2020-11-25T21:19:20.732 90    emsg_multiline:687: E492: Not an editor command: W
+INFO  2020-11-25T21:33:19.356 90    os_proc_tree_kill:96: sending SIGTERM to PID -92
+INFO  2020-11-25T21:33:19.368 90    on_process_exit:393: exited: pid=92 status=143 stoptime=3353195333400
+INFO  2020-11-25T21:33:19.373 90    os_exit:593: Nvim exit: 0
