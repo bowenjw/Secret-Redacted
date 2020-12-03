@@ -15,7 +15,7 @@ public class Settings : MonoBehaviour {
     public Toggle fullscreenToggle;
     public AudioMixer audioMixer;
     void Start() {
-        setVolume(PlayerPrefs.GetFloat("volume"));
+        GameObject.Find("VolumeSlider").GetComponent<Slider>().value = PlayerPrefs.GetFloat("volume");
         resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate == 60).ToArray();
 
         resolutionDropdown.ClearOptions();

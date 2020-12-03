@@ -85,6 +85,7 @@ public class GameLoop : MonoBehaviour {
 
         //We have a chancellor
         //TODO: Implement our card draw functions here
+        
             
         Debug.Log("GAMELOOP");
         

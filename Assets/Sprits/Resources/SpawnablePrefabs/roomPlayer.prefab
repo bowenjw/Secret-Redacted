@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3233974726073481356}
   - component: {fileID: 3233974726073481359}
   - component: {fileID: 3276931270269053217}
+  - component: {fileID: 8779217672183654357}
   m_Layer: 0
   m_Name: roomPlayer
   m_TagString: Untagged
@@ -72,10 +73,12 @@ MonoBehaviour:
   username: 
   isSelected: 0
   hasToVote: 0
+  startGame: 0
   pathwayTracker: 0
   electionTracker: 0
   party: 
   readyButton: {fileID: 0}
+  voting: {fileID: 0}
 --- !u!114 &3276931270269053217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,4 +99,21 @@ MonoBehaviour:
   noVote: {fileID: 0}
   selectPlayerBtn: {fileID: 0}
   playerIndex: 0
-  roomPlayer: {fileID: 0}
+--- !u!114 &8779217672183654357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3233974726073481358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd35bfa0d1133e4e9b493a742d5fa45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  liberalsInHand: 0
+  fascistsInHand: 0
+  discardLiberalButton: {fileID: 0}
+  discardFascistButton: {fileID: 0}

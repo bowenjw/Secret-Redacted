@@ -251,6 +251,7 @@ namespace customLobby {
             //Called from RoomPlayer when a player has been selected
             //ATTN: This is called by every RoomPlayer
 
+
             //Make sure we don't overwrite the votes 
             if (votes == null)
                 votes = new List<bool>();
@@ -287,6 +288,19 @@ namespace customLobby {
             }
             return false;
         }
+
+        public int FindRoleIndex(string role) {
+            int cnt = 0;
+            foreach (RoomPlayer player in roomSlots) {
+                if (player.role == role){
+                    return cnt;
+                }
+                cnt++;
+            }
+            return -1;
+            
+        }
+        
 
         public void playerStarted() {
             //Player has pressed start button on their client

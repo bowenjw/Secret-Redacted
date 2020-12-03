@@ -12,7 +12,7 @@ namespace customLobby {
 
         //****************SYNC VARS*****************
         [SyncVar(hook = nameof(aliveChanged))]
-        public bool isAlive;
+        public bool isAlive = true;
 
         [SyncVar(hook = nameof(roleChanged))]
         public string role;
@@ -50,6 +50,9 @@ namespace customLobby {
         //Voting obj
         public Voting voting;
 
+        //Player index
+        int playerIndex;
+
         public override void OnStartClient() {
             //Called when the client starts 
             //Use this as if it's the Start() func
@@ -58,7 +61,9 @@ namespace customLobby {
             voting = this.GetComponent<Voting>();
 
             //username = PlayerPrefs.GetString("Username");
-            username = "Player" + (index + 1);
+            playerIndex = index;
+            username = "Player" + (playerIndex + 1);
+            
 
         }
 
@@ -203,6 +208,7 @@ namespace customLobby {
             if (canStartGame) {
                 GameObject.Find("GameLoop").GetComponent<GameLoop>().startBtn.gameObject.SetActive(false);
                 GameObject.Find("GameLoop").GetComponent<GameLoop>().readyToStart = true;
+
             }
         }
 
